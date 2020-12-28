@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-12-28T08:38:17.333Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" etag="STAtyu0q5njMRVgF4Bpm" version="14.1.2" type="github">
+<mxfile host="app.diagrams.net" modified="2020-12-28T08:40:31.810Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" etag="mURiRjNB31cVHexkhAGB" version="14.1.2" type="github">
   <diagram name="Page-1" id="5f0bae14-7c28-e335-631c-24af17079c00">
     <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff" math="0" shadow="0">
       <root>
@@ -145,6 +145,12 @@
         </mxCell>
         <mxCell id="vIjA369l-1uuV4axcZcj-34" value="router.get(&quot;/&quot;, getAllProducts)&#xa;router.get(&quot;/category&quot;, getProductFromCategory)&#xa;router.get(&quot;/:productId&quot;, getProductById)&#xa;router.post(&quot;/&quot;) (A, vg)&#xa;router.put(&quot;/:productId&quot;, updateProduct) (A)&#xa;router.put(&quot;/:productId&quot;, updateProductStock) (S)&#xa;router.delete(&quot;/:productId&quot;)(A, vg)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="vIjA369l-1uuV4axcZcj-31">
           <mxGeometry y="60" width="270" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="vIjA369l-1uuV4axcZcj-35" value="S = secure, only logged in users can access" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=13;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="275" y="740" width="290" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vIjA369l-1uuV4axcZcj-36" value="A = admin, only admin can access" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=13;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="595" y="740" width="230" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
