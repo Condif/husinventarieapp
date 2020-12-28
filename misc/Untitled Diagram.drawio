@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-12-28T09:35:29.637Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" etag="5bIXkvj4rQD3x5X9mCBB" version="14.1.2" type="github">
+<mxfile host="app.diagrams.net" modified="2020-12-28T09:43:05.246Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.2 Safari/605.1.15" etag="-AD64u68Drwmg3R9butU" version="14.1.2" type="github">
   <diagram name="Page-1" id="5f0bae14-7c28-e335-631c-24af17079c00">
-    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="1426" dy="945" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -131,7 +131,7 @@
         <mxCell id="vIjA369l-1uuV4axcZcj-29" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="vIjA369l-1uuV4axcZcj-28">
           <mxGeometry y="26" width="220" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="vIjA369l-1uuV4axcZcj-30" value="&#xa;+ updateRoom(req,res) &#xa;+ getAllRooms(req,res)&#xa;+ getRoomsById(req,res)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="vIjA369l-1uuV4axcZcj-28">
+        <mxCell id="vIjA369l-1uuV4axcZcj-30" value="&#xa;+ updateRoom(req,res) &#xa;+ getAllRooms(req,res)&#xa;+ getRoomsById(req,res)&#xa;+ deleteRoomByID(req, res)&#xa;+ createRoom(req, res)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="vIjA369l-1uuV4axcZcj-28">
           <mxGeometry y="34" width="220" height="110" as="geometry" />
         </mxCell>
         <mxCell id="vIjA369l-1uuV4axcZcj-31" value="RoomRouter" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
