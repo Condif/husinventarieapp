@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-12-28T09:29:01.019Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.2 Safari/605.1.15" etag="HV6RUt2rNeZumrswb1gP" version="14.1.2" type="github">
+<mxfile host="app.diagrams.net" modified="2020-12-28T09:33:39.606Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.2 Safari/605.1.15" etag="Ym4SknHcNRnIbM9UGIEP" version="14.1.2" type="github">
   <diagram name="Page-1" id="5f0bae14-7c28-e335-631c-24af17079c00">
     <mxGraphModel dx="1426" dy="945" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff" math="0" shadow="0">
       <root>
@@ -101,7 +101,7 @@
         <mxCell id="vIjA369l-1uuV4axcZcj-21" value="RoomModel" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="730" y="490" width="350" height="140" as="geometry" />
         </mxCell>
-        <mxCell id="vIjA369l-1uuV4axcZcj-22" value="+ productSchema = new mongoose.Schema&#xa;&#xa;module.exports = mongoose.model(&#39;Product&#39;, productSchema)&#xa;&#xa;See ER-diagram for details. " style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" vertex="1" parent="vIjA369l-1uuV4axcZcj-21">
+        <mxCell id="vIjA369l-1uuV4axcZcj-22" value="+ roomSchema = new mongoose.Schema&#xa;&#xa;module.exports = mongoose.model(&#39;Room&#39;, roomSchema)&#xa;&#xa;See ER-diagram for details. " style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" vertex="1" parent="vIjA369l-1uuV4axcZcj-21">
           <mxGeometry y="26" width="350" height="114" as="geometry" />
         </mxCell>
         <mxCell id="vIjA369l-1uuV4axcZcj-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.012;entryY=0.728;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=none;startFill=0;endArrow=diamond;endFill=1;" edge="1" parent="1" source="vIjA369l-1uuV4axcZcj-25" target="vIjA369l-1uuV4axcZcj-4">
@@ -131,7 +131,7 @@
         <mxCell id="vIjA369l-1uuV4axcZcj-29" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="vIjA369l-1uuV4axcZcj-28">
           <mxGeometry y="26" width="220" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="vIjA369l-1uuV4axcZcj-30" value="+ updateProductStock(productAmount)&#xa;+ updateProduct(req,res) &#xa;+ getAllProducts(req,res)&#xa;+ getProductsFromCategory(req,res)&#xa;+ getProductById(req,res)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="vIjA369l-1uuV4axcZcj-28">
+        <mxCell id="vIjA369l-1uuV4axcZcj-30" value="&#xa;+ updateRoom(req,res) &#xa;+ getAllRooms(req,res)&#xa;+ getRoomsById(req,res)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="vIjA369l-1uuV4axcZcj-28">
           <mxGeometry y="34" width="220" height="110" as="geometry" />
         </mxCell>
         <mxCell id="vIjA369l-1uuV4axcZcj-31" value="RoomRouter" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
@@ -143,7 +143,7 @@
         <mxCell id="vIjA369l-1uuV4axcZcj-33" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="vIjA369l-1uuV4axcZcj-31">
           <mxGeometry y="52" width="270" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="vIjA369l-1uuV4axcZcj-34" value="router.get(&quot;/&quot;, getAllInventory)&#xa;router.get(&quot;/category&quot;, getProductFromCategory)&#xa;router.get(&quot;/:productId&quot;, getProductById)&#xa;router.post(&quot;/&quot;) (A, vg)&#xa;router.put(&quot;/:productId&quot;, updateProduct) (A)&#xa;router.put(&quot;/:productId&quot;, updateProductStock) (S)&#xa;router.delete(&quot;/:productId&quot;)(A, vg)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="vIjA369l-1uuV4axcZcj-31">
+        <mxCell id="vIjA369l-1uuV4axcZcj-34" value="router.get(&quot;/&quot;, getAllRooms)&#xa;router.get(&quot;/:roomId&quot;, getRoomById)&#xa;router.post(&quot;/&quot;) (A, S)&#xa;router.put(&quot;/:roomId&quot;, updateRoom) (A. S)&#xa;router.delete(&quot;/:productId&quot;)(A, S)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="vIjA369l-1uuV4axcZcj-31">
           <mxGeometry y="60" width="270" height="110" as="geometry" />
         </mxCell>
         <mxCell id="vIjA369l-1uuV4axcZcj-35" value="S = secure, only logged in users can access" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=13;fontStyle=1" vertex="1" parent="1">
