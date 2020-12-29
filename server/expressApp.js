@@ -32,6 +32,9 @@ app.use(
 /* Import routes */
 
 const userRouter = require("./routers/user.router");
+const sessionRouter = require("./routers/session.router");
+const projectRouter = require("./routers/project.router");
+const roomRouter = require("./routers/room.router");
 
 // run the database
 run();
@@ -41,6 +44,9 @@ app.use(express.urlencoded({ extended: false }));
 /* Add API resourses */
 
 app.use(userRouter);
+app.use(sessionRouter)
+app.use(projectRouter)
+app.use(roomRouter)
 
 
 app.listen(port, () => console.log('Server has started'))

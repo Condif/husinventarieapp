@@ -1,7 +1,7 @@
 // ----- USER ------ // 
 ###
 // GET ONE USER BY ID. Is working!!!
-GET http://localhost:3002/api/users/5feb090d6ce331ed6d5dc6a7
+GET http://localhost:3002/api/users/5feb13f61ee2d8f2c1b9b8ea
 
 ###
 // GET ALL USERS. Is working!!!
@@ -37,7 +37,7 @@ DELETE http://localhost:3002/api/users/5feb090d6ce331ed6d5dc6a7
 
 ###
 // UPDATE USER Is working!!!
-PUT   http://localhost:3002/api/users/5feb090d6ce331ed6d5dc6a7
+PUT   http://localhost:3002/api/users/5feb13f61ee2d8f2c1b9b8ea
 Content-Type: application/json
 
 {

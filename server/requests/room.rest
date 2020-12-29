@@ -1,0 +1,38 @@
+// ----- ROOM ------ // 
+###
+// GET ONE ROOM BY ID. 
+GET http://localhost:3002/api/rooms/5feb3656cbd090ff99f2c81c
+
+###
+// GET ALL ROOMS. 
+GET http://localhost:3002/api/rooms
+
+###
+// CREATE A ROOM. 
+POST http://localhost:3002/api/newroom
+Content-Type: application/json
+
+{
+  "houseId": "5ed612ec6aaf5cd950517f93",
+  "roomName": "Kök",
+  "roomSize": "35",
+  "roomHeight": "2.40"
+
+}
+
+###
+// DELETE ROOM
+DELETE http://localhost:3002/api/rooms/5ec4cf387fc96805d8281c84
+
+###
+// UPDATE ORDER
+PUT   http://localhost:3002/api/rooms/5feb3656cbd090ff99f2c81c
+Content-Type: application/json
+
+{
+  "houseId": "5ed612ec6aaf5cd950517f93",
+  "roomName": "Köket",
+  "roomSize": "37",
+  "roomHeight": "2.4"
+  
+}
