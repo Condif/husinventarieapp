@@ -9,10 +9,20 @@ const path = require('path');
 
 app.use(express.json());
 
+/* Import routes */
+
+const userRouter = require("./routers/user.router");
 
 // run the database
 run();
 
-// app.use('/api/users', usersRouter)
+// Make sure to parse req.body as JSON
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+/* Add API resourses */
+
+app.use(userRouter);
+
 
 app.listen(port, () => console.log('Server has started'))
