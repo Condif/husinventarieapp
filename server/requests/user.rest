@@ -1,7 +1,7 @@
 // ----- USER ------ // 
 ###
 // GET ONE USER BY ID. Is working!!!
-GET http://localhost:3002/api/users/5ec3aae54b390402d59d0ccc
+GET http://localhost:3002/api/users/5feb090d6ce331ed6d5dc6a7
 
 ###
 // GET ALL USERS. Is working!!!
@@ -14,9 +14,9 @@ POST http://localhost:3002/api/newuser
 Content-Type: application/json
 
 {
-  "firstName": "kalle",
+  "firstName": "Filip",
   "lastName": "Svensson",
-  "email": "dickstenqvist@hotmail.com",
+  "email": "dickssstehhdssssdnqvist@hotmail.com",
   "password": "4321"
 }
 
@@ -26,18 +26,18 @@ POST http://localhost:3002/api/users/login
 Content-Type: application/json
 
 {
-  "email": "dickstenqvist@hotmail.com",
-  "password": "1234"
+  "email": "dickssstehhdssssdnqvist@hotmail.com",
+  "password": "4321"
 }
 
 ###
 // DELETE USER Is working!!!
-DELETE http://localhost:3002/api/users/5ede78383aaed446464f5c8e
+DELETE http://localhost:3002/api/users/5feb090d6ce331ed6d5dc6a7
 
 
 ###
 // UPDATE USER Is working!!!
-PUT   http://localhost:3002/api/users/5ec3b3e2fa18c10684a9b3d8
+PUT   http://localhost:3002/api/users/5feb090d6ce331ed6d5dc6a7
 Content-Type: application/json
 
 {
