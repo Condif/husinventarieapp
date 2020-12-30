@@ -7,33 +7,33 @@ const {
   createNewHouse,
   deleteHouse,
   updateHouse,
-} = require("../controllers/room.controller");
+} = require("../controllers/house.controller");
 
 
 
 // GET ALL
-router.get("/api/rooms", async (req, res) => {
-  getAllRooms(req, res);
+router.get("/api/houses", async (req, res) => {
+  getAllHouses(req, res);
 });
 
 // GET ONE BY ID
-router.get("/api/rooms/:roomId", async (req, res) => {
-  getOneRoom(req, res);
+router.get("/api/houses/:houseId", async (req, res) => {
+  getOneHouse(req, res);
 });
 
 // CREATE
-router.post("/api/newroom", async (req, res) => {
-  createNewRoom(req, res);
+router.post("/api/newhouse", async (req, res) => {
+  createNewHouse(req, res);
 });
 
 // DELETE
-router.delete("/api/rooms/:roomId", isAuthenticated, async (req, res) => {
-  deleteRoom(req, res);
+router.delete("/api/houses/:houseId", isAuthenticated, async (req, res) => {
+  deleteHouse(req, res);
 });
 
 // UPDATE
-router.put("/api/rooms/:roomId", async (req, res) => {
-  updateRoom(req, res);
+router.put("/api/houses/:houseId", async (req, res) => {
+  updateHouse(req, res);
 });
 
 module.exports = router;
