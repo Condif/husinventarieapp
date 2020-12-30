@@ -35,6 +35,7 @@ const userRouter = require("./routers/user.router");
 const sessionRouter = require("./routers/session.router");
 const projectRouter = require("./routers/project.router");
 const roomRouter = require("./routers/room.router");
+const houseRouter = require("./routers/house.router")
 
 // run the database
 run();
@@ -47,6 +48,7 @@ app.use(userRouter);
 app.use(sessionRouter)
 app.use(projectRouter)
 app.use(roomRouter)
+app.use(houseRouter)
 
 
 app.listen(port, () => console.log('Server has started'))
