@@ -1,0 +1,40 @@
+// ----- NOTES------ // 
+###
+// GET ONE NOTE BY ID. 
+GET http://localhost:3002/api/notes/5fec4c5d5e047e22f88b0ea9
+
+###
+// GET ALL NOTES. 
+GET http://localhost:3002/api/notes
+
+###
+// CREATE A NOTE. 
+POST http://localhost:3002/api/newnote
+Content-Type: application/json
+
+{
+  "headerText": "Sommarstugan i Småland",
+  "bodyText": "Titta va fint det har blivit",
+  "date": "2020-12-31",
+  "imageId": "5ed612ec6aaf5cd950517f93",
+  "roomId": "5feb3656cbd090ff99f2c81c",
+  "projectId": "5feb4415b86c74079a471b36"
+
+}
+
+###
+// DELETE NOTE
+DELETE http://localhost:3002/api/notes/5fec4d99333c2f23e673913d
+
+###
+// UPDATE NOTE
+PUT   http://localhost:3002/api/notes/5fec4c5d5e047e22f88b0ea9
+Content-Type: application/json
+
+{
+ "headerText": "Sommarstugan i Småland",
+  "bodyText": "Titta va fint det har blivit",
+  "date": "2020-12-33",
+  "imageId": "5ed612ec6aaf5cd950517f93"
+  
+}
