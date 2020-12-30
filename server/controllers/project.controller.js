@@ -33,14 +33,15 @@ const createNewProject = async (req, res) => {
 // UPDATE
 const updateProject = async (req, res) => {
     try {
+        
       let project = await Project.findById(req.params.projectId);
   
       if (project) {
-        project.projectName = project.projectName;
-        project.imageId = project.imageId;
-        project.description = project.description;
-        project.roomId = project.roomId ;
-        project.category = project.category;
+        project.projectName = req.body.projectName;
+        project.imageId = req.body.imageId;
+        project.description = req.body.description;
+        project.roomId = req.body.roomId ;
+        project.category = req.body.category;
         await project.save();
   
         res.status(200).json(project);
@@ -58,7 +59,7 @@ const updateProject = async (req, res) => {
 const deleteProject = async (req, res) => {
     try {
       const removedProject = await Project.deleteOne({ _id: req.params.projectId });
-      res.status(200).json(removedProject);
+      res.status(200).json({message: "project deleted"});
     } catch (err) {
       res.status(500).json(err);
     }

@@ -23,11 +23,11 @@ Content-Type: application/json
 
 ###
 // DELETE PROJECT
-DELETE http://localhost:3002/api/projects/5feb44c48dd2ed082b67cfba
+DELETE http://localhost:3002/api/projects/5fec367bfa0b8f1741769dcd
 
 ###
 // UPDATE PROJECT
-PUT   http://localhost:3002/api/projects/5feb44c48dd2ed082b67cfba
+PUT   http://localhost:3002/api/projects/5feb4415b86c74079a471b36
 Content-Type: application/json
 
 {
