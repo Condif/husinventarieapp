@@ -2,12 +2,10 @@ const Project = require("../models/project.model");
 
 // GET ALL
 const getAllProjects = async (req, res) => {
-    try {
-      const projects = await Project.find();
-      res.status(200).json(projects);
-    } catch (err) {
-      res.status(500).json(err);
-    }
+  await Project.find()
+    .populate("items")
+    .then((post) => res.status(200).json(post))
+    .catch((err) => res.status(500).json(err));
 };
 // GET ONE
 const getProjectsById = async (req, res) => {
@@ -32,26 +30,25 @@ const createNewProject = async (req, res) => {
 
 // UPDATE
 const updateProject = async (req, res) => {
-    try {
-        
-      let project = await Project.findById(req.params.projectId);
-  
-      if (project) {
-        project.projectName = req.body.projectName;
-        project.imageId = req.body.imageId;
-        project.description = req.body.description;
-        project.roomId = req.body.roomId ;
-        project.category = req.body.category;
-        await project.save();
-  
-        res.status(200).json(project);
-      } else {
-        res.status(404).json({ status: "Project not found in db" });
+  try {
+    let updatedProject = await Project.updateOne(
+      { _id: req.params.projectId },
+      {
+        $set: {
+          projectName: req.body.projectName,
+          imageId: req.body.projectName,
+          description: req.body.description,
+          roomId: req.body.roomId,
+          category: req.body.category,
+          items: req.body.items
+        },
       }
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  };
+    );
+    res.status(200).json({ message: "ok" });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
 
 // DELETE

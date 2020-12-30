@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ItemSchema } = require("./item.model");
 
 const ProjectSchema = mongoose.Schema({
     projectName: {
@@ -22,9 +23,11 @@ const ProjectSchema = mongoose.Schema({
         type: String,
         // required: true,
     },
-//   items: {
-//     type: [ItemSchema],
-//   },
+    items: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Item',
+            required: true
+    }]
 //   journal: {
 //     type: [JournalSchema],
 //   },
