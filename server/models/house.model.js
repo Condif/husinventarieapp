@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const { RoomSchema } = require("./room.model");
 const { ProjectSchema } = require("./project.model");
 const HouseSchema = mongoose.Schema({
- 
   houseName: {
     type: String,
     required: true,
@@ -18,12 +17,18 @@ const HouseSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  rooms: {
-    type: [RoomSchema]
-  },
-  projects: {
-    type: [ProjectSchema],
-  },
+  rooms: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Room",
+    },
+  ],
+  projects: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Project",
+    },
+  ],
 });
 
 const HouseModel = mongoose.model("House", HouseSchema);

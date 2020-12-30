@@ -25,9 +25,11 @@ const ProjectSchema = mongoose.Schema({
   //   items: {
   //     type: [ItemSchema],
   //   },
-  Notes: {
-    type: [NotesSchema],
-  },
+  Notes: [{
+    type: mongoose.Types.ObjectId,
+    ref: "Notes"
+  }],
+ 
 });
 
 const ProjectModel = mongoose.model("Project", ProjectSchema);
