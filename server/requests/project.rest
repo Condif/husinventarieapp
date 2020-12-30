@@ -13,9 +13,9 @@ POST http://localhost:3002/api/newproject
 Content-Type: application/json
 
 {
-  "projectName": "Byte av pump",
+  "projectName": "Byte av lampa",
   "imageId": "5ed612ec6aaf5cd950517f93",
-  "description": "ipsum lorem lorem ipsum",
+  "description": "ipsum sdddlorem lorem ipsum",
   "roomId": "5feb3656cbd090ff99f2c81c",
   "category": "EL"
  

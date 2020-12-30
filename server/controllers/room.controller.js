@@ -3,7 +3,9 @@ const Room = require("../models/room.model");
 // GET ALL
 getAllRooms = async (req, res) => {
   await Room.find()
-    // .populate("houseId")
+    .populate("houseId")
+    .populate("projects")
+
     .then((post) => res.status(200).json(post))
     .catch((err) => res.status(500).json(err));
 };
@@ -11,7 +13,6 @@ getAllRooms = async (req, res) => {
 // GET ONE
 getOneRoom = async (req, res) => {
   await Room.findById(req.params.roomId)
-    .populate("houseId")
 
     .then((post) => res.status(200).json(post))
     .catch((err) => res.status(500).json(err));
@@ -52,6 +53,7 @@ updateRoom = async (req, res) => {
           roomName: req.body.roomName,
           roomSize: req.body.roomSize,
           roomHeight: req.body.roomHeight,
+          projects: req.body.projects,
         },
       }
     );

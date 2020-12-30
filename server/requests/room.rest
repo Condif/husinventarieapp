@@ -13,7 +13,7 @@ POST http://localhost:3002/api/newroom
 Content-Type: application/json
 
 {
-  "houseId": "5ed612ec6aaf5cd950517f93",
+  "houseId": "5fec43c4cceaaf1f07ed3268",
   "roomName": "Kök",
   "roomSize": "35",
   "roomHeight": "2.40"
@@ -25,14 +25,15 @@ Content-Type: application/json
 DELETE http://localhost:3002/api/rooms/5ec4cf387fc96805d8281c84
 
 ###
-// UPDATE ORDER
+// UPDATE ROOM
 PUT   http://localhost:3002/api/rooms/5feb3656cbd090ff99f2c81c
 Content-Type: application/json
 
 {
   "houseId": "5ed612ec6aaf5cd950517f93",
   "roomName": "Köket",
-  "roomSize": "37",
-  "roomHeight": "2.4"
+  "roomSize": "347",
+  "roomHeight": "2.8",
+  "projects": ["5fec761ca3a1b83407b8df70", "5fec761ca3a1b83407b8df70"]
   
 }
