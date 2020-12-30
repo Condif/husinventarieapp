@@ -1,39 +1,39 @@
-const Room = require("../models/room.models");
+const House = require("../models/house.model");
 
 // GET ALL
-getAllRooms = async (req, res) => {
-  await Room.find()
+getAllHouses = async (req, res) => {
+  await House.find()
     // .populate("houseId")
     .then((post) => res.status(200).json(post))
     .catch((err) => res.status(500).json(err));
 };
 
 // GET ONE
-getOneRoom = async (req, res) => {
-  await Room.findById(req.params.roomId)
-    .populate("houseId")
+getOneHouse = async (req, res) => {
+  await House.findById(req.params.houseId)
+    // .populate("houseId")
 
     .then((post) => res.status(200).json(post))
     .catch((err) => res.status(500).json(err));
 };
 
 // CREATE
-createNewRoom = (req, res) => {
-  const room = new Room(req.body);
+createNewHouse = (req, res) => {
+  const house = new House(req.body);
 
-  room.save((err, room) => {
+  house.save((err, house) => {
     if (err) {
       console.log("error", err);
       res.status(400).json(err);
-    } else res.status(201).json(room);
+    } else res.status(201).json(house);
   });
 };
 
 // DELETE
-deleteRoom = async (req, res) => {
+deleteHouse = async (req, res) => {
   try {
-    const removeRoom = await Room.deleteOne({
-      _id: req.params.roomId,
+    const removeHouse = await House.deleteOne({
+      _id: req.params.houseId,
     });
     res.status(200).json({ status: "removed room" });
   } catch (err) {
@@ -42,16 +42,16 @@ deleteRoom = async (req, res) => {
 };
 
 // UPDATE
-updateRoom = async (req, res) => {
+updateHouse = async (req, res) => {
   try {
-    let updatedRoom = await Room.updateOne(
-      { _id: req.params.roomId },
+    let updatedHouse = await House.updateOne(
+      { _id: req.params.houseId },
       {
         $set: {
-          houseId: req.body.houseId,
-          roomName: req.body.roomName,
-          roomSize: req.body.roomSize,
-          roomHeight: req.body.roomHeight,
+          houseName: req.body.houseName,
+          houseCategory: req.body.houseCategory,
+          houseSize: req.body.houseSize,
+          numberOfRooms: req.body.numberOfRooms,
         },
       }
     );
@@ -62,9 +62,9 @@ updateRoom = async (req, res) => {
 };
 
 module.exports = {
-  getAllRooms,
-  getOneRoom,
-  createNewRoom,
-  deleteRoom,
-  updateRoom,
+  getAllHouses,
+  getOneHouse,
+  createNewHouse,
+  deleteHouse,
+  updateHouse,
 };

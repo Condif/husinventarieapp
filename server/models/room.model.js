@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ProjectSchema } = require("./project.model");
 
 const RoomSchema = mongoose.Schema({
   houseId: {
@@ -21,9 +22,9 @@ const RoomSchema = mongoose.Schema({
 //   items: {
 //     type: [ItemSchema],
 //   },
-//   projects: {
-//     type: [ProjectSchema],
-//   },
+  projects: {
+    type: [ProjectSchema],
+  },
 });
 
 const RoomModel = mongoose.model("Room", RoomSchema);
