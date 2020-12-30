@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ItemSchema } = require("./item.model");
 const { NotesSchema } = require("./notes.model");
 
 const ProjectSchema = mongoose.Schema({
@@ -22,14 +23,16 @@ const ProjectSchema = mongoose.Schema({
     type: String,
     // required: true,
   },
-  //   items: {
-  //     type: [ItemSchema],
-  //   },
   Notes: [{
     type: mongoose.Types.ObjectId,
     ref: "Notes"
   }],
  
+    items: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Item',
+            required: true
+    }]
 });
 
 const ProjectModel = mongoose.model("Project", ProjectSchema);
