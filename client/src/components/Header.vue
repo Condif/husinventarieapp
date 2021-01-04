@@ -1,6 +1,5 @@
 <template>
-    <v-app>
-        <v-card class="overflow-hidden">
+    <div>
         <v-app-bar
             absolute
             color="white"
@@ -9,7 +8,7 @@
         >
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
     
-            <v-toolbar-title>Title</v-toolbar-title>
+            <v-toolbar-title>HomeApp</v-toolbar-title>
     
             <v-spacer></v-spacer>
     
@@ -33,8 +32,7 @@
             <v-container style="height: 1500px;">
             </v-container>
         </v-sheet>
-        </v-card>
-    </v-app>
+        </div>
 </template>
 
 <script>
