@@ -1,10 +1,13 @@
 <template>
+
   <v-sheet id="scrolling-techniques-7" class="overflow-y-auto" max-height="98%">
     <v-card class="mx-auto mt-16" max-width="344">
+       <h1>Vinden</h1>
       <v-img src="../assets/vinden.jpeg" height="200px"></v-img>
 
       <v-card-title>
-    Vinden
+       
+    
       </v-card-title>
 
       <v-card-subtitle>
@@ -145,4 +148,12 @@ export default {
 };
 </script>
 
-<style></style>
+
+<style lang="sass">
+  @import '~vuetify/src/styles/styles.sass'
+
+  @media #{map-get($display-breakpoints, 'md-and-down')}
+    .custom-class
+      display: none
+</style>
+
