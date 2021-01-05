@@ -1,10 +1,10 @@
 <template>
-  <v-sheet id="scrolling-techniques-7" class="overflow-y-auto" max-height="95%">
+  <v-sheet id="scrolling-techniques-7" class="overflow-y-auto" max-height="98%">
     <v-card class="mx-auto mt-16" max-width="344">
       <v-img src="../assets/vinden.jpeg" height="200px"></v-img>
 
       <v-card-title>
-        Vinden
+    Vinden
       </v-card-title>
 
       <v-card-subtitle>
@@ -18,15 +18,15 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn icon @click="showhome = !showHome">
+        <v-btn icon @click="show = !show">
           <v-icon>{{
-            showHome ? "mdi-chevron-up" : "mdi-chevron-down"
+            show ? "mdi-chevron-up" : "mdi-chevron-down"
           }}</v-icon>
         </v-btn>
       </v-card-actions>
 
       <v-expand-transition>
-        <div v-show="showHome">
+        <div v-show="show">
           <v-divider></v-divider>
 
           <v-card-text>
@@ -45,13 +45,13 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn icon @click="show = !show">
-          <v-icon>{{ show ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
+        <v-btn icon @click="show1 = !show1">
+          <v-icon>{{ show1 ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
         </v-btn>
       </v-card-actions>
 
       <v-expand-transition>
-        <div v-show="show">
+        <div v-show="show1">
           <v-divider></v-divider>
 
           <v-card-text>
@@ -140,6 +140,7 @@
 export default {
   data: () => ({
     show: false,
+    show1: false,
   }),
 };
 </script>
