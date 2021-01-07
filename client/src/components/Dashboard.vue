@@ -1,5 +1,5 @@
 <template>
-  <v-sheet id="scrolling-techniques-7" class="overflow-y-auto" max-height="98%">
+  <v-sheet id="scrolling-techniques-7" class="overflow-y-auto" max-height="98%" color= "primary">
     <v-card class="mx-auto mt-16" max-width="344">
       <v-img src="../assets/vinden.jpeg" height="200px"></v-img>
 
@@ -7,12 +7,12 @@
     Vinden
       </v-card-title>
 
-      <v-card-subtitle>
+      <v-card-subtitle color="error" text>
         2021-01-02 En massa kablar och annat bös
       </v-card-subtitle>
 
       <v-card-actions>
-        <v-btn color="orange lighten-2" text>
+        <v-btn color="primary" text>
           Mitt hem
         </v-btn>
 
@@ -26,7 +26,7 @@
       </v-card-actions>
 
       <v-expand-transition>
-        <div v-show="show">
+        <div v-show="show" >
           <v-divider></v-divider>
 
           <v-card-text>
@@ -39,7 +39,7 @@
         </div>
       </v-expand-transition>
       <v-card-actions>
-        <v-btn color="orange lighten-2" text>
+        <v-btn color="secondary" text>
           Mina Projekt
         </v-btn>
 
@@ -65,7 +65,7 @@
     </v-card>
 
     <v-card class="mx-auto mt-1" max-width="344">
-      <v-card-title>
+      <v-card-title class="primary--text text-{h2}">
         Aktivitet
       </v-card-title>
       <v-list subheader two-line flat>

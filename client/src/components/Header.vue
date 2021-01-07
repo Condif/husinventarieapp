@@ -1,13 +1,8 @@
 <template>
-  <v-app-bar
-    absolute
-    color="white"
-    elevate-on-scroll
-    scroll-target="#scrolling-techniques-7"
-  >
+  <v-app-bar app color="grey" absolute dark hide-on-scroll prominent>
     <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-    <v-toolbar-title>HomeApp</v-toolbar-title>
+    <v-toolbar-title>HOME</v-toolbar-title>
 
     <v-spacer></v-spacer>
 
@@ -28,6 +23,9 @@
 <script>
 export default {
   name: "Header",
-  data: () => ({}),
+  data: () => ({
+    drawer: false,
+    group: null,
+  }),
 };
 </script>
