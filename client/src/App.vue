@@ -9,6 +9,9 @@
 <script>
 export default {
   name: "App",
+  mounted() {
+    this.$store.dispatch("PROJECT/setProjects")
+  },
   data() {
     return {
       //
