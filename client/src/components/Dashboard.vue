@@ -3,8 +3,8 @@
     <v-card class="mx-auto mt-16" max-width="344">
       <v-img src="../assets/vinden.jpeg" height="200px"></v-img>
 
-      <v-card-title>
-        {{projects[0].projectName}}
+      <v-card-title v-if="project !== undefined">
+        {{project.projectName}}
       </v-card-title>
 
       <v-card-subtitle>
@@ -130,13 +130,6 @@
           mdi-checkbox-marked-circle
         </v-icon>
       </v-btn>
-      <v-btn 
-      @click="setProjects" 
-      class="ma-2" 
-      color="primary" 
-      dark>
-        Add projects
-      </v-btn>
     </v-card>
   </v-sheet>
 </template>
@@ -150,15 +143,16 @@ export default {
     show1: false,
     settings: [],
   }),
-  methods: {
-    setProjects: function() {
-      return this.$store.dispatch('PROJECT/setProjects')
-    }
-  },
+
   computed: {
     projects() {
       return this.$store.getters["PROJECT/getProjects"];
+      
+    },
+    project() {
+      return this.$store.getters["PROJECT/getProject"]("5feb4415b86c74079a471b36");
     }
+    
   },
 };
 </script>
