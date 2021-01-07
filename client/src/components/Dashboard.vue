@@ -5,8 +5,8 @@
     max-height="100%"
   >
     <v-card class="mx-auto mt-2" max-width="344">
-      <v-card-title>
-        Vinden
+      <v-card-title v-if="project !== undefined">
+        {{project.projectName}}
       </v-card-title>
 
       <v-card-subtitle color="error" text>
@@ -68,10 +68,24 @@
 
 <script>
 export default {
+  namespaced: true,
+  name: "Dashboard",
   data: () => ({
     show: false,
     show1: false,
+    settings: [],
   }),
+
+  computed: {
+    projects() {
+      return this.$store.getters["PROJECT/getProjects"];
+      
+    },
+    project() {
+      return this.$store.getters["PROJECT/getProject"]("5feb4415b86c74079a471b36");
+    }
+    
+  },
 };
 </script>
 

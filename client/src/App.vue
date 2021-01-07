@@ -1,9 +1,9 @@
 <template>
   <v-app>
+    <v-main>
     <Header />
-    <v-content>
       <router-view />
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 
@@ -14,6 +14,8 @@ export default {
   name: "App",
   components: {
     Header,
+  mounted() {
+    this.$store.dispatch("PROJECT/setProjects")
   },
   data() {
     return {
