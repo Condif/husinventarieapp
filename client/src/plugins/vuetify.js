@@ -6,7 +6,7 @@ Vue.use(Vuetify);
 const vuetify = 
 new Vuetify({
     theme: {
-        dark: false,
+        dark: true,
         themes: {
           light: {
             primary: '#1976D2',
@@ -16,6 +16,7 @@ new Vuetify({
             info: '#2196F3',
             success: '#4CAF50',
             warning: '#FFC107',
+            
           }
         },
       },
