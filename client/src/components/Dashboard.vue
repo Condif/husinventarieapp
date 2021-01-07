@@ -4,7 +4,7 @@
       <v-img src="../assets/vinden.jpeg" height="200px"></v-img>
 
       <v-card-title>
-    Vinden
+        Vinden
       </v-card-title>
 
       <v-card-subtitle>
@@ -19,9 +19,7 @@
         <v-spacer></v-spacer>
 
         <v-btn icon @click="show = !show">
-          <v-icon>{{
-            show ? "mdi-chevron-up" : "mdi-chevron-down"
-          }}</v-icon>
+          <v-icon>{{ show ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
         </v-btn>
       </v-card-actions>
 
@@ -127,10 +125,17 @@
         </v-icon>
       </v-btn>
       <v-btn class="ma-2" color="primary" dark>
-        Lägg till
+        Mitt hem
         <v-icon dark right>
           mdi-checkbox-marked-circle
         </v-icon>
+      </v-btn>
+      <v-btn 
+      @click="setProjects" 
+      class="ma-2" 
+      color="primary" 
+      dark>
+        Add projects
       </v-btn>
     </v-card>
   </v-sheet>
@@ -138,10 +143,23 @@
 
 <script>
 export default {
+  namespaced: true,
+  name: "Dashboard",
   data: () => ({
     show: false,
     show1: false,
+    settings: [],
   }),
+  methods: {
+    setProjects: function() {
+      return this.$store.dispatch('PROJECT/setProjects')
+    }
+  },
+  computed: {
+    projects() {
+      return this.$store.getters["PROJECT/getProjects"];
+    }
+  },
 };
 </script>
 
