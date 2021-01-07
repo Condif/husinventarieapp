@@ -4,7 +4,7 @@
       <v-img src="../assets/vinden.jpeg" height="200px"></v-img>
 
       <v-card-title>
-        Vinden
+        {{projects[0].projectName}}
       </v-card-title>
 
       <v-card-subtitle>

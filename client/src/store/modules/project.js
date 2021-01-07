@@ -14,15 +14,15 @@ export const project = {
 
     mutations: {
         setProjects(state, payload) {
-            state.projects.push(payload)
+            state.projects = payload
         }
     },
 
     actions: {
         async setProjects (state) {
-            const projects = await fetch(url, {headers})
-            const j = await projects.json()
-            state.commit("setProjects", j.projects)
+            const allProjects = await fetch(url, {headers})
+            const j = await allProjects.json()
+            state.commit("setProjects", j)
         }
     }  
 }
