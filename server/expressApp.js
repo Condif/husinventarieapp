@@ -2,6 +2,7 @@
 const express = require("express");
 const app = express();
 const cookieSession = require("cookie-session");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const { run } = require("./mongo");
 require("dotenv").config();
@@ -9,6 +10,12 @@ const port = process.env.PORT || 8080;
 const path = require("path");
 
 app.use(express.json());
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://localhost:8080"],
+  })
+);
 
 // cookieSession skickar med req.session till alla req, s
 //så vi kan komma åt allt vi sparar i req.session globalt.
