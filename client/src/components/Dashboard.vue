@@ -53,13 +53,11 @@
       <v-expand-transition>
         <div v-show="show1">
           <v-divider></v-divider>
-
-          <v-card-text>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ea
-            odio, facilis facere voluptas deserunt fugiat. Eius sit quidem cum
-            nemo quos, reprehenderit eligendi corporis quae dolore porro
-            mollitia molestias?
-          </v-card-text>
+          <div v-if="project !== undefined">
+            <v-card-text v-for="project in projects" :key="project._id">
+              <h1>{{project.projectName}}</h1>
+            </v-card-text>
+          </div>
         </div>
       </v-expand-transition>
     </v-card>
