@@ -4,18 +4,18 @@
     class="overflow-y-auto"
     max-height="100%"
   >
-    <v-card class="mx-auto mt-2" max-width="344">
+    <v-card class="mx-auto pt-2" max-width="344" color="primary">
       <v-card-title v-if="project !== undefined">
         {{project.projectName}}
       </v-card-title>
 
-      <v-card-subtitle color="error" text>
+      <v-card-subtitle  text>
         2021-01-02 En massa kablar och annat bös
       </v-card-subtitle>
       <v-img src="../assets/vinden.jpeg" height="200px"></v-img>
 
-      <v-card-actions>
-        <v-btn color="primary" text>
+      <v-card-actions  >
+        <v-btn  text>
           Mitt hem
         </v-btn>
 
