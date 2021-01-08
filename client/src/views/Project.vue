@@ -14,14 +14,31 @@
       </v-card-subtitle>
 
       <v-text-field
-      label="Namn"
-      v-model="projectName"
-      :rules="rules"
-      placeholder="Skriv in namnet på ditt projekt"
+        label="Namn"
+        v-model="projectName"
+        :rules="rules"
+        placeholder="Skriv in namnet på ditt projekt"
       >
       </v-text-field>
-      <v-textarea label="Description" v-model="description" :rules="rules" ></v-textarea>
-      
+      <v-textarea
+        label="Description"
+        v-model="description"
+        :rules="rules"
+      ></v-textarea>
+
+      <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn v-bind="attrs" v-on="on">
+            <v-icon expand_more></v-icon>
+            <span>Rum: {{room}}</span>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item v-for="(room, index) in rooms" :key="index" @click="addRoomToState(room)">
+            <v-list-item-title>{{ room }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
       <v-card-actions>
         <v-btn @click="createProjectHandler">
           Skapa projekt
@@ -41,7 +58,7 @@ export default {
     projectName: "",
     imageId: "5ed612ec6aaf5cd950517f93",
     description: "",
-    roomId: "5feb3656cbd090ff99f2c81c",
+    room: "",
     category: "",
     items: [],
 
@@ -49,9 +66,11 @@ export default {
       (value) => !!value || "Required.",
       (value) => (value && value.length >= 3) || "Min 3 characters",
     ],
+    show: false,
+    rooms: ["Badrum", "Sovrum", "Kök"],
   }),
   methods: {
-   async createProjectHandler() {
+    async createProjectHandler() {
       const newProjectObject = {
         projectName: this.projectName,
         imageId: this.imageId,
@@ -59,11 +78,12 @@ export default {
         roomId: this.roomId,
         category: this.category,
         items: this.items,
-      }
-      this.$store.dispatch("PROJECT/createProject", newProjectObject)
+      };
+      this.$store.dispatch("PROJECT/createProject", newProjectObject);
+    },
+    addRoomToState(room) {
+      this.room = room
     }
-  }
-      
-}
-  
+  },
+};
 </script>
