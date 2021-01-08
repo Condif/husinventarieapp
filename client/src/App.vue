@@ -1,11 +1,9 @@
 <template>
-  <v-app >
-   
-      <Header />
+  <v-app>
+    <Header />
     <v-main>
       <router-view />
     </v-main>
-
   </v-app>
 </template>
 
@@ -19,13 +17,10 @@ export default {
   },
   mounted() {
     this.$store.dispatch("PROJECT/setProjects");
+    this.$store.dispatch("ITEMS/setItems");
   },
   data() {
-    return {
-      //
-    };
+    return {};
   },
 };
 </script>
-
-

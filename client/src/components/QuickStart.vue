@@ -1,6 +1,6 @@
 <template>
-  <v-container >
-    <v-speed-dial   v-model="fab" bottom="true" absolute="true" right="true">
+  
+    <v-speed-dial height="100vh" fixed v-model="fab" bottom absolute right>
       <template v-slot:activator>
         <v-btn v-model="fab" fab dark x-large color="accent2">
           <v-icon v-if="fab">
@@ -23,7 +23,7 @@
     </v-speed-dial>
 
    
-  </v-container>
+ 
 </template>
 
 <script>

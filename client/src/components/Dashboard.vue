@@ -4,7 +4,7 @@
     class="overflow-y-auto"
     max-height="100%"
   >
-    <v-card class="mx-auto pt-2" max-width="344" color="primary">
+    <v-card class="mx-auto pt-2"  color="primary">
       <v-card-title v-if="project !== undefined">
         {{project.projectName}}
       </v-card-title>

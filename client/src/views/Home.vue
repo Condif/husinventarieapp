@@ -1,12 +1,14 @@
 <template>
   <v-container fluid>
-    <v-row>
-      <v-col cols="auto">
-        <Dashboard />
         <Quick-start />
+    <v-row>
+      <v-col cols="12" sm="6"
+          md="4">
+        <Dashboard />
       </v-col>
      
-      <v-col cols="12">
+      <v-col cols="12" sm="6"
+          md="8">
         <v-card class="mx-auto" color="base">
           <v-img
             class="white--text align-end"
@@ -29,10 +31,17 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col  sm="6"
+          md="5">
+        <Create-item/>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
+import CreateItem from '../components/CreateItem.vue';
 import Dashboard from "../components/Dashboard.vue";
 import QuickStart from "../components/QuickStart.vue";
 // @ is an alias to /src
@@ -42,6 +51,7 @@ export default {
   components: {
     Dashboard,
     QuickStart,
+    CreateItem,
   },
 };
 </script>
