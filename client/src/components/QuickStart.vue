@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container >
     <v-speed-dial   v-model="fab" bottom="true" absolute="true" right="true">
       <template v-slot:activator>
         <v-btn v-model="fab" fab dark x-large color="accent2">

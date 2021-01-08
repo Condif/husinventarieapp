@@ -12,7 +12,7 @@
       <v-card-subtitle  text>
         2021-01-02 En massa kablar och annat bös
       </v-card-subtitle>
-      <v-img src="../assets/vinden.jpeg" height="200px"></v-img>
+      <v-img height="200" src="../assets/chris-briggs-ILBrHd6PFJA-unsplash.jpg"></v-img>
 
       <v-card-actions  >
         <v-btn  text>
