@@ -43,8 +43,7 @@
 <script>
 import CreateItem from '../components/CreateItem.vue';
 import Dashboard from "../components/Dashboard.vue";
-import QuickStart from "../components/QuickStart.vue";
-// @ is an alias to /src
+import QuickStart from '../components/QuickStart.vue';
 
 export default {
   name: "Home",

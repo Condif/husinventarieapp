@@ -14,14 +14,17 @@
       </v-card-subtitle>
 
       <v-text-field
-      label="Namn"
-      v-model="projectName"
-      :rules="rules"
-      placeholder="Skriv in namnet på ditt projekt"
+        label="Namn"
+        v-model="projectName"
+        :rules="rules"
+        placeholder="Skriv in namnet på ditt projekt"
       >
       </v-text-field>
-      <v-textarea label="Description" v-model="description" :rules="rules" ></v-textarea>
-      
+      <v-textarea
+        label="Description"
+        v-model="description"
+        :rules="rules"
+      ></v-textarea>
       <v-card-actions>
         <v-btn @click="createProjectHandler">
           Skapa projekt
@@ -36,12 +39,12 @@
 // @ is an alias to /src
 
 export default {
-  name: "Project",
+  name: "CreateProject",
   data: () => ({
     projectName: "",
     imageId: "5ed612ec6aaf5cd950517f93",
     description: "",
-    roomId: "5feb3656cbd090ff99f2c81c",
+    roomId: "5ed612ec6aaf5cd950517f93",
     category: "",
     items: [],
 
@@ -51,7 +54,7 @@ export default {
     ],
   }),
   methods: {
-   async createProjectHandler() {
+    async createProjectHandler() {
       const newProjectObject = {
         projectName: this.projectName,
         imageId: this.imageId,
@@ -59,11 +62,12 @@ export default {
         roomId: this.roomId,
         category: this.category,
         items: this.items,
-      }
-      this.$store.dispatch("PROJECT/createProject", newProjectObject)
+      };
+      this.$store.dispatch("PROJECT/createProject", newProjectObject);
+    },
+    addRoomToState(room) {
+      this.room = room
     }
-  }
-      
-}
-  
+  },
+};
 </script>
