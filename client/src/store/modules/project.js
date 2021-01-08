@@ -17,11 +17,9 @@ export const project = {
     mutations: {
         setProjects(state, payload) {
             state.projects = payload
-            console.log(state.projects)
         },
         createProject(state, payload) {
             state.projects.push(payload)
-            console.log(state.projects)
         },
     },
 
