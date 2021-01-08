@@ -21,8 +21,6 @@
 <script>
 import Dashboard from "../components/Dashboard.vue";
 import QuickStart from '../components/QuickStart.vue';
-// @ is an alias to /src
-
 
 export default {
   name: "Home",

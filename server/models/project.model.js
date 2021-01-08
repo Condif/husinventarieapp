@@ -15,8 +15,8 @@ const ProjectSchema = mongoose.Schema({
     type: String,
     // required: true
   },
-  room: {
-    type: String,
+  roomId: {
+    type: mongoose.Types.ObjectId,
     // required: true,
   },
   category: {

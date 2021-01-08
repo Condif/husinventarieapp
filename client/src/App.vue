@@ -17,6 +17,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("PROJECT/setProjects");
+    this.$store.dispatch("ROOM/setRooms");
   },
   data() {
     return {
