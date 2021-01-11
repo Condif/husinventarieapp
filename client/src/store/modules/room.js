@@ -11,7 +11,7 @@ export const room = {
 
     getters: {
         getRooms: state => state.rooms,
-        getRoom: state => (id) => state.rooms.find(project => project._id === id)  
+        getRoom: state => (id) => state.rooms.find(room => room._id === id)  
     },
 
     mutations: {

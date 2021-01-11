@@ -3,14 +3,16 @@ const Project = require("../models/project.model");
 // GET ALL
 const getAllProjects = async (req, res) => {
   await Project.find()
-    .populate("items")
+    .populate("itemsId")
+    .populate("roomId")
+    .populate("notesId")
     .then((post) => res.status(200).json(post))
     .catch((err) => res.status(500).json(err));
 };
 // GET ONE
 const getProjectsById = async (req, res) => {
     try {
-        const project = await Project.findById(req.params.projectId);
+        const project = await Project.findById(req.params.projectId).populate("itemsId").populate("roomId").populate("notesId");
         res.status(200).json(project);
       } catch (err) {
         res.status(500).json(err);

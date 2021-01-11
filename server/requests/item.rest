@@ -13,11 +13,11 @@ POST http://localhost:3002/api/newitem
 Content-Type: application/json
 
 {
-  "itemName": "fönster",
+  "itemName": "flerafönster",
   "imageId": "5ed612ec6aaf5cd950517f93",
   "description": "ipsum lorem lorem ipsum",
   "receipt": "5feb3656cbd090ff99f2c81c",
-  "orderDate": "EL",
+  "orderDate": "2021-01-02",
   "warranty": "3 år"
  
 }
