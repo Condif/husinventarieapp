@@ -6,7 +6,7 @@
   >
     <v-card class="mx-auto pt-2"  color="primary">
       <v-card-title v-if="project !== undefined">
-        {{project.projectName}}
+       {{project.projectName}}
       </v-card-title>
 
       <v-card-subtitle  text>
@@ -53,9 +53,9 @@
       <v-expand-transition>
         <div v-show="show1">
           <v-divider></v-divider>
-          <div v-if="project !== undefined">
+          <div v-if="projects !== undefined">
             <v-card-text v-for="project in projects" :key="project._id">
-              <h1>{{project.projectName}}</h1>
+              <v-btn @click="goToProjectHandler(project._id)">{{project.projectName}}</v-btn>
             </v-card-text>
           </div>
         </div>
@@ -73,6 +73,14 @@ export default {
     show1: false,
     settings: [],
   }),
+  
+  methods: {
+    goToProjectHandler(selectedProjectId) {
+      this.$store.dispatch("PROJECT/setProject", selectedProjectId)
+      localStorage.setItem("currentProjectId", JSON.stringify(selectedProjectId))
+      this.$router.push('Project')
+    },
+  },
 
   computed: {
     projects() {
@@ -80,7 +88,7 @@ export default {
       
     },
     project() {
-      return this.$store.getters["PROJECT/getProject"]("5feb4415b86c74079a471b36");
+      return this.$store.getters["PROJECT/getProjectFromProjects"](`${this.$store.getters["PROJECT/getProject"]}`)
     }
     
   },
