@@ -11,13 +11,12 @@ export const items = {
 
     getters: {
         getItems: state => state.items,
-        getItem: state => (id) => state.item.find(item => item._id === id)  
+        getItem: state => (id) => state.items.find(item => item._id === id),
     },
 
     mutations: {
         setItems(state, payload) {
             state.items = payload
-            console.log(state.items);
         },
         createItem(state, payload) {
             state.items.push(payload)

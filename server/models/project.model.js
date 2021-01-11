@@ -17,22 +17,26 @@ const ProjectSchema = mongoose.Schema({
   },
   roomId: {
     type: mongoose.Types.ObjectId,
+    ref: "Room",
     // required: true,
   },
   category: {
     type: String,
     // required: true,
   },
-  Notes: [{
-    type: mongoose.Types.ObjectId,
-    ref: "Notes"
-  }],
- 
-    items: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Item',
-            required: true
-    }]
+  notesId: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Note",
+    },
+  ],
+
+  itemsId: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Item",
+    },
+  ],
 });
 
 const ProjectModel = mongoose.model("Project", ProjectSchema);

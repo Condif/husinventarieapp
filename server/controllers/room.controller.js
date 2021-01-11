@@ -12,7 +12,7 @@ getAllRooms = async (req, res) => {
 
 // GET ONE
 getOneRoom = async (req, res) => {
-  await Room.findById(req.params.roomId)
+  await Room.findById(req.params.roomId).populate("houseId").populate("projects")
 
     .then((post) => res.status(200).json(post))
     .catch((err) => res.status(500).json(err));

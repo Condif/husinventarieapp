@@ -1,7 +1,7 @@
 // ----- PROJECT ------ // 
 ###
 // GET ONE PROJECT BY ID. 
-GET http://localhost:3002/api/projects/5feb4415b86c74079a471b36
+GET http://localhost:3002/api/projects/5ffc4a1988b8de25c4ee87a5
 
 ###
 // GET ALL Projects. 
@@ -13,12 +13,13 @@ POST http://localhost:3002/api/newproject
 Content-Type: application/json
 
 {
-  "projectName": "Byte av lampa",
+  "projectName": "Med notes",
   "imageId": "5ed612ec6aaf5cd950517f93",
   "description": "ipsum sdddlorem lorem ipsum",
   "roomId": "5feb3656cbd090ff99f2c81c",
   "category": "EL",
-  "items": ["5fec4526996e81276488d087"]
+  "itemsId": "5ffc4abb88b8de25c4ee87a6",
+  "notesId": "5fec4c5d5e047e22f88b0ea9"
  
 }
 
