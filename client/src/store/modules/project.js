@@ -1,4 +1,4 @@
-const url = "http://localhost:3002/api/"
+const url = "api/"
 const headers = { Accept: "application/json"}
 
 
