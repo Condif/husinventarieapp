@@ -11,12 +11,21 @@ export const project = {
 
     getters: {
         getProjects: state => state.projects,
-        getProject: state => (id) => state.projects.find(project => project._id === id)  
+        getProjectFromProjects: state => (id) => state.projects.find(project => project._id === id),
+        getProject: state => state.project
     },
 
     mutations: {
         setProjects(state, payload) {
             state.projects = payload
+        },
+        setProject(state, payload) {
+            state.project = payload
+            
+        },
+        setProjectFromStorage(state) {
+            state.project = JSON.parse(localStorage.getItem("currentProjectId") || '[]')
+            
         },
         createProject(state, payload) {
             state.projects.push(payload)
@@ -28,6 +37,12 @@ export const project = {
             const allProjects = await fetch(url +"projects", {headers})
             const j = await allProjects.json()
             state.commit("setProjects", j)
+        },
+        setProject (state, selectedProjectId) {
+            state.commit("setProject", selectedProjectId)
+        },
+        setProjectFromStorage (state, selectedProjectId) {
+            state.commit("setProjectFromStorage", selectedProjectId)
         },
         async createProject(state, newProjectObject) {
             const response = await fetch(url + "newproject", {

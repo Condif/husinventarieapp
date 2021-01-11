@@ -22,30 +22,30 @@
         </v-card-title>
         <v-card-title >
           {{project.category}}
-        </v-card-title>
+        </v-card-title> 
       </v-card>
-    </v-row>
+   </v-row>
     <v-row>
       <v-col color="secondary">
-        <v-card-title >
+        <v-card-title v-if="project.itemsId[0] !== undefined">
           {{ project.itemsId[0].itemName}}
         </v-card-title>
-        <!-- <v-card-title >
-          Image
-        </v-card-title> -->
         <v-card-title >
+          Image
+        </v-card-title>
+        <v-card-title v-if="project.itemsId[0] !== undefined">
             {{ project.itemsId[0].description}}
         </v-card-title>
-        <v-card-title >
+        <v-card-title v-if="project.itemsId[0] !== undefined">
             {{ project.itemsId[0].orderDate}}
         </v-card-title>
-        <v-card-title >
+        <v-card-title v-if="project.itemsId[0] !== undefined">
             {{ project.itemsId[0].warranty}}
         </v-card-title>
-        <v-card-title >
+        <v-card-title v-if="project.notesId[0] !== undefined">
             {{ project.notesId[0].headerText}}
-        </v-card-title>
-      </v-col>
+        </v-card-title> 
+       </v-col> 
     </v-row>
     <v-row>
       <v-col sm="6" md="5">
@@ -77,9 +77,8 @@ export default {
       return this.$store.getters["PROJECT/getProjects"];
     },
     project() {
-      return this.$store.getters["PROJECT/getProject"](
-        "5ffc4acf88b8de25c4ee87a7"
-      );
+      return this.$store.getters["PROJECT/getProjectFromProjects"](`${this.$store.getters["PROJECT/getProject"]}`)
+       
     },
   },
 };

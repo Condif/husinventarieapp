@@ -15,13 +15,13 @@ export default {
   components: {
     Header,
   },
+  created () {
+     this.$store.dispatch("PROJECT/setProjectFromStorage")
+  },
   mounted() {
     this.$store.dispatch("PROJECT/setProjects");
     this.$store.dispatch("ROOM/setRooms");
     this.$store.dispatch("ITEMS/setItems");
-  },
-  data() {
-    return {};
   },
 };
 </script>
