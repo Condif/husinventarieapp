@@ -3,7 +3,7 @@
     <Quick-start />
     <v-row>
       <v-card class="mx-auto pt-2" color="primary">
-        <v-card-title >
+        <v-card-title>
           {{ project.projectName }}
         </v-card-title>
 
@@ -14,38 +14,41 @@
           height="200"
           src="../assets/chris-briggs-ILBrHd6PFJA-unsplash.jpg"
         ></v-img>
-        <v-card-title >
+        <v-card-title>
           {{ project.description }}
         </v-card-title>
-        <v-card-title >
+        <v-card-title>
           {{ project.roomId.roomName }}
         </v-card-title>
-        <v-card-title >
-          {{project.category}}
-        </v-card-title> 
+        <v-card-title>
+          {{ project.category }}
+        </v-card-title>
       </v-card>
-   </v-row>
+    </v-row>
     <v-row>
       <v-col color="secondary">
-        <v-card-title v-if="project.itemsId[0] !== undefined">
-          {{ project.itemsId[0].itemName}}
-        </v-card-title>
-        <v-card-title >
-          Image
-        </v-card-title>
-        <v-card-title v-if="project.itemsId[0] !== undefined">
-            {{ project.itemsId[0].description}}
-        </v-card-title>
-        <v-card-title v-if="project.itemsId[0] !== undefined">
-            {{ project.itemsId[0].orderDate}}
-        </v-card-title>
-        <v-card-title v-if="project.itemsId[0] !== undefined">
-            {{ project.itemsId[0].warranty}}
-        </v-card-title>
-        <v-card-title v-if="project.notesId[0] !== undefined">
-            {{ project.notesId[0].headerText}}
-        </v-card-title> 
-       </v-col> 
+        <v-card>
+          <v-card-text v-for="item in project.itemsId" :key="item._id">
+            <v-btn @click="goToItemHandler(item._id)">{{
+              item.itemName
+            }}</v-btn>
+            <v-card-title>
+              Image
+            </v-card-title>
+            <v-card-title >
+              {{ item.description }}
+            </v-card-title>
+            <v-card-title >
+              {{ item.orderDate }}
+            </v-card-title>
+            <v-card-title >
+              {{ item.warranty }}
+            </v-card-title>
+          </v-card-text>
+            
+          
+        </v-card>
+      </v-col>
     </v-row>
     <v-row>
       <v-col sm="6" md="5">
@@ -68,17 +71,23 @@ export default {
     CreateItem,
   },
   methods: {
-      log(message) {
-          console.log(message)
-      }
+    log(message) {
+      console.log(message);
+    },
+    goToItemHandler(selectedItemId) {
+      this.$store.dispatch("ITEMS/setItem", selectedItemId)
+      localStorage.setItem("currentItemId", JSON.stringify(selectedItemId))
+      this.$router.push('Item')
+    },
   },
   computed: {
     projects() {
       return this.$store.getters["PROJECT/getProjects"];
     },
     project() {
-      return this.$store.getters["PROJECT/getProjectFromProjects"](`${this.$store.getters["PROJECT/getProject"]}`)
-       
+      return this.$store.getters["PROJECT/getProjectFromProjects"](
+        `${this.$store.getters["PROJECT/getProject"]}`
+      );
     },
   },
 };
