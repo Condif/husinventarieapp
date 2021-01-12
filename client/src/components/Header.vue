@@ -3,7 +3,7 @@
   style="background: linear-gradient(to right top, #e8dfe0, #ead3d1, #e9c7be, #e4bea8, #dab692);">
     <v-app-bar-nav-icon color="secondary"></v-app-bar-nav-icon>
 
-    <v-toolbar-title ><h2 class="secondary--text" >MYhome</h2></v-toolbar-title>
+    <router-link to="/"><v-toolbar-title><h2 class="secondary--text" >MYhome</h2></v-toolbar-title></router-link>
 
     <v-spacer></v-spacer>
 
