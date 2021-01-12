@@ -2,9 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "expressApp.js",
+  "main": "server/expressApp.js",
   "scripts": {
-    "start": "nodemon expressApp.js",
+    "start": "node server/expressApp.js",
+    "dev": "nodemon server/expressApp.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
