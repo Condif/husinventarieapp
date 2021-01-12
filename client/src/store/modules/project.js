@@ -24,8 +24,7 @@ export const project = {
             
         },
         setProjectFromStorage(state) {
-            state.project = JSON.parse(localStorage.getItem("currentProjectId") || '[]')
-            
+            state.project = JSON.parse(localStorage.getItem("currentProjectId") || '[]')  
         },
         createProject(state, payload) {
             state.projects.push(payload)

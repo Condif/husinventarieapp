@@ -17,6 +17,7 @@ export default {
   },
   created () {
      this.$store.dispatch("PROJECT/setProjectFromStorage")
+     this.$store.dispatch("ITEMS/setItemFromStorage")
   },
   mounted() {
     this.$store.dispatch("PROJECT/setProjects");
