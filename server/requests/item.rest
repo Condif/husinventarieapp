@@ -36,6 +36,5 @@ Content-Type: application/json
   "imageId": "5ed612ec6aaf5cd950517f93",
   "description": "ipsum lorem lorem ipsum",
   "receipt": "5feb3656cbd090ff99f2c81c",
-  "orderDate": "2020-12-30",
-  "warranty": "3 år" 
+  "orderDate": "2020-12-30"
 }

@@ -75,8 +75,10 @@ export default {
         warranty: this.warranty,
 
       }
-      this.$store.dispatch("ITEMS/createItem", newItemObject)
-      this.$store.dispatch("PROJECT/addItem", newItemObject._id)
+      await this.$store.dispatch("ITEMS/createItem", newItemObject)
+      await this.$store.dispatch("PROJECT/addItemToProject", this.$store.getters["ITEMS/getItem"]._id)
+      await this.$store.dispatch("PROJECT/updateProject", this.$store.getters["PROJECT/getProject"])
+      await this.$store.dispatch("PROJECT/setProjects");
     },
   }
 };
