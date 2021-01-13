@@ -55,7 +55,7 @@
           <v-divider></v-divider>
           <div v-if="projects !== undefined">
             <v-card-text v-for="project in projects" :key="project._id">
-              <v-btn @click="goToProjectHandler(project._id)">{{project.projectName}}</v-btn>
+              <v-btn @click="goToProjectHandler(project)">{{project.projectName}}</v-btn>
             </v-card-text>
           </div>
         </div>
@@ -75,9 +75,9 @@ export default {
   }),
   
   methods: {
-    goToProjectHandler(selectedProjectId) {
-      this.$store.dispatch("PROJECT/setProject", selectedProjectId)
-      localStorage.setItem("currentProjectId", JSON.stringify(selectedProjectId))
+    goToProjectHandler(selectedProject) {
+      this.$store.dispatch("PROJECT/setProject", selectedProject)
+      localStorage.setItem("currentProject", JSON.stringify(selectedProject))
       this.$router.push('Project')
     },
   },
@@ -88,7 +88,7 @@ export default {
       
     },
     project() {
-      return this.$store.getters["PROJECT/getProjectFromProjects"](`${this.$store.getters["PROJECT/getProject"]}`)
+      return this.$store.getters["PROJECT/getProjectFromProjects"](this.$store.getters["PROJECT/getProject"]._id)
     }
     
   },

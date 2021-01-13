@@ -24,10 +24,14 @@ export const project = {
             
         },
         setProjectFromStorage(state) {
-            state.project = JSON.parse(localStorage.getItem("currentProjectId") || '[]')  
+            state.project = JSON.parse(localStorage.getItem("currentProject") || '[]')  
         },
         createProject(state, payload) {
             state.projects.push(payload)
+        },
+        addItem(state, payload) {
+            state.project.itemId.push(payload)
+         
         },
     },
 
@@ -54,7 +58,22 @@ export const project = {
                     return response.json()
                 })
                 .then((data) => {
-                    state.commit("createProject", data)
+                    state.commit("setProjects", data)
+                })
+              return response   
+        },
+        async updateProject(state, updatedProject) {
+            const response = await fetch(url + "projects", {
+                method: "PUT",
+                headers: {'Content-Type': 'application/json'},
+                credentials: "include",
+                body: JSON.stringify(updatedProject),
+              })
+                .then((response) => {
+                    return response.json()
+                })
+                .then(() => {
+                    this.setProjects()
                 })
               return response   
         }

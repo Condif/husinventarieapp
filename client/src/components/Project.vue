@@ -86,7 +86,7 @@ export default {
     },
     project() {
       return this.$store.getters["PROJECT/getProjectFromProjects"](
-        `${this.$store.getters["PROJECT/getProject"]}`
+        this.$store.getters["PROJECT/getProject"]._id
       );
     },
   },

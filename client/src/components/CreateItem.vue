@@ -36,10 +36,10 @@
     ></v-textarea>
 
     <v-card-actions>
-      <v-btn  color="accent1">
+      <v-btn color="accent1">
         Lägg till bild
       </v-btn>
-      <v-btn  color="accent1">
+      <v-btn color="accent1">
         Lägg till kvitto
       </v-btn>
       <v-btn @click="createItemHandler" color="accent2">
@@ -58,7 +58,7 @@ export default {
     description: "",
     orderDate: "",
     warranty: "",
-   
+
 
     rules: [
       (value) => !!value || "Required.",
@@ -73,10 +73,11 @@ export default {
         description: this.description,
         orderDate: this.orderDate,
         warranty: this.warranty,
-        
+
       }
       this.$store.dispatch("ITEMS/createItem", newItemObject)
-    }
+      this.$store.dispatch("PROJECT/addItem", newItemObject._id)
+    },
   }
 };
 </script>
