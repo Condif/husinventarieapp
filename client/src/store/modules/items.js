@@ -56,6 +56,7 @@ export const items = {
                 })
                 .then((data) => {
                     state.commit("createItem", data)
+                    state.commit("setItem", data)
                 })
               return response   
         }
