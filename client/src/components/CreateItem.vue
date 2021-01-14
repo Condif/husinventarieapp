@@ -34,14 +34,14 @@
       v-model="description"
       :rules="rules"
     ></v-textarea>
-
+<v-file-input
+    label="File input"
+    filled
+    prepend-icon="mdi-camera"
+  ></v-file-input>
     <v-card-actions>
-      <v-btn  color="accent1">
-        Lägg till bild
-      </v-btn>
-      <v-btn  color="accent1">
-        Lägg till kvitto
-      </v-btn>
+      
+      
       <v-btn @click="createItemHandler" color="accent2">
         Spara
       </v-btn>
