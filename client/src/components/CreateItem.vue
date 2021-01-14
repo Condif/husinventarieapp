@@ -34,14 +34,8 @@
       v-model="description"
       :rules="rules"
     ></v-textarea>
-<v-file-input
-    label="File input"
-    filled
-    prepend-icon="mdi-camera"
-  ></v-file-input>
+    <ImageUploader />
     <v-card-actions>
-      
-      
       <v-btn @click="createItemHandler" color="accent2">
         Spara
       </v-btn>
@@ -50,7 +44,9 @@
 </template>
 
 <script>
+import ImageUploader from "./ImageUploader.vue";
 export default {
+  components: { ImageUploader },
   name: "CreatItem",
   data: () => ({
     itemName: "",
@@ -58,7 +54,6 @@ export default {
     description: "",
     orderDate: "",
     warranty: "",
-   
 
     rules: [
       (value) => !!value || "Required.",
@@ -66,18 +61,17 @@ export default {
     ],
   }),
   methods: {
-   async createItemHandler() {
+    async createItemHandler() {
       const newItemObject = {
         itemName: this.itemName,
         imageId: this.imageId,
         description: this.description,
         orderDate: this.orderDate,
         warranty: this.warranty,
-        
-      }
-      this.$store.dispatch("ITEMS/createItem", newItemObject)
-    }
-  }
+      };
+      this.$store.dispatch("ITEMS/createItem", newItemObject);
+    },
+  },
 };
 </script>
 
