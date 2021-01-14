@@ -10,6 +10,7 @@ const ProjectSchema = mongoose.Schema({
   imageId: {
     type: mongoose.Types.ObjectId,
     // required: true
+    ref: "uploadedImg"
   },
   description: {
     type: String,

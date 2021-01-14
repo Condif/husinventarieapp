@@ -22,6 +22,7 @@
             2021-01-02 En massa kablar och annat bös
           </v-card-subtitle>
 
+  
           <v-card-text>
             <div>
               Behöver fixa ventialtionen <span />Lorem ipsum dolor sit amet
@@ -36,6 +37,10 @@
           md="5">
         <Create-item/>
       </v-col>
+      <v-col  sm="6"
+          md="5">
+        <ImageUploader/>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -44,6 +49,7 @@
 import CreateItem from '../components/CreateItem.vue';
 import Dashboard from "../components/Dashboard.vue";
 import QuickStart from '../components/QuickStart.vue';
+import ImageUploader from '../components/ImageUploader.vue';
 
 export default {
   name: "Home",
@@ -51,6 +57,7 @@ export default {
     Dashboard,
     QuickStart,
     CreateItem,
+    ImageUploader,
   },
 };
 </script>
