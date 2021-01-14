@@ -17,9 +17,14 @@
       </v-list-item>
 
       <v-spacer></v-spacer>
-      <v-btn icon color="secondary">
-        <v-icon>mdi-magnify</v-icon>
+      <v-btn icon color="secondary"> <v-icon>mdi-magnify</v-icon> 
       </v-btn>
+
+      <v-btn color="white" text to="/login">
+        <span>Login</span>
+        <v-icon right></v-icon>
+      </v-btn>
+
       <v-btn color="grey" text>
         <span>Sign Out</span>
         <v-icon right></v-icon>

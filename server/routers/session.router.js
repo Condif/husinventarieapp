@@ -8,7 +8,6 @@ const User = require("../models/user.model");
 // LOGIN
 
 router.post("/api/users/login", async (req, res) => {
-  console.log("test");
   logInUser(req, res);
 });
 
