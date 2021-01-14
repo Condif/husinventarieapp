@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { isAuthenticated } = require("../authenticationMiddleware.js");
+// const { isAuthenticated } = require("../authenticationMiddleware.js");
 
 const {
     getAllItems,
@@ -31,7 +31,7 @@ router.put("/api/items/:itemId", async (req, res) => {
 });
 
 // DELETE
-router.delete("/api/items/:itemId", isAuthenticated, async (req, res) => {
+router.delete("/api/items/:itemId", async (req, res) => {
   deleteItem(req, res);
 });
 
