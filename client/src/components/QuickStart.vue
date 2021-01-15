@@ -1,7 +1,7 @@
 <template>
-  
+  <v-content class="pa-5">
     <v-speed-dial height="100vh" fixed v-model="fab" bottom absolute right>
-      <template v-slot:activator>
+      <template #activator >
         <v-btn v-model="fab" fab dark x-large color="accent2">
           <v-icon v-if="fab">
             mdi-close
@@ -11,28 +11,39 @@
           </v-icon>
         </v-btn>
       </template>
-      <v-btn fab dark medium color="accent1">
+
+    
+     <v-btn fab dark medium color="accent1">
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
       <v-btn fab dark medium color="primary">
         <v-icon>mdi-briefcase</v-icon>
-      </v-btn>
-      <v-btn fab dark medium color="secondary">
-        <v-icon>mdi-camera</v-icon>
-      </v-btn>
+      </v-btn> 
+     
+      <v-btn fab dark medium color="secondary" @click="dialogOutside = true" >
+        <v-icon>mdi-call-split</v-icon>
+      </v-btn> 
     </v-speed-dial>
+      
+      <v-dialog v-model="dialogOutside" width="500"  >
+      <CreateItem/>
+      </v-dialog>
+      
+     
 
-   
+   </v-content>
  
 </template>
 
 <script>
+import CreateItem from '../components/CreateItem';
 export default {
+  components: { CreateItem },
   name: "QuickStart",
 
   data: () => ({ 
     fab: false,
-    
+    dialogOutside: false,
   }),
 };
 </script>

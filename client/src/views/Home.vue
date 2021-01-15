@@ -32,33 +32,22 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col  sm="6"
-          md="5">
-        <Create-item/>
-      </v-col>
-      <v-col  sm="6"
-          md="5">
-          
-        <ImageUploader/>
-      </v-col>
-    </v-row>
+   
   </v-container>
 </template>
 
 <script>
-import CreateItem from '../components/CreateItem.vue';
+
 import Dashboard from "../components/Dashboard.vue";
 import QuickStart from '../components/QuickStart.vue';
-import ImageUploader from '../components/ImageUploader.vue';
+
 
 export default {
   name: "Home",
   components: {
     Dashboard,
     QuickStart,
-    CreateItem,
-    ImageUploader,
+    
   },
 };
 </script>
