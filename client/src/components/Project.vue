@@ -17,10 +17,10 @@
         <v-card-title>
           {{ project.description }}
         </v-card-title>
-        <v-card-title>
+        <v-card-title v-if="project.roomId">
           {{ project.roomId.roomName }}
         </v-card-title>
-        <v-card-title>
+        <v-card-title v-if="project.category">
           {{ project.category }}
         </v-card-title>
       </v-card>
