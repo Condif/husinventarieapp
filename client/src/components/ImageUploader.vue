@@ -38,8 +38,8 @@ export default {
       console.log(this.selectedFile, "test");
     },
 
-    uploadImage(selectedFile) {
-      this.$store.dispatch("IMAGE/uploadImageToDB", selectedFile)
+    async uploadImage(selectedFile) {
+      await this.$store.dispatch("IMAGE/uploadImageToDB", selectedFile)
     }
 
 
