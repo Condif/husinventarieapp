@@ -1,23 +1,28 @@
 <template>
-<div>
-
-  <form @submit.prevent="sendImage" enctype="multipart/form-data">
-    <div class="field">
-      <label for="file" class="label">Upload File</label>
-      <input type="file" @change="selectFile" ref="image" />
-    </div>
-    <div class="field">
-      <button>send</button>
-    </div>
-  </form>
-  <img src="/api/images/5ffee83646032c7d6e43c9b8" alt="">
-</div>
-  
+  <div>
+    <v-form @submit.prevent="sendImage" enctype="multipart/form-data"
+      ><div class="field">
+        <v-file-input
+          label="Image upload"
+          filled
+          prepend-icon="mdi-camera"
+          type="file"
+          @change="selectFile"
+          ref="imag"
+          accept="image"
+        />
+        <div class="field">
+        <v-btn @click="sendImage">
+          Ladda upp
+        </v-btn>
+      </div>
+      </div>
+    </v-form>
+  </div>
 </template>
 
 <script>
 const url = "/api/";
-
 
 export default {
   name: "ImageUploader",
@@ -27,18 +32,19 @@ export default {
     };
   },
   methods: {
-    selectFile() {
-      this.selectedFile = this.$refs.image.files[0];
-      console.log(this.selectedFile.name);
+    selectFile(image) {
+    
+      this.selectedFile = image;
+      console.log(this.selectedFile, "test");
     },
 
     async sendImage() {
       const formData = new FormData();
       formData.append("image", this.selectedFile, this.selectedFile.name);
-      
+
       const response = await fetch(url + "images", {
         method: "POST",
-       
+
         body: formData,
       })
         .then((response) => {
@@ -48,7 +54,7 @@ export default {
         .then((data) => {
           console.log("created image" + data);
         });
-        return response
+      return response;
     },
   },
 };

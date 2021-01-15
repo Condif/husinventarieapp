@@ -39,6 +39,7 @@
       </v-col>
       <v-col  sm="6"
           md="5">
+          
         <ImageUploader/>
       </v-col>
     </v-row>
