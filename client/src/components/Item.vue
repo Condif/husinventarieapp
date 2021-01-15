@@ -7,9 +7,7 @@
           {{ item.itemName}}
         </v-card-title>
         <v-card-title  >
-          <img :src='image'>
-         
-          {{ log(image + "image") }}
+          <v-img  height="200" :src='image'></v-img>
         </v-card-title>
         <v-card-title v-if="item !== undefined">
             {{ item.description}}
