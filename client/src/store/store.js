@@ -12,7 +12,7 @@ export default new Vuex.Store({
         PROJECT,
         ROOM,
         ITEMS,
-        LOGIN
+        LOGIN,
         IMAGE,
     },
 });
