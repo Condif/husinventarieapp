@@ -20,12 +20,12 @@
       <v-btn icon color="secondary"> <v-icon>mdi-magnify</v-icon> 
       </v-btn>
 
-      <v-btn color="white" text to="/login">
+      <v-btn color="white" v-if="!loggedIn" text to="/login">
         <span>Login</span>
         <v-icon right></v-icon>
       </v-btn>
 
-      <v-btn color="grey" text>
+      <v-btn v-if="loggedIn" @click="logout" to="/login" color="grey" text>
         <span>Sign Out</span>
         <v-icon right></v-icon>
       </v-btn>
@@ -60,6 +60,21 @@ export default {
   data: () => ({
     drawer: false,
   }),
+  methods: {
+    async logout() {
+        await this.$store.dispatch("SESSION/logout").then(() => {
+          if(this.$store.getters["SESSION/getLoggedOut"] === true) {
+              this.signedOut = true
+              this.$router.push({ name: "Login" });
+          }
+        })
+    }
+  },
+  computed: {
+    loggedIn () {
+      return this.$store.getters["SESSION/getLoggedIn"]
+    }
+  }
 };
 </script>
 

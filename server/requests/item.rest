@@ -24,7 +24,7 @@ Content-Type: application/json
 
 ###
 // DELETE ITEM
-DELETE http://localhost:3002/api/items/5fec549af306fc1dc85fba2b
+DELETE http://localhost:3002/api/items/60016bf70bbbd13f1c5e8e99
 
 ###
 // UPDATE ITEM

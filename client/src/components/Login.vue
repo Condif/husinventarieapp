@@ -51,8 +51,8 @@ export default {
         email: this.email,
         password: this.password,
       };
-      await this.$store.dispatch("LOGIN/login", credentials).then(() => {
-          if(this.$store.getters["LOGIN/getLoggedIn"] === true) {
+      await this.$store.dispatch("SESSION/login", credentials).then(() => {
+          if(this.$store.getters["SESSION/getLoggedIn"] === true) {
               this.$router.push({ name: "Home" });
           }
       })
