@@ -1,6 +1,11 @@
 
 //ONE
-GET http://localhost:3002/api/images/5ffee83646032c7d6e43c9b8
+GET http://localhost:3002/api/images/600006302c613a808d268039
+
+###
+
+//ALL
+GET http://localhost:3002/api/images/
 
 ###
 

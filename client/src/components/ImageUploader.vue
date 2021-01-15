@@ -12,8 +12,8 @@
           accept="image"
         />
         <div class="field">
-        <v-btn @click="sendImage">
-          Ladda upp
+        <v-btn @click="uploadImage(selectedFile)">
+          Ladda upp bilden
         </v-btn>
       </div>
       </div>
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-const url = "/api/";
+// const url = "/api/";
 
 export default {
   name: "ImageUploader",
@@ -38,24 +38,29 @@ export default {
       console.log(this.selectedFile, "test");
     },
 
-    async sendImage() {
-      const formData = new FormData();
-      formData.append("image", this.selectedFile, this.selectedFile.name);
+    uploadImage(selectedFile) {
+      this.$store.dispatch("IMAGE/uploadImageToDB", selectedFile)
+    }
 
-      const response = await fetch(url + "images", {
-        method: "POST",
 
-        body: formData,
-      })
-        .then((response) => {
-          return response.json();
-        })
+    // async sendImage() {
+    //   const formData = new FormData();
+    //   formData.append("image", this.selectedFile, this.selectedFile.name);
 
-        .then((data) => {
-          console.log("created image" + data);
-        });
-      return response;
-    },
+    //   const response = await fetch(url + "images", {
+    //     method: "POST",
+
+    //     body: formData,
+    //   })
+    //     .then((response) => {
+    //       return response.json();
+    //     })
+
+    //     .then((data) => {
+    //       console.log("created image" + data);
+    //     });
+    //   return response;
+    // },
   },
 };
 </script>
