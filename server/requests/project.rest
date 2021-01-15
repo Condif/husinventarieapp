@@ -14,7 +14,7 @@ Content-Type: application/json
 
 {
   "projectName": "Med notes",
-  "imageId": "5ed612ec6aaf5cd950517f93",
+  "imageId": "5ffee83646032c7d6e43c9b8",
   "description": "ipsum sdddlorem lorem ipsum",
   "roomId": "5feb3656cbd090ff99f2c81c",
   "category": "EL",

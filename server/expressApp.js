@@ -49,6 +49,7 @@ const roomRouter = require("./routers/room.router");
 const houseRouter = require("./routers/house.router");
 const notesRouter = require("./routers/notes.router");
 const itemRouter = require("./routers/item.router");
+const imageRouter = require("./routers/image.router");
 
 // run the database
 run();
@@ -63,7 +64,8 @@ app.use(projectRouter);
 app.use(roomRouter);
 app.use(houseRouter);
 app.use(notesRouter);
-app.use(itemRouter)
+app.use(itemRouter);
+app.use(imageRouter)
 
 // Handle production
 if(process.env.NODE_ENV === 'production') {

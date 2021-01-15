@@ -34,14 +34,8 @@
       v-model="description"
       :rules="rules"
     ></v-textarea>
-
+    <ImageUploader />
     <v-card-actions>
-      <v-btn color="accent1">
-        Lägg till bild
-      </v-btn>
-      <v-btn color="accent1">
-        Lägg till kvitto
-      </v-btn>
       <v-btn @click="createItemHandler" color="accent2">
         Spara
       </v-btn>
@@ -50,7 +44,9 @@
 </template>
 
 <script>
+import ImageUploader from "./ImageUploader.vue";
 export default {
+  components: { ImageUploader },
   name: "CreatItem",
   data: () => ({
     itemName: "",
@@ -59,14 +55,13 @@ export default {
     orderDate: "",
     warranty: "",
 
-
     rules: [
       (value) => !!value || "Required.",
       (value) => (value && value.length >= 3) || "Min 3 characters",
     ],
   }),
   methods: {
-   async createItemHandler() {
+    async createItemHandler() {
       const newItemObject = {
         itemName: this.itemName,
         imageId: this.imageId,

@@ -6,8 +6,8 @@
         <v-card-title v-if="item !== undefined">
           {{ item.itemName}}
         </v-card-title>
-        <v-card-title >
-          Image
+        <v-card-title  >
+          <v-img  height="200" :src='image'></v-img>
         </v-card-title>
         <v-card-title v-if="item !== undefined">
             {{ item.description}}
@@ -38,7 +38,11 @@ import QuickStart from "../components/QuickStart.vue";
 export default {
   namespaced: true,
   name: "item",
-  data: () => ({}),
+  data: () => ({
+    
+    //  image: `api/images/+ ${item.imageId}`
+ 
+  }),
   components: {
     QuickStart,
     CreateItem,
@@ -53,9 +57,13 @@ export default {
       return this.$store.getters["ITEMS/getItems"];
     },
     item() {
+       
       return this.$store.getters["ITEMS/getItemFromItems"](`${this.$store.getters["ITEMS/getItem"]}`)
        
     },
+    image() {
+    return "api/images/" + this.$store.getters["ITEMS/getItemFromItems"](`${this.$store.getters["ITEMS/getItem"]}`).imageId
+    }
   },
 };
 </script>
