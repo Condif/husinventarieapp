@@ -12,8 +12,8 @@ export const image = {
   mutations: {
     setImage(state, payload) {
       state.image = payload;
+      console.log("state image" + JSON.stringify(state.image));
     },
- 
   },
 
   actions: {

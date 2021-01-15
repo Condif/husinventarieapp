@@ -1,4 +1,26 @@
 <template>
+
+
+<div class="text-center">
+    <v-dialog
+      v-model="dialog"
+      width="500"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          color="red lighten-2"
+          dark
+          v-bind="attrs"
+          v-on="on"
+        >
+          Click Me
+        </v-btn>
+      </template>
+
+
+
+
+
   <v-card class="mx-auto mt-2" color="base">
     <v-card-title placeholder="test">
       Lägg till inventarie
@@ -41,6 +63,8 @@
       </v-btn>
     </v-card-actions>
   </v-card>
+  </v-dialog>
+</div>
 </template>
 
 <script>
@@ -50,7 +74,7 @@ export default {
   name: "CreatItem",
   data: () => ({
     itemName: "",
-    imageId: "5ed612ec6aaf5cd950517f93",
+  
     description: "",
     orderDate: "",
     warranty: "",
@@ -59,22 +83,37 @@ export default {
       (value) => !!value || "Required.",
       (value) => (value && value.length >= 3) || "Min 3 characters",
     ],
+
+    dialog: false
   }),
+
+// computed: {
+//  imageId(){
+
+//    return this.$store.getters["IMAGE/getImage"]._id
+//  }
+// },
+
   methods: {
+
+  
+
     async createItemHandler() {
       const newItemObject = {
         itemName: this.itemName,
-        imageId: this.imageId,
+        imageId: this.$store.getters["IMAGE/getImage"]._id,
         description: this.description,
         orderDate: this.orderDate,
         warranty: this.warranty,
 
       }
+      console.log("new itemobjekt hätr" + JSON.stringify(newItemObject));
       await this.$store.dispatch("ITEMS/createItem", newItemObject)
       await this.$store.dispatch("PROJECT/addItemToProject", this.$store.getters["ITEMS/getItem"]._id)
       await this.$store.dispatch("PROJECT/updateProject", this.$store.getters["PROJECT/getProject"])
       await this.$store.dispatch("PROJECT/setProjects");
     },
+    
   }
 };
 </script>

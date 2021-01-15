@@ -40,7 +40,6 @@ export default {
   name: "item",
   data: () => ({
     
-    //  image: `api/images/+ ${item.imageId}`
  
   }),
   components: {
