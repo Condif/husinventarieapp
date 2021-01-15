@@ -35,9 +35,6 @@
             <v-btn @click="deleteItemHandler(item._id)">
               papperskorg
             </v-btn>
-            <v-card-title>
-              Image
-            </v-card-title>
             <v-card-title >
               {{ item.description }}
             </v-card-title>

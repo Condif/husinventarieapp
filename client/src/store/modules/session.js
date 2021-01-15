@@ -1,6 +1,6 @@
 const url = "api/";
 
-export const login = {
+export const session = {
   namespaced: true,
   state: {
     loggedIn: false,
@@ -11,14 +11,14 @@ export const login = {
   },
 
   mutations: {
-    loggedIn(state, loggedIn) {
+    setLoggedIn(state, loggedIn) {
         state.loggedIn = loggedIn
-    }
+    },
   },
   
   actions: {
     async login (state, credentials) {
-        const response = await fetch(url + "users/login", {
+        const response = await fetch(url + "session/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -29,9 +29,24 @@ export const login = {
             })
             .then((response) => {
                 if(response.status === 200) {
-                    state.commit("loggedIn", true);
+                    state.commit("setLoggedIn", true);
                 } else {
-                    state.commit("loggedIn", false);
+                    state.commit("setLoggedIn", false);
+                }
+                
+            })
+        return response;
+    },
+    async logout (state) {
+        const response = await fetch(url + "session/logout", {
+            method: "POST",
+            credentials: "include",
+            })
+            .then((response) => {
+                if(response.status === 200) {
+                    state.commit("setLoggedIn", false);
+                } else {
+                    state.commit("setLoggedIn", true);
                 }
                 
             })
