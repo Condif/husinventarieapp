@@ -30,6 +30,12 @@ export const items = {
         setItemFromStorage(state) {
             state.item = JSON.parse(localStorage.getItem("currentItemId") || '[]')  
         },
+        deleteItemFromState(state, itemId) {
+            const index = state.items.findIndex(item => item._id === itemId);
+            if(index > -1) {
+                state.items.splice(index, 1)
+            }
+        }
     },
 
     actions: {
@@ -56,8 +62,21 @@ export const items = {
                 })
                 .then((data) => {
                     state.commit("createItem", data)
+                    state.commit("setItem", data)
                 })
               return response   
+        },
+        async deleteItem(state, itemId) {
+            const response = await fetch(url + "items/" + itemId, {
+                method: "DELETE",
+              })
+                .then((response) => {
+                    return response.json()
+                })
+                .then(()=> {
+                    state.commit("deleteItemFromState", itemId)
+                })
+            return response   
         }
     },
 }

@@ -32,6 +32,9 @@
             <v-btn @click="goToItemHandler(item._id)">{{
               item.itemName
             }}</v-btn>
+            <v-btn @click="deleteItemHandler(item._id)">
+              papperskorg
+            </v-btn>
             <v-card-title>
               Image
             </v-card-title>
@@ -79,6 +82,10 @@ export default {
       localStorage.setItem("currentItemId", JSON.stringify(selectedItemId))
       this.$router.push('Item')
     },
+    async deleteItemHandler(selectedItemId) {
+      await this.$store.dispatch("ITEMS/deleteItem", selectedItemId)
+      this.$store.dispatch("PROJECT/setProjects");
+    }
   },
   computed: {
     projects() {
@@ -86,7 +93,7 @@ export default {
     },
     project() {
       return this.$store.getters["PROJECT/getProjectFromProjects"](
-        `${this.$store.getters["PROJECT/getProject"]}`
+        this.$store.getters["PROJECT/getProject"]._id
       );
     },
   },
