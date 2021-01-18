@@ -34,15 +34,17 @@
             :key="item._id"
             fucosable
           >
+          <v-container fluid>
             <v-btn
-              width="30rem"
+               width="70%"
               :key="item._id"
               @click="goToItemHandler(item._id)"
               >{{ item.itemName }}</v-btn
             >
             <v-btn :key="item._id + 1" @click="deleteItemHandler(item._id)">
-              papperskorg
+              <v-icon >mdi-delete-forever</v-icon>
             </v-btn>
+          </v-container>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
@@ -103,4 +105,6 @@ export default {
 .home {
   height: 100%;
 }
+
+
 </style>

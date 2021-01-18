@@ -26,8 +26,8 @@ app.use(
   cookieSession({
     name: "LoginSession",
     secret: "GuppA4Lyf3-geeks",
-    // maxAge: 24 * 60 * 60 * 1000, //24 hours
-    maxAge: 1000 * 60 * 60, //1 hour
+    maxAge: 24 * 60 * 60 * 1000, //24 hours
+    // maxAge: 1000 * 60 * 60, //1 hour
     // maxAge: 30 * 60 * 1000, //30 minutes
     // maxAge: 60 * 1000, //1 minute
     // maxAge: 15 * 1000, //15 seconds

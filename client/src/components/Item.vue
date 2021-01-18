@@ -1,27 +1,32 @@
 <template>
-  <v-container fluid v-if="items !== undefined">
+  <v-container fluid v-if="items !== undefined || item !== undefined" >
     <Quick-start />
     <v-row>
-      <v-col color="secondary">
-        <v-card-title v-if="item !== undefined">
-          {{ item.itemName}}
-        </v-card-title>
-        <v-card-title  >
-          <v-img  height="200" :src='image'></v-img>
-        </v-card-title>
-        <v-card-title v-if="item !== undefined">
-            {{ item.description}}
-        </v-card-title>
-        <v-card-title v-if="item !== undefined">
-            {{ item.orderDate}}
-        </v-card-title>
-        <v-card-title v-if="item !== undefined">
-            {{ item.warranty}}
-        </v-card-title>
-        <v-card-title v-if="item !== undefined">
-            {{ item.headerText}}
-        </v-card-title> 
-       </v-col> 
+      <v-card min-width="100%">
+        <v-col color="secondary">
+          <v-card-title >
+            {{ item.itemName }}
+          </v-card-title>
+          <v-spacer></v-spacer>
+          <v-card-subtitle >
+            <v-img height="200" :src="image"></v-img>
+          </v-card-subtitle>
+
+          <div >
+            <v-card-subtitle >
+              Beskrivning:
+            </v-card-subtitle>
+            <v-card-text><p>{{ item.description }}</p></v-card-text>
+          </div>
+
+          <v-card-subtitle>
+            Order datum: {{ item.orderDate }}
+          </v-card-subtitle>
+          <v-card-subtitle>
+           Garanti: {{ item.warranty }}
+          </v-card-subtitle>
+        </v-col>
+      </v-card>
     </v-row>
     <v-row>
       <v-col sm="6" md="5">
@@ -38,37 +43,42 @@ import QuickStart from "../components/QuickStart.vue";
 export default {
   namespaced: true,
   name: "item",
-  data: () => ({
-    
- 
-  }),
+  data: () => ({}),
   components: {
     QuickStart,
     CreateItem,
   },
   methods: {
-      log(message) {
-          console.log(message)
-      }
+    log(message) {
+      console.log(message);
+    },
   },
   computed: {
     items() {
       return this.$store.getters["ITEMS/getItems"];
     },
     item() {
-       
-      return this.$store.getters["ITEMS/getItemFromItems"](`${this.$store.getters["ITEMS/getItem"]}`)
-       
+      return this.$store.getters["ITEMS/getItemFromItems"](
+        `${this.$store.getters["ITEMS/getItem"]}`
+      );
     },
     image() {
-    return "api/images/" + this.$store.getters["ITEMS/getItemFromItems"](`${this.$store.getters["ITEMS/getItem"]}`).imageId
-    }
+      return (
+        "api/images/" +
+        this.$store.getters["ITEMS/getItemFromItems"](
+          `${this.$store.getters["ITEMS/getItem"]}`
+        ).imageId
+      );
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .home {
   height: 100%;
+}
+p {
+  font-size: 0.8rem;
 }
 </style>
