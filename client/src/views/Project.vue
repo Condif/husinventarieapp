@@ -2,6 +2,9 @@
   <v-container fluid v-if="project !== undefined">
     <Quick-start />
     <v-row>
+      <v-col class="d-flex" cols="12" sm="6">
+        <v-select v-for="item in project.itemsId" :key="item._id" :label="test" solo></v-select>
+      </v-col>
       <v-card class="mx-auto pt-2" color="primary">
         <v-card-title>
           {{ project.projectName }}

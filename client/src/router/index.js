@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Project from '../components/Project.vue'
+import Project from '../views/Project.vue'
 import Item from '../components/Item.vue'
 import Login from '../components/Login.vue'
 import store from '../store/store'
+import House from '../views/House.vue'
 
 Vue.use(VueRouter)
 
@@ -31,6 +32,11 @@ const routes = [
     name: 'Item',
     component: Item,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/house',
+    name: 'House',
+    component: House
   },
   {
     path: '/createproject',
