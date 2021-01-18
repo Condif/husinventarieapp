@@ -6,6 +6,7 @@ import Item from '../components/Item.vue'
 import Login from '../components/Login.vue'
 import store from '../store/store'
 import House from '../views/House.vue'
+import Signup from '../components/Signup.vue'
 
 Vue.use(VueRouter)
 
@@ -20,6 +21,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/signup',
+    name: 'Signup',
+    component: Signup
   },
   {
     path: '/project',

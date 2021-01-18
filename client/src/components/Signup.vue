@@ -6,10 +6,22 @@
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
               <v-toolbar dark color="primary">
-                <v-toolbar-title>Login form</v-toolbar-title>
+                <v-toolbar-title>Register</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
                 <v-form>
+                  <v-text-field
+                    name="firstName"
+                    label="First name"
+                    type="text"
+                    v-model="firstName"
+                  ></v-text-field>
+                  <v-text-field
+                    name="lastName"
+                    label="Last name"
+                    type="lastName"
+                    v-model="lastName"
+                  ></v-text-field>
                   <v-text-field
                     name="email"
                     label="Email"
@@ -24,12 +36,11 @@
                     v-model="password"
                   ></v-text-field>
                 </v-form>
-                <router-link to="/signup">Dont have an account? Sign up here</router-link>
               </v-card-text>
-              
+
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click="loginHandler">Login</v-btn>
+                <v-btn color="primary" @click="signupHandler">Sign up</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -41,24 +52,25 @@
 
 <script>
 export default {
-  name: "Login",
+  name: "Signup",
   data: () => ({
     email: "",
     password: "",
+    firstName: "",
+    lastName: "",
     error: false,
   }),
   methods: {
-    async loginHandler() {
+    async signupHandler() {
       const credentials = {
+        firstName: this.firstName,
+        lastName: this.lastName,
         email: this.email,
-        password: this.password,
+        password: this.password
       };
-      await this.$store.dispatch("SESSION/login", credentials).then(() => {
-          if(this.$store.getters["SESSION/getLoggedIn"] === true) {
-              this.$router.push({ name: "Home" });
-          }
-      })
-      
+      await this.$store.dispatch("SESSION/signup", credentials).then(() => {
+        this.$router.push({ name: "Login" });
+      });
     },
   },
 };
