@@ -2,13 +2,6 @@
   <v-container fluid v-if="project !== undefined">
     <Quick-start />
     <v-row>
-      <v-col class="d-flex" cols="12" sm="6">
-        <v-select
-          v-for="item in project.itemsId"
-          :key="item._id"
-          solo
-        ></v-select>
-      </v-col>
       <v-card class="mx-auto pt-2" color="primary">
         <v-card-title>
           {{ project.projectName }}
@@ -31,14 +24,30 @@
           {{ project.category }}
         </v-card-title>
       </v-card>
-      <transition-group name="slide" v-for="item in project.itemsId" :key="item._id">
-              <v-btn :key="item._id" @click="goToItemHandler(item._id)">{{
-                item.itemName
-              }}</v-btn>
-              <v-btn :key="item._id + 1"  @click="deleteItemHandler(item._id)">
-                papperskorg
-              </v-btn>
-      </transition-group>
+      <v-expansion-panels>
+        <v-expansion-panel>
+          <v-expansion-panel-header>
+            Inventarier
+          </v-expansion-panel-header>
+          <v-expansion-panel-content
+            v-for="item in project.itemsId"
+            :key="item._id"
+            fucosable
+          >
+          <v-container fluid>
+            <v-btn
+               width="70%"
+              :key="item._id"
+              @click="goToItemHandler(item._id)"
+              >{{ item.itemName }}</v-btn
+            >
+            <v-btn :key="item._id + 1" @click="deleteItemHandler(item._id)">
+              <v-icon >mdi-delete-forever</v-icon>
+            </v-btn>
+          </v-container>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
     </v-row>
     <v-row>
       <v-col color="secondary">
@@ -96,4 +105,6 @@ export default {
 .home {
   height: 100%;
 }
+
+
 </style>
