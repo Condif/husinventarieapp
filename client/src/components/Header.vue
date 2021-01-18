@@ -4,7 +4,7 @@
       app
       absolute
       dark
-      hide-on-scroll
+      elevate-on-scroll
       style="background: linear-gradient(to right top, #e8dfe0, #ead3d1, #e9c7be, #e4bea8, #dab692)"
     >
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
