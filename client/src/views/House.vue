@@ -9,12 +9,50 @@
         <v-card class="mx-auto" color="base">
           <v-expansion-panels focusable>
             <v-expansion-panel v-for="(room, i) in rooms" :key="i">
-              <v-expansion-panel-header>{{ room }}</v-expansion-panel-header>
+              <v-expansion-panel-header>{{
+                room.roomName
+              }}</v-expansion-panel-header>
               <v-expansion-panel-content>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                <p>Höjd till tak:{{ room.roomHeigt }}</p>
+                <p>Antal kvadratmeter {{ room.roomSize }}</p>
+                <!-- {{room}} -->
+                <div class="items">
+                  <h5>Inventarier</h5>
+                  <v-expansion-panels>
+                    <v-expansion-panel v-for="(item, i) in room.items" :key="i">
+                      <v-expansion-panel-header>
+                        {{ item.itemName }}
+                       
+                      </v-expansion-panel-header>
+                      <v-expansion-panel-content>
+                        <p>Beskrivning</p>
+                        {{ item.description }}
+                         <v-btn @click="goToItemHandler(item)">Visa inventariet</v-btn>
+                      </v-expansion-panel-content>
+                    </v-expansion-panel>
+                  </v-expansion-panels>
+                </div>
+
+                <div class="projects">
+                  <h5>Projekt</h5>
+                  <v-expansion-panels>
+                    <v-expansion-panel
+                      v-for="(project, i) in room.projects"
+                      :key="i"
+                    >
+                      <v-expansion-panel-header>
+                        {{ project.projectName }}
+                      </v-expansion-panel-header>
+                      <v-expansion-panel-content>
+                        {{ project.description }}
+                       
+                       
+                        <v-btn @click="goToProjectHandler(project)">Gå till projektet</v-btn>
+                     
+                      </v-expansion-panel-content>
+                    </v-expansion-panel>
+                  </v-expansion-panels>
+                </div>
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
@@ -47,7 +85,7 @@ export default {
   data() {
     return {
       items: ["Olvonvägen 47", "Sommarstugan"],
-      rooms: ["sovrum", "kök", "vardagsrum", "toalett"],
+
       colors: [
         "indigo",
         "warning",
@@ -61,6 +99,29 @@ export default {
   name: "Home",
   components: {
     QuickStart,
+  },
+
+
+ methods: {
+    goToProjectHandler(selectedProject) {
+      this.$store.dispatch("PROJECT/setProject", selectedProject)
+      localStorage.setItem("currentProject", JSON.stringify(selectedProject))
+      this.$router.push('Project')
+    },
+
+
+// Måste testas
+    goToItemsHandler(selectedItem) {
+      this.$store.dispatch("ITEM/setItem", selectedItem)
+      localStorage.setItem("currentItem", JSON.stringify(selectedItem))
+      this.$router.push('Item')
+    }
+  },
+
+  computed: {
+    rooms() {
+      return this.$store.getters["ROOM/getRooms"];
+    },
   },
 };
 </script>

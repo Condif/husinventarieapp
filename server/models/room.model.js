@@ -21,9 +21,9 @@ const RoomSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  //   items: {
-  //     type: [ItemSchema],
-  //   },
+    items: {
+      type: [{ type: mongoose.Types.ObjectId, ref: "Item" }]
+    },
 
   projects: [{ type: mongoose.Types.ObjectId, ref: "Project" }],
 });
