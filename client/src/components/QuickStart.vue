@@ -1,5 +1,5 @@
 <template>
-  <v-content class="pa-5">
+  <v-container class="pa-5">
     <v-speed-dial height="100vh" fixed v-model="fab" bottom absolute right>
       <template #activator >
         <v-btn v-model="fab" fab dark x-large color="accent2">
@@ -25,13 +25,13 @@
       </v-btn> 
     </v-speed-dial>
       
-      <v-dialog v-model="dialogOutside" width="500"  >
-      <CreateItem/>
+      <v-dialog v-model="dialogOutside" width="500" @close-dialog="closeDialog"  >
+      <CreateItem />
       </v-dialog>
       
      
 
-   </v-content>
+   </v-container>
  
 </template>
 
@@ -45,6 +45,15 @@ export default {
     fab: false,
     dialogOutside: false,
   }),
+
+  methods: {
+    
+          closeDialog: function(){
+            console.log('close dialog 2');
+            this.dialogOutside = false;
+
+          }  
+  }
 };
 </script>
 
