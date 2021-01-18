@@ -31,14 +31,14 @@
           {{ project.category }}
         </v-card-title>
       </v-card>
-      <v-expand-transition-group v-for="item in project.itemsId" :key="item._id">
-              <v-btn @click="goToItemHandler(item._id)">{{
+      <transition-group name="slide" v-for="item in project.itemsId" :key="item._id">
+              <v-btn :key="item._id" @click="goToItemHandler(item._id)">{{
                 item.itemName
               }}</v-btn>
-              <v-btn @click="deleteItemHandler(item._id)">
+              <v-btn :key="item._id + 1"  @click="deleteItemHandler(item._id)">
                 papperskorg
               </v-btn>
-      </v-expand-transition-group>
+      </transition-group>
     </v-row>
     <v-row>
       <v-col color="secondary">
