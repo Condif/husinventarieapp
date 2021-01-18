@@ -24,6 +24,7 @@
       </v-btn>
     </v-speed-dial>
 
+ 
     <v-dialog v-model="dialogOutside" width="500">
       <CreateItem @close-dialog="closeDialog" />
     </v-dialog>
