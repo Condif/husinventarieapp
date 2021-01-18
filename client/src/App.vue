@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <Header />
-    <v-main>
+    <v-main class="pb-16">
       <router-view />
-    </v-main>
+    </v-main >
   </v-app>
 </template>
 
