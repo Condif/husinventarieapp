@@ -20,8 +20,8 @@
       <v-spacer></v-spacer>
       <v-btn icon color="secondary"> <v-icon>mdi-magnify</v-icon> </v-btn>
 
-      <v-btn color="white" v-if="!loggedIn" text to="/login">
-        <span>Login</span>
+      <v-btn color="white" v-if="!loggedIn" text to="/signup">
+        <span>Sign up</span>
         <v-icon right></v-icon>
       </v-btn>
 

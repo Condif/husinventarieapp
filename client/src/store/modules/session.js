@@ -51,6 +51,15 @@ export const session = {
                 
             })
         return response;
+    },
+    async signup (state, credentials) {
+        const response = await fetch(url + "newuser", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify(credentials),
+        })
+        return response;
     }
   }
 }
