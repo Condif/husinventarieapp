@@ -14,9 +14,11 @@ Content-Type: application/json
 
 {
   "houseId": "5fec43c4cceaaf1f07ed3268",
-  "roomName": "Kök",
+  "roomName": "Sovrum",
   "roomSize": "35",
-  "roomHeight": "2.40"
+  "roomHeight": "2.40",
+  "projects": ["600153be4bc8fe051da7f5a4"],
+  "items": ["6001b27fd71d8720ae3b1b6f"]
 
 }
 

@@ -3,7 +3,7 @@ const Room = require("../models/room.model");
 // GET ALL
 getAllRooms = async (req, res) => {
   await Room.find()
-    .populate("houseId")
+    .populate("itemset")
     .populate("projects")
 
     .then((post) => res.status(200).json(post))
