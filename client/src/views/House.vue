@@ -13,7 +13,7 @@
                 room.roomName
               }}</v-expansion-panel-header>
               <v-expansion-panel-content>
-                <p>Höjd till tak:{{ roomHeigt }}</p>
+                <p>Höjd till tak:{{ room.roomHeigt }}</p>
                 <p>Antal kvadratmeter {{ room.roomSize }}</p>
                 <!-- {{room}} -->
                 <div class="items">
@@ -22,11 +22,12 @@
                     <v-expansion-panel v-for="(item, i) in room.items" :key="i">
                       <v-expansion-panel-header>
                         {{ item.itemName }}
+                       
                       </v-expansion-panel-header>
                       <v-expansion-panel-content>
                         <p>Beskrivning</p>
                         {{ item.description }}
-                        <v-btn>visa inventarie</v-btn>
+                         <v-btn @click="goToItemHandler(item)">Visa inventariet</v-btn>
                       </v-expansion-panel-content>
                     </v-expansion-panel>
                   </v-expansion-panels>
@@ -44,7 +45,10 @@
                       </v-expansion-panel-header>
                       <v-expansion-panel-content>
                         {{ project.description }}
-                        <v-btn>visa projekt</v-btn>
+                       
+                       
+                        <v-btn @click="goToProjectHandler(project)">Gå till projektet</v-btn>
+                     
                       </v-expansion-panel-content>
                     </v-expansion-panel>
                   </v-expansion-panels>
@@ -95,6 +99,23 @@ export default {
   name: "Home",
   components: {
     QuickStart,
+  },
+
+
+ methods: {
+    goToProjectHandler(selectedProject) {
+      this.$store.dispatch("PROJECT/setProject", selectedProject)
+      localStorage.setItem("currentProject", JSON.stringify(selectedProject))
+      this.$router.push('Project')
+    },
+
+
+// Måste testas
+    goToItemsHandler(selectedItem) {
+      this.$store.dispatch("ITEM/setItem", selectedItem)
+      localStorage.setItem("currentItem", JSON.stringify(selectedItem))
+      this.$router.push('Item')
+    }
   },
 
   computed: {
