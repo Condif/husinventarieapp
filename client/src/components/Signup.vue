@@ -6,19 +6,19 @@
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
               <v-toolbar dark color="primary">
-                <v-toolbar-title>Register</v-toolbar-title>
+                <v-toolbar-title>Registrering</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
                 <v-form>
                   <v-text-field
                     name="firstName"
-                    label="First name"
+                    label="Förnamn"
                     type="text"
                     v-model="firstName"
                   ></v-text-field>
                   <v-text-field
                     name="lastName"
-                    label="Last name"
+                    label="Efternamn"
                     type="lastName"
                     v-model="lastName"
                   ></v-text-field>
@@ -31,7 +31,7 @@
                   <v-text-field
                     id="password"
                     name="password"
-                    label="Password"
+                    label="Lösenord"
                     type="password"
                     v-model="password"
                   ></v-text-field>
@@ -40,7 +40,7 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click="signupHandler">Sign up</v-btn>
+                <v-btn color="primary" @click="signupHandler">Registrera</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>

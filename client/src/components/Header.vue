@@ -21,12 +21,12 @@
       <v-btn icon color="secondary"> <v-icon>mdi-magnify</v-icon> </v-btn>
 
       <v-btn color="white" v-if="!loggedIn" text to="/signup">
-        <span>Sign up</span>
+        <span>Registrera</span>
         <v-icon right></v-icon>
       </v-btn>
 
       <v-btn v-if="loggedIn" @click="logout" to="/login" color="grey" text>
-        <span>Sign Out</span>
+        <span>Logga ut</span>
         <v-icon right></v-icon>
       </v-btn>
     </v-app-bar>

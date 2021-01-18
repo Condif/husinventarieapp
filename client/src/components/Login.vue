@@ -6,7 +6,7 @@
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
               <v-toolbar dark color="primary">
-                <v-toolbar-title>Login form</v-toolbar-title>
+                <v-toolbar-title>Logga in</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
                 <v-form>
@@ -19,17 +19,17 @@
                   <v-text-field
                     id="password"
                     name="password"
-                    label="Password"
+                    label="Lösenord"
                     type="password"
                     v-model="password"
                   ></v-text-field>
                 </v-form>
-                <router-link to="/signup">Dont have an account? Sign up here</router-link>
+                <router-link to="/signup">Inte registrerad? Registrera dig här.</router-link>
               </v-card-text>
               
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click="loginHandler">Login</v-btn>
+                <v-btn color="primary" @click="loginHandler">Logga in</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
