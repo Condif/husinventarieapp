@@ -14,6 +14,9 @@ export const session = {
     setLoggedIn(state, loggedIn) {
         state.loggedIn = loggedIn
     },
+    setLoggedInFromStorage(state) {
+        state.loggedIn = JSON.parse(localStorage.getItem("loggedIn") || '[]')  
+    },
   },
   
   actions: {
@@ -30,6 +33,7 @@ export const session = {
             .then((response) => {
                 if(response.status === 200) {
                     state.commit("setLoggedIn", true);
+                    localStorage.setItem("loggedIn", JSON.stringify(true));
                 } else {
                     state.commit("setLoggedIn", false);
                 }
@@ -45,6 +49,7 @@ export const session = {
             .then((response) => {
                 if(response.status === 200) {
                     state.commit("setLoggedIn", false);
+                    localStorage.setItem("loggedIn", JSON.stringify(false));
                 } else {
                     state.commit("setLoggedIn", true);
                 }
@@ -60,6 +65,9 @@ export const session = {
             body: JSON.stringify(credentials),
         })
         return response;
-    }
+    },
+    setLoggedInFromStorage (state) {
+        state.commit("setLoggedInFromStorage")
+    },
   }
 }

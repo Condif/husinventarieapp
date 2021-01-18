@@ -3,7 +3,11 @@
     <Quick-start />
     <v-row>
       <v-col class="d-flex" cols="12" sm="6">
-        <v-select v-for="item in project.itemsId" :key="item._id" :label="test" solo></v-select>
+        <v-select
+          v-for="item in project.itemsId"
+          :key="item._id"
+          solo
+        ></v-select>
       </v-col>
       <v-card class="mx-auto pt-2" color="primary">
         <v-card-title>
@@ -27,30 +31,18 @@
           {{ project.category }}
         </v-card-title>
       </v-card>
+      <transition-group name="slide" v-for="item in project.itemsId" :key="item._id">
+              <v-btn :key="item._id" @click="goToItemHandler(item._id)">{{
+                item.itemName
+              }}</v-btn>
+              <v-btn :key="item._id + 1"  @click="deleteItemHandler(item._id)">
+                papperskorg
+              </v-btn>
+      </transition-group>
     </v-row>
     <v-row>
       <v-col color="secondary">
-        <v-card>
-          <v-card-text v-for="item in project.itemsId" :key="item._id">
-            <v-btn @click="goToItemHandler(item._id)">{{
-              item.itemName
-            }}</v-btn>
-            <v-btn @click="deleteItemHandler(item._id)">
-              papperskorg
-            </v-btn>
-            <v-card-title >
-              {{ item.description }}
-            </v-card-title>
-            <v-card-title >
-              {{ item.orderDate }}
-            </v-card-title>
-            <v-card-title >
-              {{ item.warranty }}
-            </v-card-title>
-          </v-card-text>
-            
-          
-        </v-card>
+        <v-card> </v-card>
       </v-col>
     </v-row>
     <v-row>
@@ -78,14 +70,14 @@ export default {
       console.log(message);
     },
     goToItemHandler(selectedItemId) {
-      this.$store.dispatch("ITEMS/setItem", selectedItemId)
-      localStorage.setItem("currentItemId", JSON.stringify(selectedItemId))
-      this.$router.push('Item')
+      this.$store.dispatch("ITEMS/setItem", selectedItemId);
+      localStorage.setItem("currentItemId", JSON.stringify(selectedItemId));
+      this.$router.push("Item");
     },
     async deleteItemHandler(selectedItemId) {
-      await this.$store.dispatch("ITEMS/deleteItem", selectedItemId)
+      await this.$store.dispatch("ITEMS/deleteItem", selectedItemId);
       this.$store.dispatch("PROJECT/setProjects");
-    }
+    },
   },
   computed: {
     projects() {

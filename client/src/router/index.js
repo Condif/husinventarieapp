@@ -68,7 +68,9 @@ const router = new VueRouter({
   routes
 })
 
+
 router.beforeEach((to, from, next) => {
+  store.dispatch("SESSION/setLoggedInFromStorage")
   let routerAuthCheck = store.getters["SESSION/getLoggedIn"];
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
