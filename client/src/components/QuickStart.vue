@@ -1,5 +1,5 @@
 <template>
-  <v-content class="pa-5">
+  <v-main class="pa-5">
     <v-speed-dial height="100vh" fixed v-model="fab" bottom absolute right>
       <template #activator >
         <v-btn v-model="fab" fab dark x-large color="accent2">
@@ -31,7 +31,7 @@
       
      
 
-   </v-content>
+   </v-main>
  
 </template>
 
