@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Project from '../components/Project.vue'
 import Item from '../components/Item.vue'
 import Login from '../components/Login.vue'
+import House from '../views/House.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/item',
     name: 'Item',
     component: Item
+  },
+  {
+    path: '/house',
+    name: 'House',
+    component: House
   },
   {
     path: '/createproject',
