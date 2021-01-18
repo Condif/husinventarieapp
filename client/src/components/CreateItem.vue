@@ -110,7 +110,7 @@ export default {
         this.$store.getters["PROJECT/getProject"]
       );
       await this.$store.dispatch("PROJECT/setProjects");
-
+console.log("emit");
       this.$emit('close-dialog')
     },
   },

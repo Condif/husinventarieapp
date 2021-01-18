@@ -2,7 +2,8 @@
   <nav>
     <v-app-bar
       app
-      absolute
+      fixed
+      
       dark
       elevate-on-scroll
       style="background: linear-gradient(to right top, #e8dfe0, #ead3d1, #e9c7be, #e4bea8, #dab692)"
@@ -68,12 +69,12 @@ export default {
   data: () => ({
     drawer: false,
     items: [
-      { title: "Dashboard", icon: "mdi-view-dashboard", link: "/home" },
-      { title: "Mitt Hus", icon: "mdi-home-city", link: "/createitem" },
+      { title: "Dashboard", icon: "mdi-view-dashboard", link: "/" },
+      { title: "Mitt Hus", icon: "mdi-home-city", link: "/house" },
       {
         title: "Projekt",
         icon: "mdi-calendar-check-outline",
-        link: "/createitem",
+        link: "/project",
       },
       { title: "Mitt konto", icon: "mdi-account-box", link: "/createproject" },
       { title: "Admin", icon: "mdi-gavel", link: "/createitem" },

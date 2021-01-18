@@ -1,59 +1,51 @@
 <template>
   <v-container class="pa-5">
     <v-speed-dial height="100vh" fixed v-model="fab" bottom absolute right>
-      <template #activator >
+      <template #activator>
         <v-btn v-model="fab" fab dark x-large color="accent2">
           <v-icon v-if="fab">
             mdi-close
           </v-icon>
           <v-icon v-else>
-           mdi-plus
+            mdi-plus
           </v-icon>
         </v-btn>
       </template>
 
-    
-     <v-btn fab dark medium color="accent1">
+      <v-btn fab dark medium color="accent1">
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
       <v-btn fab dark medium color="primary">
         <v-icon>mdi-briefcase</v-icon>
-      </v-btn> 
-     
-      <v-btn fab dark medium color="secondary" @click="dialogOutside = true" >
-        <v-icon>mdi-call-split</v-icon>
-      </v-btn> 
-    </v-speed-dial>
-      
-      <v-dialog v-model="dialogOutside" width="500" @close-dialog="closeDialog"  >
-      <CreateItem />
-      </v-dialog>
-      
-     
+      </v-btn>
 
-   </v-container>
- 
+      <v-btn fab dark medium color="secondary" @click="dialogOutside = true">
+        <v-icon>mdi-call-split</v-icon>
+      </v-btn>
+    </v-speed-dial>
+
+    <v-dialog v-model="dialogOutside" width="500">
+      <CreateItem @close-dialog="closeDialog" />
+    </v-dialog>
+  </v-container>
 </template>
 
 <script>
-import CreateItem from '../components/CreateItem';
+import CreateItem from "../components/CreateItem";
 export default {
   components: { CreateItem },
   name: "QuickStart",
 
-  data: () => ({ 
+  data: () => ({
     fab: false,
     dialogOutside: false,
   }),
 
   methods: {
-    
-          closeDialog: function(){
-            console.log('close dialog 2');
-            this.dialogOutside = false;
-
-          }  
-  }
+    closeDialog() {
+      this.dialogOutside = false;
+    },
+  },
 };
 </script>
 
