@@ -29,6 +29,10 @@
         <span>Logga ut</span>
         <v-icon right></v-icon>
       </v-btn>
+      <v-btn v-if="!loggedIn" to="/login" color="white" text>
+        <span>Logga in</span>
+        <v-icon right></v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-navigation-drawer
@@ -54,7 +58,7 @@
 
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn block color="accent1">
+          <v-btn v-if="loggedIn" @click="logout" to="/login" block color="accent1">
             Logout
           </v-btn>
         </div>
