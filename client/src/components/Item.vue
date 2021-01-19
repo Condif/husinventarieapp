@@ -115,6 +115,7 @@ export default {
       this.$store.dispatch("ITEMS/setItem", selectedItem);
       localStorage.setItem("currentItem", JSON.stringify(selectedItem));
       console.log("selected", selectedItem);
+      window.scrollTo(0,0)
       
     },
 
