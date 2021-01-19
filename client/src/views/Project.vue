@@ -24,6 +24,8 @@
           {{ project.category }}
         </v-card-title>
       </v-card>
+
+ 
       <v-expansion-panels>
         <v-expansion-panel>
           <v-expansion-panel-header>
@@ -38,7 +40,7 @@
             <v-btn
                width="70%"
               :key="item._id"
-              @click="goToItemHandler(item._id)"
+              @click="goToItemHandler(item)"
               >{{ item.itemName }}</v-btn
             >
             <v-btn :key="item._id + 1" @click="deleteItemHandler(item._id)">
@@ -48,6 +50,7 @@
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
+
     </v-row>
     <v-row>
       <v-col color="secondary">
@@ -78,9 +81,9 @@ export default {
     log(message) {
       console.log(message);
     },
-    goToItemHandler(selectedItemId) {
-      this.$store.dispatch("ITEMS/setItem", selectedItemId);
-      localStorage.setItem("currentItemId", JSON.stringify(selectedItemId));
+    goToItemHandler(selectedItem) {
+      this.$store.dispatch("ITEMS/setItem", selectedItem);
+      localStorage.setItem("currentItem", JSON.stringify(selectedItem));
       this.$router.push("Item");
     },
     async deleteItemHandler(selectedItemId) {

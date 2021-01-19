@@ -2,37 +2,90 @@
   <v-container fluid v-if="items !== undefined || item !== undefined" >
     <Quick-start />
     <v-row>
-      <v-card min-width="100%">
-        <v-col color="secondary">
-          <v-card-title >
-            {{ item.itemName }}
-          </v-card-title>
-          <v-spacer></v-spacer>
-          <v-card-subtitle >
+
+      <v-col sm="6" md="5" color="secondary">
+        <v-card class="mx-auto" max-width="344" v-if="item !== undefined">
+          <v-card-text>
+            <div class="d-flex justify-space-between">
+              <div class="card-header">
+                <p>Inventarie</p>
+                <p class="display-1 text--primary">
+                  {{ item.itemName }}
+                </p>
+              </div>
+              <div class="edit-buttons">
+                <v-btn icon>
+                  <v-icon color="grey lighten-1">mdi-pencil</v-icon>
+                </v-btn>
+                <v-btn icon>
+                  <v-icon color="grey lighten-1">mdi-delete</v-icon>
+                </v-btn>
+              </div>
+            </div>
             <v-img height="200" :src="image"></v-img>
-          </v-card-subtitle>
+            <div class="text--primary">
+              {{ item.description }}
+              <p>Inköpsdatum: {{ item.orderDate }}</p>
+            </div>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn text color="teal accent-4" @click="reveal = true">
+              Visa mer
+            </v-btn>
+          </v-card-actions>
 
-          <div >
-            <v-card-subtitle >
-              Beskrivning:
-            </v-card-subtitle>
-            <v-card-text><p>{{ item.description }}</p></v-card-text>
-          </div>
-
-          <v-card-subtitle>
-            Order datum: {{ item.orderDate }}
-          </v-card-subtitle>
-          <v-card-subtitle>
-           Garanti: {{ item.warranty }}
-          </v-card-subtitle>
-        </v-col>
-      </v-card>
+          <v-expand-transition>
+            <v-card
+              v-if="reveal"
+              class="transition-fast-in-fast-out v-card--reveal"
+              style="height: 100%;"
+            >
+              <v-card-text class="pb-0">
+                <p>Garanti: {{ item.warranty }}</p>
+                <v-img height="200" :src="image"></v-img>
+                <p>Kvitto</p>
+                <p>Rum: {{ item.warranty }}</p>
+                <p>Projekt: {{ item.warranty }}</p>
+              </v-card-text>
+              <v-card-actions class="pt-0">
+                <v-btn text color="teal accent-4" @click="reveal = false">
+                  Stäng
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-expand-transition>
+        </v-card>
+      </v-col>
     </v-row>
     <v-row>
       <v-col sm="6" md="5">
-        <Create-item />
+        <v-card class="mx-auto" max-width="344">
+          <v-card-text>
+            <h5>Alla inventarier</h5>
+
+            <v-list-item two-line v-for="(item, i) in items" :key="i">
+              <v-list-item-content>
+                <v-list-item-title>{{ item.itemName }}</v-list-item-title>
+                <v-list-item-subtitle>
+                  {{ item.description }},
+                </v-list-item-subtitle>
+              </v-list-item-content>
+              <v-list-item-action>
+                <v-btn icon @click="openItemDetails(item)">
+                  <v-icon color="grey lighten-1">mdi-open-in-new</v-icon>
+                </v-btn>
+              </v-list-item-action>
+            </v-list-item>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary">
+              Lägg till nytt inventarie
+            </v-btn>
+          </v-card-actions>
+        </v-card>
       </v-col>
     </v-row>
+    <Create-item />
   </v-container>
 </template>
 
@@ -43,7 +96,12 @@ import QuickStart from "../components/QuickStart.vue";
 export default {
   namespaced: true,
   name: "item",
-  data: () => ({}),
+
+  data: () => ({
+    reveal: false,
+  
+  }),
+
   components: {
     QuickStart,
     CreateItem,
@@ -52,22 +110,30 @@ export default {
     log(message) {
       console.log(message);
     },
+
+    openItemDetails(selectedItem) {
+      this.$store.dispatch("ITEMS/setItem", selectedItem);
+      localStorage.setItem("currentItem", JSON.stringify(selectedItem));
+      console.log("selected", selectedItem);
+      
+    },
+
   },
   computed: {
     items() {
       return this.$store.getters["ITEMS/getItems"];
     },
     item() {
-      return this.$store.getters["ITEMS/getItemFromItems"](
-        `${this.$store.getters["ITEMS/getItem"]}`
-      );
+
+      return this.$store.getters["ITEMS/getItem"];
+
     },
     image() {
       return (
         "api/images/" +
-        this.$store.getters["ITEMS/getItemFromItems"](
-          `${this.$store.getters["ITEMS/getItem"]}`
-        ).imageId
+
+        this.$store.getters["ITEMS/getItem"].imageId
+
       );
     },
   },
@@ -78,7 +144,15 @@ export default {
 .home {
   height: 100%;
 }
+
+.v-card--reveal {
+  bottom: 0;
+  opacity: 1 !important;
+  position: absolute;
+  width: 100%;
+
 p {
   font-size: 0.8rem;
+
 }
 </style>

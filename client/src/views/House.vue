@@ -111,8 +111,8 @@ export default {
 
 
 // Måste testas
-    goToItemsHandler(selectedItem) {
-      this.$store.dispatch("ITEM/setItem", selectedItem)
+    goToItemHandler(selectedItem) {
+      this.$store.dispatch("ITEMS/setItem", selectedItem)
       localStorage.setItem("currentItem", JSON.stringify(selectedItem))
       this.$router.push('Item')
     }
