@@ -75,6 +75,9 @@
         </v-carousel>
       </v-col>
     </v-row>
+    <v-col>
+      <v-btn to="/createRoom">Skapa rum</v-btn>
+    </v-col>
   </v-container>
 </template>
 
@@ -108,8 +111,6 @@ export default {
       localStorage.setItem("currentProject", JSON.stringify(selectedProject))
       this.$router.push('Project')
     },
-
-
 // Måste testas
     goToItemHandler(selectedItem) {
       this.$store.dispatch("ITEMS/setItem", selectedItem)
