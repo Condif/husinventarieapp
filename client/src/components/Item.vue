@@ -115,6 +115,7 @@ export default {
       this.$store.dispatch("ITEMS/setItem", selectedItem);
       localStorage.setItem("currentItem", JSON.stringify(selectedItem));
       console.log("selected", selectedItem);
+      window.scrollTo(0,0)
       
     },
 
@@ -150,7 +151,7 @@ export default {
   opacity: 1 !important;
   position: absolute;
   width: 100%;
-
+}
 p {
   font-size: 0.8rem;
 
