@@ -150,7 +150,7 @@ export default {
   opacity: 1 !important;
   position: absolute;
   width: 100%;
-
+}
 p {
   font-size: 0.8rem;
 
