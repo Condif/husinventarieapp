@@ -32,7 +32,7 @@
         </v-card-title>
       </v-card>
       <transition-group name="slide" v-for="item in project.itemsId" :key="item._id">
-              <v-btn :key="item._id" @click="goToItemHandler(item._id)">{{
+              <v-btn :key="item._id" @click="goToItemHandler(item)">{{
                 item.itemName
               }}</v-btn>
               <v-btn :key="item._id + 1"  @click="deleteItemHandler(item._id)">
@@ -69,9 +69,9 @@ export default {
     log(message) {
       console.log(message);
     },
-    goToItemHandler(selectedItemId) {
-      this.$store.dispatch("ITEMS/setItem", selectedItemId);
-      localStorage.setItem("currentItemId", JSON.stringify(selectedItemId));
+    goToItemHandler(selectedItem) {
+      this.$store.dispatch("ITEMS/setItem", selectedItem);
+      localStorage.setItem("currentItem", JSON.stringify(selectedItem));
       this.$router.push("Item");
     },
     async deleteItemHandler(selectedItemId) {

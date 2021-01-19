@@ -28,7 +28,7 @@ export const items = {
          
         },
         setItemFromStorage(state) {
-            state.item = JSON.parse(localStorage.getItem("currentItemId") || '[]')  
+            state.item = JSON.parse(localStorage.getItem("currentItem") || '[]')  
         },
         deleteItemFromState(state, itemId) {
             const index = state.items.findIndex(item => item._id === itemId);
@@ -46,9 +46,10 @@ export const items = {
         },
         setItem (state, selectedItemId) {
             state.commit("setItem", selectedItemId)
+        
         },
-        setItemFromStorage (state, selectedItemId) {
-            state.commit("setItemFromStorage", selectedItemId)
+        setItemFromStorage (state, selectedItem) {
+            state.commit("setItemFromStorage", selectedItem)
         },
         async createItem(state, newItemObject) {
             const response = await fetch(url + "newitem", {
