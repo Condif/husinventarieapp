@@ -42,7 +42,8 @@ const routes = [
   {
     path: '/house',
     name: 'House',
-    component: House
+    component: House,
+    meta: { requiresAuth: true }
   },
   {
     path: '/createproject',
