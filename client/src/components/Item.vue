@@ -13,7 +13,6 @@
                 </p>
               </div>
               <div class="edit-buttons d-flex">
-                
                 <Edit-item />
                 <Delete-dialog />
               </div>
@@ -73,11 +72,6 @@
               </v-list-item-action>
             </v-list-item>
           </v-card-text>
-          <v-card-actions>
-            <v-btn color="primary">
-              Lägg till nytt inventarie
-            </v-btn>
-          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -87,7 +81,7 @@
 <script>
 import QuickStart from "../components/QuickStart.vue";
 import DeleteDialog from "../elements/DeleteDialog.vue";
-import EditItem from './EditItem.vue';
+import EditItem from "./EditItem.vue";
 
 export default {
   namespaced: true,
@@ -110,8 +104,7 @@ export default {
     openItemDetails(selectedItem) {
       this.$store.dispatch("ITEMS/setItem", selectedItem);
       localStorage.setItem("currentItem", JSON.stringify(selectedItem));
-      window.scrollTo(0,0)
-      
+      window.scrollTo(0, 0);
     },
   },
   computed: {
