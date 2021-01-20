@@ -42,6 +42,8 @@ const updateItem = async (req, res) => {
         item.description = req.body.description;
         item.receipt = req.body.receipt ;
         item.orderDate = req.body.orderDate;
+        item.projectId = req.body.projectId;
+        item.roomId = req.body.roomId;
         item.warranty = req.body.warranty;
         await item.save();
   

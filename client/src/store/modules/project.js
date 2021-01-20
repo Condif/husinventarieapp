@@ -5,7 +5,7 @@ export const project = {
   namespaced: true,
   state: {
     projects: [],
-    project: []
+    project: [],
   },
 
   getters: {
@@ -70,10 +70,9 @@ export const project = {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(project),
-      })
-        .then((response) => {
-          return response.json();
-        })
+      }).then((response) => {
+        return response.json();
+      });
       return response;
     },
   },
