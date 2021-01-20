@@ -4,7 +4,7 @@
     <v-row>
       <v-card class="mx-auto pt-2" color="primary">
         <v-card-title>
-          {{ project.projectName }}
+          {{ project.projectName }} 
         </v-card-title>
 
         <v-card-subtitle text>

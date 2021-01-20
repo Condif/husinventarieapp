@@ -1,8 +1,7 @@
 <template>
-  <v-container fluid v-if="items !== undefined || item !== undefined" >
+  <v-container fluid v-if="items !== undefined || item !== undefined">
     <Quick-start />
     <v-row>
-
       <v-col sm="6" md="5" color="secondary">
         <v-card class="mx-auto" max-width="344" v-if="item !== undefined">
           <v-card-text>
@@ -13,13 +12,10 @@
                   {{ item.itemName }}
                 </p>
               </div>
-              <div class="edit-buttons">
-                <v-btn icon>
-                  <v-icon color="grey lighten-1">mdi-pencil</v-icon>
-                </v-btn>
-                <v-btn icon>
-                  <v-icon color="grey lighten-1">mdi-delete</v-icon>
-                </v-btn>
+              <div class="edit-buttons d-flex">
+                
+                <Edit-item />
+                <Delete-dialog />
               </div>
             </div>
             <v-img height="200" :src="image"></v-img>
@@ -85,13 +81,13 @@
         </v-card>
       </v-col>
     </v-row>
-    <Create-item />
   </v-container>
 </template>
 
 <script>
-import CreateItem from "../components/CreateItem.vue";
 import QuickStart from "../components/QuickStart.vue";
+import DeleteDialog from "../elements/DeleteDialog.vue";
+import EditItem from './EditItem.vue';
 
 export default {
   namespaced: true,
@@ -99,12 +95,12 @@ export default {
 
   data: () => ({
     reveal: false,
-  
   }),
 
   components: {
     QuickStart,
-    CreateItem,
+    DeleteDialog,
+    EditItem,
   },
   methods: {
     log(message) {
@@ -115,27 +111,18 @@ export default {
       this.$store.dispatch("ITEMS/setItem", selectedItem);
       localStorage.setItem("currentItem", JSON.stringify(selectedItem));
       console.log("selected", selectedItem);
-      window.scrollTo(0,0)
-      
+      window.scrollTo(0, 0);
     },
-
   },
   computed: {
     items() {
       return this.$store.getters["ITEMS/getItems"];
     },
     item() {
-
       return this.$store.getters["ITEMS/getItem"];
-
     },
     image() {
-      return (
-        "api/images/" +
-
-        this.$store.getters["ITEMS/getItem"].imageId
-
-      );
+      return "api/images/" + this.$store.getters["ITEMS/getItem"].imageId;
     },
   },
 };
@@ -154,6 +141,5 @@ export default {
 }
 p {
   font-size: 0.8rem;
-
 }
 </style>
