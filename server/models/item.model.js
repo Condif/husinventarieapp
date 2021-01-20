@@ -20,6 +20,12 @@ const ItemSchema = new mongoose.Schema({
   },
   warranty: {
       type: String,
+  },
+  projectId: {
+    type: mongoose.Types.ObjectId,
+  },
+  roomId: {
+    type: mongoose.Types.ObjectId,
   }
 });
 

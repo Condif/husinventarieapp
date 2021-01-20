@@ -7,9 +7,7 @@
     </template>
 
     <v-card class="mx-auto mt-2" color="base">
-      <v-card-title>
-        Lägg till inventarie </v-card-title
-      >
+      <v-card-title> Lägg till inventarie </v-card-title>
 
       <v-text-field
         label="Namn"
@@ -31,7 +29,7 @@
         v-model="item.description"
         :rules="rules"
       ></v-textarea>
-     
+
       <v-select
         v-model="item.projectId"
         prepend-icon="mdi-calendar-check-outline"
@@ -39,8 +37,14 @@
         item-text="projectName"
         item-value="_id"
         :placeholder="item.projectId"
-        persistent-hint
-        single-line
+      ></v-select>
+      <v-select
+        v-model="item.roomId"
+        prepend-icon="mdi-home-city"
+        :items="rooms.map((room) => room)"
+        item-text="roomName"
+        item-value="_id"
+        :placeholder="item.roomId"
       ></v-select>
       <v-menu
         ref="menu"
@@ -67,9 +71,16 @@
           min="1950-01-01"
         ></v-date-picker>
       </v-menu>
+      <v-img
+        class="mb-2"
+        contain
+        :lazy-src="image"
+        :src="image"
+        max-height="100 "
+      ></v-img>
       <ImageUploader />
       <v-card-actions>
-        <v-btn @click="saveItem" color="accent2">
+        <v-btn @click="updateItemHandler" color="accent2">
           Spara
         </v-btn>
       </v-card-actions>
@@ -92,11 +103,11 @@ export default {
     menu: false,
     inputField: false,
     dialog: false,
-    
   }),
-mounted() {
-this.item.projectId= this.project.projectName
-},
+  mounted() {
+    this.item.projectId = this.project.projectName;
+    this.item.roomId = this.room.roomName;
+  },
 
   watch: {
     menu(val) {
@@ -121,8 +132,13 @@ this.item.projectId= this.project.projectName
         this.item.projectId
       );
     },
+    rooms() {
+      return this.$store.getters["ROOM/getRooms"];
+    },
+    room() {
+      return this.$store.getters["ROOM/getRoomFromRooms"](this.item.roomId);
+    },
   },
-
   methods: {
     save(date) {
       this.$refs.menu.save(date);
@@ -132,12 +148,14 @@ this.item.projectId= this.project.projectName
     },
     async updateItemHandler() {
       const updatedItemObject = {
-        _id: this.$store.getters["ITEMS/getItem"]._id,
-        itemName: this.itemName,
+        _id: this.item._id,
+        itemName: this.item.itemName,
         imageId: this.$store.getters["IMAGE/getImage"]._id,
-        description: this.description,
-        orderDate: this.orderDate,
-        warranty: this.warranty,
+        description: this.item.description,
+        orderDate: this.item.orderDate,
+        warranty: this.item.warranty,
+        projectId: this.item.projectId,
+        roomId: this.item.roomId,
       };
       console.log("itemobjekt" + JSON.stringify(updatedItemObject));
       await this.$store.dispatch("ITEMS/updateItem", updatedItemObject);
@@ -150,6 +168,7 @@ this.item.projectId= this.project.projectName
         this.$store.getters["PROJECT/getProject"]
       );
       await this.$store.dispatch("PROJECT/setProjects");
+      this.dialog = false;
     },
   },
 };
