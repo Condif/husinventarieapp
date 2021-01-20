@@ -13,10 +13,10 @@ POST http://localhost:3002/api/newhouse
 Content-Type: application/json
 
 {
-  "houseName": "Sommarstugan i Småland",
-  "houseCategory": "fritidsboende",
-  "houseSize": "80",
-  "numberOfRooms": "3"
+  "houseName": "Huset",
+  "houseCategory": "Året runt",
+  "houseSize": "300",
+  "numberOfRooms": "12"
 
 }
 
@@ -26,13 +26,14 @@ DELETE http://localhost:3002/api/houses/5fec3fc46692fe1d076d5379
 
 ###
 // UPDATE HOUSE
-PUT   http://localhost:3002/api/houses/5fec3fc46692fe1d076d5379
+PUT   http://localhost:3002/api/houses/5fec43c4cceaaf1f07ed3268
 Content-Type: application/json
 
 {
  "houseName": "Sommarstugan i Blekinge",
   "houseCategory": "fritidsboende",
   "houseSize": "87",
-  "numberOfRooms": "3"
+  "numberOfRooms": "3",
+  "rooms": ["5feb3656cbd090ff99f2c81c"]
   
 }

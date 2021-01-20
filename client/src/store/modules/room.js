@@ -11,12 +11,15 @@ export const room = {
 
     getters: {
         getRooms: state => state.rooms,
-        getRoom: state => (id) => state.rooms.find(room => room._id === id)  
+        getRoom: state => state.room
     },
 
     mutations: {
         setRooms(state, payload) {
             state.rooms = payload
+        },
+        setRoom(state, payload) {
+            state.room = payload
         },
         createRoom(state, payload) {
             state.rooms.push(payload)
@@ -41,6 +44,7 @@ export const room = {
                 })
                 .then((data) => {
                     state.commit("createRoom", data)
+                    state.commit("setRoom", data)
                 })
               return response   
         }

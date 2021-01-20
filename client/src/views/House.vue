@@ -2,32 +2,58 @@
   <v-container fluid>
     <Quick-start />
     <v-row>
-      <v-col class="d-flex" cols="12" sm="6">
-        <v-select :items="items" :label="items[0]" solo></v-select>
-      </v-col>
+      <v-expansion-panels max-width:="20rem">
+        <v-expansion-panel>
+          <v-expansion-panel-header color="accent1">
+            Houses
+          </v-expansion-panel-header>
+          <v-expansion-panel-content
+            v-for="house in houses"
+            :key="house._id"
+            fucosable
+            color="base"
+          >
+            <v-list-item>
+              <v-btn
+                min-width="15rem"
+                width="90%"
+                depressed
+                :key="house._id"
+                @click="goToHouseHandler(house)"
+                >{{ house.houseName }}</v-btn
+              >
+            </v-list-item>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
       <v-col cols="12" sm="6" md="8">
-        <v-card class="mx-auto" color="base">
-          <v-expansion-panels focusable>
-            <v-expansion-panel v-for="(room, i) in rooms" :key="i">
-              <v-expansion-panel-header>{{
+        <v-card class="mx-auto" color="base" v-if="house !== undefined">
+          <v-expansion-panels
+            v-for="room in house.rooms"
+            :key="room._id"
+            focusable
+          >
+            <v-expansion-panel >
+              <v-expansion-panel-header >{{
                 room.roomName
               }}</v-expansion-panel-header>
               <v-expansion-panel-content>
-                <p>Höjd till tak:{{ room.roomHeigt }}</p>
+                <p>Höjd till tak: {{ room.roomHeight }}
                 <p>Antal kvadratmeter {{ room.roomSize }}</p>
                 <!-- {{room}} -->
                 <div class="items">
                   <h5>Inventarier</h5>
                   <v-expansion-panels>
-                    <v-expansion-panel v-for="(item, i) in room.items" :key="i">
+                    <v-expansion-panel v-for="item in room.items" :key="item._id">
                       <v-expansion-panel-header>
                         {{ item.itemName }}
-                       
                       </v-expansion-panel-header>
                       <v-expansion-panel-content>
                         <p>Beskrivning</p>
                         {{ item.description }}
-                         <v-btn @click="goToItemHandler(item)">Visa inventariet</v-btn>
+                        <v-btn @click="goToItemHandler(item)"
+                          >Visa inventariet</v-btn
+                        >
                       </v-expansion-panel-content>
                     </v-expansion-panel>
                   </v-expansion-panels>
@@ -45,10 +71,10 @@
                       </v-expansion-panel-header>
                       <v-expansion-panel-content>
                         {{ project.description }}
-                       
-                       
-                        <v-btn @click="goToProjectHandler(project)">Gå till projektet</v-btn>
-                     
+
+                        <v-btn @click="goToProjectHandler(project)"
+                          >Gå till projektet</v-btn
+                        >
                       </v-expansion-panel-content>
                     </v-expansion-panel>
                   </v-expansion-panels>
@@ -87,7 +113,7 @@ import QuickStart from "../components/QuickStart.vue";
 export default {
   data() {
     return {
-      items: ["Olvonvägen 47", "Sommarstugan"],
+      // items: ["Olvonvägen 47", "Sommarstugan"],
 
       colors: [
         "indigo",
@@ -104,24 +130,33 @@ export default {
     QuickStart,
   },
 
-
- methods: {
+  methods: {
     goToProjectHandler(selectedProject) {
-      this.$store.dispatch("PROJECT/setProject", selectedProject)
-      localStorage.setItem("currentProject", JSON.stringify(selectedProject))
-      this.$router.push('Project')
+      this.$store.dispatch("PROJECT/setProject", selectedProject);
+      localStorage.setItem("currentProject", JSON.stringify(selectedProject));
+      this.$router.push("Project");
     },
-// Måste testas
+    // Måste testas
     goToItemHandler(selectedItem) {
-      this.$store.dispatch("ITEMS/setItem", selectedItem)
-      localStorage.setItem("currentItem", JSON.stringify(selectedItem))
-      this.$router.push('Item')
-    }
+      this.$store.dispatch("ITEMS/setItem", selectedItem);
+      localStorage.setItem("currentItem", JSON.stringify(selectedItem));
+      this.$router.push("Item");
+    },
+    goToHouseHandler(house) {
+      this.$store.dispatch("HOUSE/setHouse", house);
+      // localStorage.setItem("currentHouse", JSON.stringify(house));
+    },
   },
 
   computed: {
-    rooms() {
-      return this.$store.getters["ROOM/getRooms"];
+    // rooms() {
+    //   return this.$store.getters["ROOM/getRooms"];
+    // },
+    houses() {
+      return this.$store.getters["HOUSE/getHouses"];
+    },
+    house() {
+      return this.$store.getters["HOUSE/getHouse"];
     },
   },
 };

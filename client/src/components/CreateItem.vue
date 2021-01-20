@@ -99,7 +99,6 @@ export default {
         orderDate: this.orderDate,
         warranty: this.warranty,
       };
-      console.log("new itemobjekt hätr" + JSON.stringify(newItemObject));
       await this.$store.dispatch("ITEMS/createItem", newItemObject);
       await this.$store.dispatch(
         "PROJECT/addItemToProject",
@@ -110,7 +109,6 @@ export default {
         this.$store.getters["PROJECT/getProject"]
       );
       await this.$store.dispatch("PROJECT/setProjects");
-console.log("emit");
       this.$emit('close-dialog')
     },
   },
