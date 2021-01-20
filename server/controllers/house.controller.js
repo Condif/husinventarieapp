@@ -3,14 +3,14 @@ const House = require("../models/house.model");
 // GET ALL
 getAllHouses = async (req, res) => {
   await House.find()
-    // .populate("houseId")
+    .populate("rooms")
     .then((post) => res.status(200).json(post))
     .catch((err) => res.status(500).json(err));
 };
 
 // GET ONE
 getOneHouse = async (req, res) => {
-  await House.findById(req.params.houseId)
+  await House.findById(req.params.houseId).populate("rooms")
     // .populate("houseId")
 
     .then((post) => res.status(200).json(post))
@@ -52,6 +52,8 @@ updateHouse = async (req, res) => {
           houseCategory: req.body.houseCategory,
           houseSize: req.body.houseSize,
           numberOfRooms: req.body.numberOfRooms,
+          rooms: req.body.rooms,
+          projects: req.body.projects
         },
       }
     );

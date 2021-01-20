@@ -5,6 +5,7 @@ import { room as ROOM } from "./modules/room";
 import { items as ITEMS } from "./modules/items";
 import { session as SESSION } from "./modules/session";
 import { image as IMAGE } from "./modules/image";
+import { house as HOUSE } from "./modules/house";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -14,5 +15,6 @@ export default new Vuex.Store({
         ITEMS,
         SESSION,
         IMAGE,
+        HOUSE
     },
 });

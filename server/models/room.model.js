@@ -5,7 +5,7 @@ const RoomSchema = mongoose.Schema({
   houseId: [
     {
       type: mongoose.Types.ObjectId,
-      required: true,
+      
       ref: "House",
     },
   ],

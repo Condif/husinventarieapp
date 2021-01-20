@@ -35,7 +35,7 @@ Content-Type: application/json
   "houseId": "5ed612ec6aaf5cd950517f93",
   "roomName": "Köket",
   "roomSize": "347",
-  "roomHeight": "2.8",
+  "roomHeight": "28",
   "projects": ["5fec761ca3a1b83407b8df70", "5fec761ca3a1b83407b8df70"]
   
 }
