@@ -1,72 +1,84 @@
 <template>
-  <v-container fluid v-if="project !== undefined">
+  <v-container fluid v-if="project !== undefined" min-width="300">
     <Quick-start />
     <v-row>
-      <v-card class="mx-auto pt-2" color="primary">
-        <v-card-title>
-          {{ project.projectName }} 
-        </v-card-title>
+      <v-col sm="6" md="6" color="secondary">
+        <v-card  class="mx-auto px-1" color="primary" max-width="600" min-width="280">
+          
+            <v-card-title>
+              {{ project.projectName }}
+            </v-card-title>
 
-        <v-card-subtitle text>
-          2021-01-02 En massa kablar och annat bös
-        </v-card-subtitle>
-        <v-img
-          height="200"
-          src="../assets/chris-briggs-ILBrHd6PFJA-unsplash.jpg"
-        ></v-img>
-        <v-card-title>
-          {{ project.description }}
-        </v-card-title>
-        <v-card-title v-if="project.roomId">
-          {{ project.roomId.roomName }}
-        </v-card-title>
-        <v-card-title v-if="project.category">
-          {{ project.category }}
-        </v-card-title>
-      </v-card>
-
- 
-      <v-expansion-panels>
-        <v-expansion-panel>
-          <v-expansion-panel-header>
-            Inventarier
-          </v-expansion-panel-header>
-          <v-expansion-panel-content
-            v-for="item in project.itemsId"
-            :key="item._id"
-            fucosable
-          >
-          <v-container fluid>
-            <v-btn
-               width="70%"
-              :key="item._id"
-              @click="goToItemHandler(item)"
-              >{{ item.itemName }}</v-btn
-            >
-            <v-btn :key="item._id + 1" @click="deleteItemHandler(item._id)">
-              <v-icon >mdi-delete-forever</v-icon>
-            </v-btn>
-          </v-container>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      </v-expansion-panels>
-
-    </v-row>
-    <v-row>
-      <v-col color="secondary">
-        <v-card> </v-card>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col sm="6" md="5">
-        <Create-item />
+            <v-card-subtitle text>
+              2021-01-02 En massa kablar och annat bös
+            </v-card-subtitle>
+            <div class="d-flex justify-center px-4" >
+              <v-img
+                height="200"
+                src="../assets/chris-briggs-ILBrHd6PFJA-unsplash.jpg"
+              ></v-img>
+            </div>
+            <v-card-title>Beskrivning</v-card-title>
+            <v-card-text>
+              {{ project.description }}
+            </v-card-text>
+            <v-card-title v-if="project.roomId">
+              {{ project.roomId.roomName }}
+            </v-card-title>
+            <v-card-title v-if="project.category">
+              {{ project.category }}
+            </v-card-title>
+            <v-expansion-panels>
+              <v-expansion-panel>
+                <v-expansion-panel-header color="primary">
+                  Inventarier
+                </v-expansion-panel-header>
+                <v-expansion-panel-content
+                  v-for="item in project.itemsId"
+                  :key="item._id"
+                  fucosable
+                  color="primary"
+                >
+                  <v-list-item fluid>
+                    <v-btn
+                      class="mx-auto my-auto mb-0"
+                      width="70%"
+                      depressed
+                      :key="item._id"
+                      @click="goToItemHandler(item)"
+                      >{{ item.itemName }}</v-btn
+                    >
+                    <v-list-item>
+                      <v-btn
+                        icon
+                        class="my-auto mb-0 mr-1 "
+                        depressed
+                        :key="item._id + 1"
+                        @click="deleteItemHandler(item._id)"
+                      >
+                        <v-icon color="grey lighten-1">mdi-delete</v-icon>
+                      </v-btn>
+                      <v-btn
+                        icon
+                        class="my-auto mb-0 "
+                        depressed
+                        :key="item._id + 2"
+                        @click="deleteItemHandler(item._id)"
+                      >
+                         <v-icon color="grey lighten-1">mdi-pencil</v-icon>
+                      </v-btn>
+                    </v-list-item>
+                  </v-list-item>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import CreateItem from "../components/CreateItem.vue";
 import QuickStart from "../components/QuickStart.vue";
 
 export default {
@@ -75,7 +87,6 @@ export default {
   data: () => ({}),
   components: {
     QuickStart,
-    CreateItem,
   },
   methods: {
     log(message) {
@@ -104,9 +115,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .home {
   height: 100%;
+}
+.v-card-text {
+  font-size: 0.4rem;
+}
+.v-btn {
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 
