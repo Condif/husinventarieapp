@@ -49,8 +49,8 @@
           </v-expansion-panel-header>
           <v-expansion-panel-content
             color="primary"
-            v-for="item in project.itemsId"
-            :key="item._id"
+            v-for="project in projects"
+            :key="project._id"
             fucosable
           >
             <v-container>
