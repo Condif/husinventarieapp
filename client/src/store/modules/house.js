@@ -12,7 +12,7 @@ export const house = {
     getHouses: (state) => state.houses,
     getHouse: (state) => state.house,
     getHouseFromHouses: (state) => (id) =>
-      state.house.find((house) => house._id === id),
+      state.houses.find((house) => house._id === id),
   },
 
   mutations: {

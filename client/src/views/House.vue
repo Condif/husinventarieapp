@@ -160,7 +160,8 @@ export default {
 
     test(id) {
       console.log("test", id);
-      return this.$store.getters["HOUSE/getHouseFromHouses"](id);
+      this.$store.dispatch("HOUSE/setHouse",this.$store.getters["HOUSE/getHouseFromHouses"](id))
+
     },
   },
 
