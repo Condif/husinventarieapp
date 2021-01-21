@@ -68,7 +68,6 @@ export const items = {
               return response   
         },
         async deleteItem(state, itemId) {
-            console.log("delete item");
             const response = await fetch(url + "items/" + itemId, {
                 method: "DELETE",
               })
@@ -78,7 +77,7 @@ export const items = {
                 .then(()=> {
                     state.commit("deleteItemFromState", itemId)
                 })
-            return response   
+            return response  
         },
         async updateItem(state, updatedItemObject) {
             console.log("update item");
@@ -97,5 +96,8 @@ export const items = {
                 })
               return response   
         },
+
+        
+
     },
 }

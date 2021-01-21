@@ -13,6 +13,10 @@ const RoomSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  userParentId: {
+    type: mongoose.Types.ObjectId,
+    ref: "User"
+  },
   roomSize: {
     type: Number,
     required: true,

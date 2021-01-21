@@ -7,6 +7,10 @@ const ProjectSchema = mongoose.Schema({
     type: String,
     // required: true
   },
+  userParentId: {
+    type: mongoose.Types.ObjectId,
+    ref: "User"
+  },
   imageId: {
     type: mongoose.Types.ObjectId,
     // required: true
