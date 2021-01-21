@@ -81,6 +81,7 @@ export const items = {
             return response   
         },
         async updateItem(state, updatedItemObject) {
+            console.log("update item");
             const response = await fetch(url + "items/" + updatedItemObject._id, {
                 method: "PUT",
                 headers: {'Content-Type': 'application/json'},
