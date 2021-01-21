@@ -9,6 +9,10 @@ const ItemSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     // required: true 
   },
+  userParentId: {
+    type: mongoose.Types.ObjectId,
+    ref: "User"
+  },
   description: {
       type: String,
   },
