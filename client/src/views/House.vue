@@ -5,7 +5,7 @@
       <v-expansion-panels max-width:="20rem">
         <v-expansion-panel>
           <v-expansion-panel-header color="accent1">
-            Houses
+            Houses {{house.houseName}}
           </v-expansion-panel-header>
           <v-expansion-panel-content
             v-for="house in houses"
@@ -26,6 +26,14 @@
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
+      <v-select
+        v-model="select"
+        v-on:change="test(select)"
+        prepend-icon="mdi-calendar-check-outline"
+        :items="houses.map((house) => house)"
+        item-text="houseName"
+        item-value="_id"
+      ></v-select>
       <v-col cols="12" sm="6" md="8">
         <v-card class="mx-auto" color="base" v-if="house !== undefined">
           <v-expansion-panels
@@ -33,18 +41,21 @@
             :key="room._id"
             focusable
           >
-            <v-expansion-panel >
-              <v-expansion-panel-header >{{
+            <v-expansion-panel>
+              <v-expansion-panel-header>{{
                 room.roomName
               }}</v-expansion-panel-header>
               <v-expansion-panel-content>
-                <p>Höjd till tak: {{ room.roomHeight }}
+                <p>Höjd till tak: {{ room.roomHeight }}</p>
                 <p>Antal kvadratmeter {{ room.roomSize }}</p>
                 <!-- {{room}} -->
                 <div class="items">
                   <h5>Inventarier</h5>
                   <v-expansion-panels>
-                    <v-expansion-panel v-for="item in room.items" :key="item._id">
+                    <v-expansion-panel
+                      v-for="item in room.items"
+                      :key="item._id"
+                    >
                       <v-expansion-panel-header>
                         {{ item.itemName }}
                       </v-expansion-panel-header>
@@ -114,7 +125,7 @@ export default {
   data() {
     return {
       // items: ["Olvonvägen 47", "Sommarstugan"],
-
+      select: {},
       colors: [
         "indigo",
         "warning",
@@ -145,6 +156,12 @@ export default {
     goToHouseHandler(house) {
       this.$store.dispatch("HOUSE/setHouse", house);
       // localStorage.setItem("currentHouse", JSON.stringify(house));
+    },
+
+    test(id) {
+      console.log("test", id);
+      this.$store.dispatch("HOUSE/setHouse",this.$store.getters["HOUSE/getHouseFromHouses"](id))
+
     },
   },
 
