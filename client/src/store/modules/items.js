@@ -77,7 +77,27 @@ export const items = {
                 .then(()=> {
                     state.commit("deleteItemFromState", itemId)
                 })
-            return response   
-        }
+            return response  
+        },
+        async updateItem(state, updatedItemObject) {
+            console.log("update item");
+            const response = await fetch(url + "items/" + updatedItemObject._id, {
+                method: "PUT",
+                headers: {'Content-Type': 'application/json'},
+                credentials: "include",
+                body: JSON.stringify(updatedItemObject),
+              })
+                .then((response) => {
+                    return response.json()
+                })
+                .then((data) => {
+                    state.commit("createItem", data)
+                    state.commit("setItem", data)
+                })
+              return response   
+        },
+
+        
+
     },
 }
