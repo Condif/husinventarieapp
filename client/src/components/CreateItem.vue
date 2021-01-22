@@ -69,10 +69,10 @@ export default {
   name: "CreatItem",
   data: () => ({
     itemName: "",
-
     description: "",
     orderDate: "",
     warranty: "",
+    receipt:"",
 
     rules: [
       (value) => !!value || "Required.",
@@ -98,6 +98,9 @@ export default {
         description: this.description,
         orderDate: this.orderDate,
         warranty: this.warranty,
+        receipt: this.receipt,
+        projectId: [],
+        roomId: []
       };
       await this.$store.dispatch("ITEMS/createItem", newItemObject);
       await this.$store.dispatch(

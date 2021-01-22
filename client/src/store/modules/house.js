@@ -32,13 +32,6 @@ export const house = {
 
   actions: {
 
-//     setHouseFromId() {
-//  const house = (state) => (id) =>
-//  state.house.find((house) => house._id === id),
-
- 
-//     },
-
     async setHouses(state) {
       const allhouses = await fetch(url + "houses", { headers });
       const j = await allhouses.json();

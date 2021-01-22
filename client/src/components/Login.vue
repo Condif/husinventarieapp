@@ -55,6 +55,8 @@ export default {
       };
       await this.$store.dispatch("SESSION/login", credentials).then(() => {
           if(this.$store.getters["SESSION/getLoggedIn"] === true) {
+              this.$store.dispatch("PROJECT/setProjects")
+              this.$store.dispatch("HOUSE/setHouses")
               this.$router.push({ name: "Home" });
           }
       })

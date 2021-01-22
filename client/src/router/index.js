@@ -7,6 +7,7 @@ import Login from '../components/Login.vue'
 import store from '../store/store'
 import House from '../views/House.vue'
 import Signup from '../components/Signup.vue'
+import CreateHouse from '../components/CreateHouse.vue'
 
 Vue.use(VueRouter)
 
@@ -26,6 +27,12 @@ const routes = [
     path: '/signup',
     name: 'Signup',
     component: Signup
+  },
+  {
+    path: '/createhouse',
+    name: 'CreateHouse',
+    component: CreateHouse,
+    meta: { requiresAuth: true }
   },
   {
     path: '/project',

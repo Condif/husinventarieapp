@@ -16,7 +16,7 @@
         height="200"
         src="../assets/chris-briggs-ILBrHd6PFJA-unsplash.jpg"
       ></v-img>
-      <v-expansion-panels v-if="project !== undefined">
+      <v-expansion-panels>
         <v-expansion-panel>
           <v-expansion-panel-header color="primary">
             Mitt hem
@@ -43,7 +43,7 @@
             </v-card-text>
           </v-expansion-panel-content>
         </v-expansion-panel>
-        <v-expansion-panel v-if="project !== undefined">
+        <v-expansion-panel v-if="projects !== undefined">
           <v-expansion-panel-header color="primary">
             Mina projekt
           </v-expansion-panel-header>

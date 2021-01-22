@@ -20,7 +20,18 @@ const getItemsById = async (req, res) => {
 };
 // CREATE NEW 
 const createNewItem = async (req, res) => {
-    const item = new Item(req.body);
+  const newItem = {
+    itemName: req.body.itemName,
+    userParentId: req.session.userId,
+    imageId: req.body.imageId,
+    description: req.body.description,
+    receipt: req.body.receipt,
+    orderDate: req.body.orderDate,
+    warranty: req.body.warranty,
+    projectId: req.body.projectId,
+    roomId: req.body.roomId,
+  }
+    const item = new Item(newItem);
 
     item.save((err, item) => {
         if (err) {
