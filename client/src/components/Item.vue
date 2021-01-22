@@ -97,10 +97,6 @@ export default {
     EditItem,
   },
   methods: {
-    log(message) {
-      console.log(message);
-    },
-
     openItemDetails(selectedItem) {
       this.$store.dispatch("ITEMS/setItem", selectedItem);
       localStorage.setItem("currentItem", JSON.stringify(selectedItem));

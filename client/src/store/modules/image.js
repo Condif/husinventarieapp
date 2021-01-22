@@ -12,7 +12,7 @@ export const image = {
   mutations: {
     setImage(state, payload) {
       state.image = payload;
-      console.log("state image" + JSON.stringify(state.image));
+      
     },
   },
 
@@ -22,7 +22,7 @@ export const image = {
     },
 
     async uploadImageToDB(state, selectedFile) {
-        console.log(selectedFile, "vald fil");
+       
       const formData = new FormData();
       formData.append("image", selectedFile, selectedFile.name);
 

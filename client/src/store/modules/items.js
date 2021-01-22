@@ -28,6 +28,12 @@ export const items = {
     setItemFromStorage(state) {
       state.item = JSON.parse(localStorage.getItem("currentItem") || "[]");
     },
+    updateItem(state,payload) {
+        const index = state.items.findIndex((item) => item._id === payload._id);
+      if (index > -1) {
+        state.items.splice(index, 1, payload);
+      }
+    },
     deleteItemFromState(state, itemId) {
       const index = state.items.findIndex((item) => item._id === itemId);
       if (index > -1) {
@@ -77,7 +83,8 @@ export const items = {
       return response;
     },
     async updateItem(state, updatedItemObject) {
-      console.log("update item");
+
+      console.log(updatedItemObject, "update item.js");
       const response = await fetch(url + "items/" + updatedItemObject._id, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -88,7 +95,7 @@ export const items = {
           return response.json();
         })
         .then((data) => {
-          state.commit("createItem", data);
+          state.commit("updateItem", data);
           state.commit("setItem", data);
         });
       return response;
