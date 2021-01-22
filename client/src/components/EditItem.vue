@@ -36,8 +36,9 @@
         :items="projects.map((project) => project)"
         item-text="projectName"
         item-value="_id"
-        :placeholder="item.projectId"
+        :placeholder="project.projectName"
       ></v-select>
+
       <v-select
         v-model="item.roomId"
         prepend-icon="mdi-home-city"
@@ -126,7 +127,11 @@ export default {
     project() {
       return this.$store.getters["PROJECT/getProjectFromProjects"](
         this.item.projectId
-      );
+      ) !== undefined
+        ? this.$store.getters["PROJECT/getProjectFromProjects"](
+            this.item.projectId
+          )
+        : [];
     },
     rooms() {
       return this.$store.getters["ROOM/getRooms"];
@@ -137,8 +142,8 @@ export default {
   },
   methods: {
     async storeOldId() {
-      console.log("store", this.project);
-      await this.$store.dispatch("PROJECT/setOldProject", this.project);
+      this.$store.commit("PROJECT/setOldProject", this.project);
+      console.log("skicka gamla porjektet store", this.project);
     },
 
     save(date) {

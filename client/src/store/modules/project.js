@@ -6,7 +6,7 @@ export const project = {
   state: {
     projects: [],
     project: [],
-    oldProject: []
+    oldProject: [],
   },
 
   getters: {
@@ -21,8 +21,8 @@ export const project = {
       state.projects = payload;
     },
     setProject(state, payload) {
-      
       state.project = payload;
+      console.log(state.project, "mutation project");
     },
     setProjectFromStorage(state) {
       state.project = JSON.parse(
@@ -31,7 +31,7 @@ export const project = {
     },
     setOldProject(state, payload) {
       console.log(payload, "payload");
-      state.project = payload;
+      state.oldProject = payload;
     },
     createProject(state, payload) {
       state.projects.push(payload);
@@ -40,51 +40,61 @@ export const project = {
       state.project.itemsId.push(payload);
     },
     deleteItemFromProject(state, payload) {
-      console.log(state);
-      var filteredAry = state.oldProject.itemsId.filter(e => e !== payload)
-      console.log( filteredAry , "filter");
-    }
+      console.log("state old project", state.oldProject);
+      var filteredAry = state.oldProject.itemsId.filter((e) => e !== payload);
+      console.log(filteredAry, "filter");
+      state.oldProject.itemsId = filteredAry;
+      console.log(state.oldProject, "updated items array");
+    },
   },
 
-
-  selectedItem: state => {
-    return state.items.find(
-      item => item.id == state.selectedId
-    );
+  selectedItem: (state) => {
+    return state.items.find((item) => item.id == state.selectedId);
   },
-
 
   actions: {
+    async getProjectFromProjects(state, id) {
+      return await state.getters["getProjectFromProjects"](id);
+    },
+
     async setProjects(state) {
       const allProjects = await fetch(url + "projects", { headers });
       const j = await allProjects.json();
       state.commit("setProjects", j);
     },
-    setProject(state, selectedProject) {
-      state.commit("setProject", selectedProject);
+    async setProject(state, selectedProject) {
+      await state.commit("setProject", selectedProject)
+      console.log(selectedProject, "selectedproject");
+      
     },
     setProjectFromStorage(state, selectedProjectId) {
       state.commit("setProjectFromStorage", selectedProjectId);
     },
     addItemToProject(state, itemsId) {
       const project = state.getters["getProject"];
-      const map = project.itemsId.filter(x => x._id === itemsId)
-      console.log(map, this.oldProject, "bef projekt");
+
+      console.log(this.state.PROJECT.oldProject, "old project");
+      console.log(project.itemsId.length, "längd");
       if (project.itemsId.length === 0) {
         state.commit("addItemToProject", itemsId);
         console.log("tomt id", itemsId);
         state.dispatch("updateProject", project);
-        state.commit("deleteItemFromProject", itemsId)
+        if (this.state.PROJECT.oldProject.length !== 0) {
+          state.commit("deleteItemFromProject", itemsId);
+          state.dispatch("updateProject", this.state.PROJECT.oldProject);
+          
+        }
         return;
       }
-      if (project.itemsId.filter(x => x._id === itemsId).length !== 0) {
+      if (project.itemsId.filter((x) => x._id === itemsId).length !== 0) {
         console.log("finns ett likandant id");
         return;
       }
       console.log("inte tom men olika idn", itemsId);
       state.commit("addItemToProject", itemsId);
       state.dispatch("updateProject", project);
-      state.commit("deleteItemFromProject", itemsId)
+      state.dispatch("updateProject", this.state.PROJECT.oldProject)
+      state.commit("deleteItemFromProject", itemsId);
     },
     async createProject(state, newProjectObject) {
       const response = await fetch(url + "newproject", {
