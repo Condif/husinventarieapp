@@ -142,7 +142,7 @@ export default {
   },
   methods: {
     async storeOldId() {
-      this.$store.commit("PROJECT/setOldProject", this.project);
+      await this.$store.commit("PROJECT/setOldProject", this.project);
       console.log("skicka gamla porjektet store", this.project);
     },
 

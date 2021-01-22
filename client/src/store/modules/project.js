@@ -30,7 +30,7 @@ export const project = {
       );
     },
     setOldProject(state, payload) {
-      console.log(payload, "payload");
+      console.log(payload, "OLDpayload");
       state.oldProject = payload;
     },
     createProject(state, payload) {
@@ -41,10 +41,23 @@ export const project = {
     },
     deleteItemFromProject(state, payload) {
       console.log("state old project", state.oldProject);
-      var filteredAry = state.oldProject.itemsId.filter((e) => e !== payload);
-      console.log(filteredAry, "filter");
-      state.oldProject.itemsId = filteredAry;
-      console.log(state.oldProject, "updated items array");
+      console.log("payload", payload);
+      const index = state.oldProject.itemsId.findIndex(id => id._id === payload);
+      if(index > -1) {
+        state.oldProject.itemsId.splice(index, 1)
+      }
+      console.log("state old project after splice", state.oldProject.itemsId);
+      // if(state.oldProject.itemsId !== null) {
+      //   if(state.oldProject.itemsId.length === 0) {
+      //     state.oldProject.itemsId = null
+      //   }
+      //   console.log("state old project after splice", state.oldProject.itemsId);
+      // }
+      console.log(index, "iundex");
+      // var filteredAry = state.oldProject.itemsId.filter((e) => e._id !== payload);
+      // console.log(filteredAry, "filter");
+      // state.oldProject.itemsId = filteredAry;
+      
     },
   },
 
@@ -72,29 +85,25 @@ export const project = {
     },
     addItemToProject(state, itemsId) {
       const project = state.getters["getProject"];
-
       console.log(this.state.PROJECT.oldProject, "old project");
       console.log(project.itemsId.length, "längd");
       if (project.itemsId.length === 0) {
         state.commit("addItemToProject", itemsId);
         console.log("tomt id", itemsId);
-        state.dispatch("updateProject", project);
-        if (this.state.PROJECT.oldProject.length !== 0) {
-          state.commit("deleteItemFromProject", itemsId);
-          state.dispatch("updateProject", this.state.PROJECT.oldProject);
-          
-        }
+        state.dispatch("updateProject", state.getters["getProject"]);
+        state.commit("deleteItemFromProject", itemsId);
+        state.dispatch("updateProject", this.state.PROJECT.oldProject);
         return;
       }
-      if (project.itemsId.filter((x) => x._id === itemsId).length !== 0) {
+      if (project.itemsId.filter((x) => x._id === itemsId).length === 1) {
         console.log("finns ett likandant id");
         return;
       }
       console.log("inte tom men olika idn", itemsId);
       state.commit("addItemToProject", itemsId);
       state.dispatch("updateProject", project);
-      state.dispatch("updateProject", this.state.PROJECT.oldProject)
       state.commit("deleteItemFromProject", itemsId);
+      state.dispatch("updateProject", this.state.PROJECT.oldProject)
     },
     async createProject(state, newProjectObject) {
       const response = await fetch(url + "newproject", {
