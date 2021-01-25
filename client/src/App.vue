@@ -3,7 +3,7 @@
     <Header />
     <v-main class="pb-16">
       <router-view />
-    </v-main >
+    </v-main>
   </v-app>
 </template>
 
@@ -15,12 +15,10 @@ export default {
   components: {
     Header,
   },
-  created () {
-     this.$store.dispatch("PROJECT/setProjectFromStorage")
-     this.$store.dispatch("ITEMS/setItemFromStorage")
-     this.$store.dispatch("HOUSE/setHouseFromStorage")
-  },
   mounted() {
+    this.$store.dispatch("PROJECT/setProjectFromStorage");
+    this.$store.dispatch("ITEMS/setItemFromStorage");
+    this.$store.dispatch("HOUSE/setHouseFromStorage");
     this.$store.dispatch("PROJECT/setProjects");
     this.$store.dispatch("HOUSE/setHouses");
     this.$store.dispatch("ROOM/setRooms");
