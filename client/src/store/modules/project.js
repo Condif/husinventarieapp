@@ -110,8 +110,8 @@ export const project = {
         .then((response) => {
           return response.json();
         })
-        .then((data) => {
-          state.commit("setProjects", data);
+        .then(() => {
+          state.dispatch("setProjects")
         });
       return response;
     },
@@ -123,6 +123,15 @@ export const project = {
       }).then((response) => {
         return response.json();
       });
+      return response;
+    },
+    async deleteProject(state, projectId) {
+      const response = await fetch(url + "projects/" + projectId, {
+        method: "DELETE",
+      })
+        .then((response) => {
+          return response.json();
+        })
       return response;
     },
   },

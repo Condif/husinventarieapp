@@ -60,6 +60,7 @@
                 @click="goToProjectHandler(project)"
                 >{{ project.projectName }}
               </v-btn>
+              <Delete-project-dialog v-bind:project="project" />
               <!-- <v-btn :key="item._id + 1" @click="deleteProjectHandler(item._id)">
               <v-icon >mdi-delete-forever</v-icon>
             </v-btn> -->
@@ -72,12 +73,17 @@
 </template>
 
 <script>
+import DeleteProjectDialog from "../elements/DeleteProjectDialog.vue";
 export default {
   namespaced: true,
   name: "Dashboard",
   data: () => ({
     settings: [],
   }),
+
+  components: {
+    DeleteProjectDialog,
+  },
 
   methods: {
     goToProjectHandler(selectedProject) {
@@ -100,9 +106,14 @@ export default {
       return this.$store.getters["HOUSE/getHouses"];
     },
     project() {
-      return this.$store.getters["PROJECT/getProjectFromProjects"](
-        this.$store.getters["PROJECT/getProject"]._id
-      );
+      if (this.$store.getters["PROJECT/getProject"] !== undefined) {
+        if (this.$store.getters["PROJECT/getProject"].length !== 0) {
+          return this.$store.getters["PROJECT/getProjectFromProjects"](
+            this.$store.getters["PROJECT/getProject"]._id
+          );
+        }
+      }
+      return []
     },
   },
 };
