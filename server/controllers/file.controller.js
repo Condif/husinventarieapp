@@ -56,6 +56,7 @@ console.log("ny fil", req.files);
   file.save((err, file) => {
     if (err) {
       res.status(400).json(err);
+      console.log("error in saving");
     } else {
       file.data = undefined;
       res.status(201).json(file);

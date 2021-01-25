@@ -24,15 +24,23 @@ export const file = {
       state.commit("setImage", selectedFile);
     },
 
-    // updateImage(state, updatedFileId) {
-      
-    //   if (updatedFileId !== this.state.IMAGE.oldFileId) {
-    //     console.log("ta bort gammal fil");
-    //     state.dispatch("deleteFileFromDB", this.state.FILE.oldFileId);
-    //   } else return;
-    // },
+    updateFile(state, updatedFileId) {
+      console.log(
+        updatedFileId + "nytt id " + this.state.FILE.oldFileId + "gammalt id"
+      );
+      if (this.state.IMAGE.oldFileID === undefined) {
+        console.log("tomt oldFileId");
+        return
+      }
+      if (updatedFileId !== this.state.IMAGE.oldFileId) {
+        console.log("ta bort gammal fil");
+        state.dispatch("deleteFileFromDB", this.state.FILE.oldFileId);
+      } else console.log("finns inget att updatera");
+      return;
+    },
 
     async uploadFileToDB(state, selectedFile) {
+      console.log("addfile", selectedFile);
       const formData = new FormData();
       formData.append("file", selectedFile, selectedFile.name);
 
@@ -46,7 +54,7 @@ export const file = {
 
         .then((data) => {
           state.commit("setFile", data);
-
+          console.log(data, "fileupload complete");
         });
       return response;
     },
@@ -58,9 +66,9 @@ export const file = {
           return response.json();
         })
         .then((data) => {
-          console.log("image deleted" + data);
+          console.log("file deleted" + data._id);
         });
-  
+
       return response;
     },
   },

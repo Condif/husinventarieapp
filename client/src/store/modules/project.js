@@ -30,7 +30,7 @@ export const project = {
       );
     },
     setOldProject(state, payload) {
-      console.log(payload, "OLDpayload");
+      
       state.oldProject = payload;
     },
     createProject(state, payload) {
@@ -72,8 +72,8 @@ export const project = {
     },
     addItemToProject(state, itemsId) {
       const project = state.getters["getProject"];
-      console.log(this.state.PROJECT.oldProject, "old project");
-      console.log(project.itemsId.length, "längd");
+      // console.log(this.state.PROJECT.oldProject, "old project");
+      // console.log(project.itemsId.length, "längd");
       if (project.itemsId.length === 0) {
         state.commit("addItemToProject", itemsId);
         console.log("tomt id", itemsId);

@@ -28,8 +28,8 @@ export const items = {
     setItemFromStorage(state) {
       state.item = JSON.parse(localStorage.getItem("currentItem") || "[]");
     },
-    updateItem(state,payload) {
-        const index = state.items.findIndex((item) => item._id === payload._id);
+    updateItem(state, payload) {
+      const index = state.items.findIndex((item) => item._id === payload._id);
       if (index > -1) {
         state.items.splice(index, 1, payload);
       }
@@ -39,7 +39,9 @@ export const items = {
       if (index > -1) {
         state.items.splice(index, 1);
       }
-      state.item = []
+      if (state.items.length !== 0) {
+        state.item = state.items[0];
+      }
     },
   },
 
@@ -84,7 +86,6 @@ export const items = {
       return response;
     },
     async updateItem(state, updatedItemObject) {
-
       console.log(updatedItemObject, "update item.js");
       const response = await fetch(url + "items/" + updatedItemObject._id, {
         method: "PUT",

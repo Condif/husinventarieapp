@@ -81,6 +81,7 @@
       ></v-img>
       <ImageUploader />
       <FileUploader />
+      <div>{{item.fileId}}</div>
       <v-card-actions>
         <v-btn @click="updateItemHandler" color="accent2">
           Spara
@@ -146,7 +147,10 @@ export default {
     async storeOldId() {
       await this.$store.commit("PROJECT/setOldProject", this.project);
       await this.$store.commit("IMAGE/setOldImage", this.item.imageId);
-      console.log("skicka gamla porjektet store", this.project);
+      await this.$store.commit("FILE/setOldFile", this.item.fileId);
+      console.log("old",this.item.fileId);
+
+      
     },
 
     save(date) {
@@ -165,12 +169,16 @@ export default {
         projectId: this.item.projectId,
         roomId: this.item.roomId,
       };
-      console.log("itemobjekt" + JSON.stringify(updatedItemObject));
+      console.log("itemobjekt", updatedItemObject);
 
       await this.$store.dispatch("ITEMS/updateItem", updatedItemObject);
       await this.$store.dispatch(
         "IMAGE/updateImage",
         updatedItemObject.imageId
+      );
+       await this.$store.dispatch(
+        "FILE/updateFile",
+        updatedItemObject.fileId
       );
 
       await this.$store.dispatch("PROJECT/setProject", this.project);

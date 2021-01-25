@@ -33,14 +33,14 @@ const createNewItem = async (req, res) => {
 // UPDATE
 const updateItem = async (req, res) => {
     try {
-        
+        console.log(req.params, "update item ");
       let item = await Item.findById(req.params.itemId);
   
       if (item) {
         item.itemName = req.body.itemName;
         item.imageId = req.body.imageId;
         item.description = req.body.description;
-        item.files = req.body.fileId ;
+        item.fileId = req.body.fileId ;
         item.orderDate = req.body.orderDate;
         item.projectId = req.body.projectId;
         item.roomId = req.body.roomId;
