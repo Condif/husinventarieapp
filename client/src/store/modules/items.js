@@ -39,6 +39,7 @@ export const items = {
       if (index > -1) {
         state.items.splice(index, 1);
       }
+      state.item = []
     },
   },
 

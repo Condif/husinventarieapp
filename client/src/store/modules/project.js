@@ -40,24 +40,12 @@ export const project = {
       state.project.itemsId.push(payload);
     },
     deleteItemFromProject(state, payload) {
-      console.log("state old project", state.oldProject);
-      console.log("payload", payload);
-      const index = state.oldProject.itemsId.findIndex(id => id._id === payload);
-      if(index > -1) {
-        state.oldProject.itemsId.splice(index, 1)
+      const index = state.oldProject.itemsId.findIndex(
+        (id) => id._id === payload
+      );
+      if (index > -1) {
+        state.oldProject.itemsId.splice(index, 1);
       }
-      console.log("state old project after splice", state.oldProject.itemsId);
-      // if(state.oldProject.itemsId !== null) {
-      //   if(state.oldProject.itemsId.length === 0) {
-      //     state.oldProject.itemsId = null
-      //   }
-      //   console.log("state old project after splice", state.oldProject.itemsId);
-      // }
-      console.log(index, "iundex");
-      // var filteredAry = state.oldProject.itemsId.filter((e) => e._id !== payload);
-      // console.log(filteredAry, "filter");
-      // state.oldProject.itemsId = filteredAry;
-      
     },
   },
 
@@ -76,9 +64,8 @@ export const project = {
       state.commit("setProjects", j);
     },
     async setProject(state, selectedProject) {
-      await state.commit("setProject", selectedProject)
+      await state.commit("setProject", selectedProject);
       console.log(selectedProject, "selectedproject");
-      
     },
     setProjectFromStorage(state, selectedProjectId) {
       state.commit("setProjectFromStorage", selectedProjectId);
@@ -99,11 +86,11 @@ export const project = {
         console.log("finns ett likandant id");
         return;
       }
-     
+
       state.commit("addItemToProject", itemsId);
       state.dispatch("updateProject", project);
       state.commit("deleteItemFromProject", itemsId);
-      state.dispatch("updateProject", this.state.PROJECT.oldProject)
+      state.dispatch("updateProject", this.state.PROJECT.oldProject);
     },
     async createProject(state, newProjectObject) {
       const response = await fetch(url + "newproject", {
@@ -121,7 +108,6 @@ export const project = {
       return response;
     },
     async updateProject(state, project) {
-    
       const response = await fetch(url + "projects/" + project._id, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
