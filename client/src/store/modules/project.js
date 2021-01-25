@@ -22,15 +22,17 @@ export const project = {
     },
     setProject(state, payload) {
       state.project = payload;
-      console.log(state.project, "mutation project");
     },
-    setProjectFromStorage(state) {
-      state.project = JSON.parse(
+    async setProjectFromStorage(state, loggedInUser) {
+      const currentProject = JSON.parse(
         localStorage.getItem("currentProject") || "[]"
       );
+      if(loggedInUser._id === currentProject.userParentId) {
+        state.project = currentProject
+      }
+      return
     },
     setOldProject(state, payload) {
-      console.log(payload, "OLDpayload");
       state.oldProject = payload;
     },
     createProject(state, payload) {
@@ -40,20 +42,16 @@ export const project = {
       state.project.itemsId.push(payload);
     },
     deleteItemFromProject(state, payload) {
-      console.log("state old project", state.oldProject);
-      console.log("payload", payload);
       const index = state.oldProject.itemsId.findIndex(id => id._id === payload);
       if(index > -1) {
         state.oldProject.itemsId.splice(index, 1)
       }
-      console.log("state old project after splice", state.oldProject.itemsId);
       // if(state.oldProject.itemsId !== null) {
       //   if(state.oldProject.itemsId.length === 0) {
       //     state.oldProject.itemsId = null
       //   }
       //   console.log("state old project after splice", state.oldProject.itemsId);
       // }
-      console.log(index, "iundex");
       // var filteredAry = state.oldProject.itemsId.filter((e) => e._id !== payload);
       // console.log(filteredAry, "filter");
       // state.oldProject.itemsId = filteredAry;
@@ -77,29 +75,33 @@ export const project = {
     },
     async setProject(state, selectedProject) {
       await state.commit("setProject", selectedProject)
-      console.log(selectedProject, "selectedproject");
       
     },
-    setProjectFromStorage(state, selectedProjectId) {
-      state.commit("setProjectFromStorage", selectedProjectId);
+    async setProjectFromStorage(state) {
+      const loggedInUser = await fetch("/api/loggedIn")
+      const j = await loggedInUser.json()
+      state.commit("setProjectFromStorage", j);
     },
     addItemToProject(state, itemsId) {
       const project = state.getters["getProject"];
-      console.log(this.state.PROJECT.oldProject, "old project");
-      console.log(project.itemsId.length, "längd");
+
+      if (project.itemsId.filter((x) => x._id === itemsId).length === 1) {
+        return;
+      }
+      state.commit("addItemToProject", itemsId);
+    },
+    moveItemToProject(state, itemsId) {
+      const project = state.getters["getProject"];
       if (project.itemsId.length === 0) {
         state.commit("addItemToProject", itemsId);
-        console.log("tomt id", itemsId);
         state.dispatch("updateProject", state.getters["getProject"]);
         state.commit("deleteItemFromProject", itemsId);
         state.dispatch("updateProject", this.state.PROJECT.oldProject);
         return;
       }
       if (project.itemsId.filter((x) => x._id === itemsId).length === 1) {
-        console.log("finns ett likandant id");
         return;
       }
-      console.log("inte tom men olika idn", itemsId);
       state.commit("addItemToProject", itemsId);
       state.dispatch("updateProject", project);
       state.commit("deleteItemFromProject", itemsId);
@@ -121,7 +123,6 @@ export const project = {
       return response;
     },
     async updateProject(state, project) {
-      console.log(project, "updateproject");
       const response = await fetch(url + "projects/" + project._id, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

@@ -7,6 +7,7 @@ const {
   newUser,
   deleteUser,
   updateUser,
+  getLoggedInUser
 } = require("../controllers/user.controller");
 
 const User = require("../models/user.model");
@@ -19,6 +20,10 @@ router.get("/api/users", async (req, res) => {
 // GET ONE BY ID
 router.get("/api/users/:userId", async (req, res) => {
   getOneById(req, res);
+});
+// GET ONE BY req.session.userId
+router.get("/api/loggedIn", async (req, res) => {
+  getLoggedInUser(req, res);
 });
 
 // CREATE

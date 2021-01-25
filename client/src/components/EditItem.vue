@@ -143,7 +143,6 @@ export default {
   methods: {
     async storeOldId() {
       await this.$store.commit("PROJECT/setOldProject", this.project);
-      console.log("skicka gamla porjektet store", this.project);
     },
 
     save(date) {
@@ -166,7 +165,6 @@ export default {
       //Updatera projekt med nytt Item ej om oförändrat
       // ta bort item från projekt
       await this.$store.dispatch("PROJECT/setProject", this.project);
-      console.log("this.project", this.project);
       // if (this.project.itemsId === this.$store.getters["Pro"].itemsId) {
 
       // }
@@ -180,7 +178,7 @@ export default {
       // console.log(this.project.itemsId, " de finns något");
 
       await this.$store.dispatch(
-        "PROJECT/addItemToProject",
+        "PROJECT/moveItemToProject",
         this.$store.getters["ITEMS/getItem"]._id
       );
 

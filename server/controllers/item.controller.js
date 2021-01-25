@@ -32,7 +32,6 @@ const createNewItem = async (req, res) => {
     projectId: req.body.projectId,
     roomId: req.body.roomId,
   }
-  console.log(JSON.stringify(newItem) + "newItem");
     const item = new Item(newItem);
 
     item.save((err, item) => {
