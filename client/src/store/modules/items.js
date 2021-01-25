@@ -46,7 +46,11 @@ export const items = {
       if (index > -1) {
         state.items.splice(index, 1);
       }
-      state.item = []
+      if(state.items.length !== 0) {
+        state.item = state.items[0]
+      } else {
+        state.item = []
+      }
     },
   },
 
