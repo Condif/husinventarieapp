@@ -50,7 +50,7 @@ const updateItem = async (req, res) => {
   
       if (item) {
         item.itemName = req.body.itemName;
-        userParentId = req.session.userId,
+        item.userParentId = req.session.userId,
         item.imageId = req.body.imageId;
         item.description = req.body.description;
         item.receipt = req.body.receipt ;

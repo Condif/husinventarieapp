@@ -166,7 +166,7 @@ export default {
         "IMAGE/updateImage",
         updatedItemObject.imageId
       );
-
+      localStorage.setItem("currentItem", JSON.stringify(this.$store.getters["ITEMS/getItem"]));
       await this.$store.dispatch("PROJECT/setProject", this.project);
 
       await this.$store.dispatch(

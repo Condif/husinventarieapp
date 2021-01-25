@@ -132,10 +132,13 @@ export default {
         "PROJECT/addItemToProject",
         this.$store.getters["ITEMS/getItem"]._id
       );
-      await this.$store.dispatch(
-        "PROJECT/updateProject",
-        this.$store.getters["PROJECT/getProject"]
-      );
+      if(this.$store.getters["PROJECT/getProject"].length !== 0) {
+        await this.$store.dispatch(
+          "PROJECT/updateProject",
+          this.$store.getters["PROJECT/getProject"]
+        );
+
+      }
       await this.$store.dispatch("PROJECT/setProjects");
       this.$emit('close-dialog')
     },

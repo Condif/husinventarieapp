@@ -74,6 +74,7 @@ export const project = {
       state.commit("setProjectFromStorage", j);
     },
     addItemToProject(state, itemsId) {
+      if(state.getters["getProject"].length === 0) return
       const project = state.getters["getProject"];
 
       if (project.itemsId.filter((x) => x._id === itemsId).length === 1) {
@@ -82,6 +83,7 @@ export const project = {
       state.commit("addItemToProject", itemsId);
     },
     moveItemToProject(state, itemsId) {
+      if(state.getters["getProject"].itemsId === undefined) return
       const project = state.getters["getProject"];
       if (project.itemsId.length === 0) {
         state.commit("addItemToProject", itemsId);
