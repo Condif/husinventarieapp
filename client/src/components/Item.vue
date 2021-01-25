@@ -97,12 +97,11 @@ export default {
     EditItem,
   },
   methods: {
-    log(message) {
-      console.log(message);
-    },
-
     openItemDetails(selectedItem) {
       this.$store.dispatch("ITEMS/setItem", selectedItem);
+      console.log(selectedItem, "valt item");
+      this.$store.dispatch("IMAGE/setImage",this.$store.getters["ITEMS/getItem"].imageId)
+console.log(this.$store.getters["IMAGE/getImage"], "valt image");
       localStorage.setItem("currentItem", JSON.stringify(selectedItem));
       window.scrollTo(0, 0);
     },

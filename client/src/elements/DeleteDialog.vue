@@ -36,7 +36,7 @@ export default {
     async deleteItemHandler(selectedItemId) {
       await this.$store.dispatch("ITEMS/deleteItem", selectedItemId);
       this.$store.dispatch("PROJECT/setProjects");
-      this.dialogBox= false;
+      this.dialogBox = false;
     },
   },
   computed: {

@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on, attrs }">
-      <v-btn icon v-bind="attrs" v-on="on">
+      <v-btn icon v-bind="attrs" v-on="on" @click="storeOldId">
         <v-icon color="grey lighten-1">mdi-pencil</v-icon>
       </v-btn>
     </template>
@@ -36,8 +36,9 @@
         :items="projects.map((project) => project)"
         item-text="projectName"
         item-value="_id"
-        :placeholder="item.projectId"
+        :placeholder="project.projectName"
       ></v-select>
+
       <v-select
         v-model="item.roomId"
         prepend-icon="mdi-home-city"
@@ -104,10 +105,6 @@ export default {
     inputField: false,
     dialog: false,
   }),
-  mounted() {
-    this.item.projectId = this.project.projectName;
-    this.item.roomId = this.room.roomName;
-  },
 
   watch: {
     menu(val) {
@@ -130,7 +127,11 @@ export default {
     project() {
       return this.$store.getters["PROJECT/getProjectFromProjects"](
         this.item.projectId
-      );
+      ) !== undefined
+        ? this.$store.getters["PROJECT/getProjectFromProjects"](
+            this.item.projectId
+          )
+        : [];
     },
     rooms() {
       return this.$store.getters["ROOM/getRooms"];
@@ -140,16 +141,20 @@ export default {
     },
   },
   methods: {
+    async storeOldId() {
+      await this.$store.commit("PROJECT/setOldProject", this.project);
+      console.log("skicka gamla porjektet store", this.project);
+    },
+
     save(date) {
       this.$refs.menu.save(date);
     },
-    saveItem() {
-    },
+
     async updateItemHandler() {
       const updatedItemObject = {
         _id: this.item._id,
         itemName: this.item.itemName,
-        imageId: this.$store.getters["IMAGE/getImage"]._id,
+        imageId: this.$store.getters["IMAGE/getImage"],
         description: this.item.description,
         orderDate: this.item.orderDate,
         warranty: this.item.warranty,
@@ -157,15 +162,36 @@ export default {
         roomId: this.item.roomId,
       };
       await this.$store.dispatch("ITEMS/updateItem", updatedItemObject);
+
+      //Updatera projekt med nytt Item ej om oförändrat
+      // ta bort item från projekt
+      await this.$store.dispatch("PROJECT/setProject", this.project);
+      console.log("this.project", this.project);
+      // if (this.project.itemsId === this.$store.getters["Pro"].itemsId) {
+
+      // }
+
+      // if (this.project.itemsId.length === 0 ) {
+      //   console.log("tom lista");
+
+      //   this.$store.commit("PROJECT/addItemToProject", this.$store.getters["ITEMS/getItem"]._id)
+      //   this.$store.dispatch("PROJECT/updateProject", this.$store.getters["PROJECT/getProject"])
+      // } else
+      // console.log(this.project.itemsId, " de finns något");
+
       await this.$store.dispatch(
         "PROJECT/addItemToProject",
         this.$store.getters["ITEMS/getItem"]._id
       );
-      await this.$store.dispatch(
-        "PROJECT/updateProject",
-        this.$store.getters["PROJECT/getProject"]
-      );
-      await this.$store.dispatch("PROJECT/setProjects");
+
+      //Uppdatera rum om förändrat
+      //
+
+      // await this.$store.dispatch(
+      //   "PROJECT/updateProject",
+      //   this.$store.getters["PROJECT/getProject"]
+      // );
+      // await this.$store.dispatch("PROJECT/setProjects");
       this.dialog = false;
     },
   },

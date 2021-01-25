@@ -80,6 +80,7 @@ export default {
         icon: "mdi-calendar-check-outline",
         link: "/project",
       },
+      { title: "Inventarier", icon: "mdi-ballot", link: "/item" },
       { title: "Mitt konto", icon: "mdi-account-box", link: "/createproject" },
       { title: "Admin", icon: "mdi-gavel", link: "/createitem" },
     ],

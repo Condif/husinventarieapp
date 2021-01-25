@@ -44,10 +44,13 @@ const createNewProject = async (req, res) => {
 
 // UPDATE
 const updateProject = async (req, res) => {
+  console.log(req.body.itemsId, "req.body.itemsid");
+  console.log(req.params.projectId, "req.body.projectid");
   try {
+
     const updatedProject = await Project.updateOne(
       { _id: req.params.projectId },
-      {
+      { 
         $set: {
           projectName: req.body.projectName,
           userParentId: req.session.userId,
