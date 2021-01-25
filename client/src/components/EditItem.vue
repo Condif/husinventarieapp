@@ -154,7 +154,7 @@ export default {
       const updatedItemObject = {
         _id: this.item._id,
         itemName: this.item.itemName,
-        imageId: this.$store.getters["IMAGE/getImage"]._id,
+        imageId: this.$store.getters["IMAGE/getImage"],
         description: this.item.description,
         orderDate: this.item.orderDate,
         warranty: this.item.warranty,

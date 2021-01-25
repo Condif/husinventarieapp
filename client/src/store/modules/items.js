@@ -95,6 +95,7 @@ export const items = {
           return response.json();
         })
         .then((data) => {
+          console.log("uppdaterat till db", data);
           state.commit("updateItem", data);
           state.commit("setItem", data);
         });
