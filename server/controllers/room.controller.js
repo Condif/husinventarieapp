@@ -2,7 +2,7 @@ const Room = require("../models/room.model");
 
 // GET ALL
 getAllRooms = async (req, res) => {
-  await Room.find()
+  await Room.find({userParentId: {$in: req.session.userId}})
     .populate("items")
     .populate("projects")
 

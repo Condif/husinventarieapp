@@ -2,37 +2,14 @@
   <v-container fluid>
     <Quick-start />
     <v-row>
-      <v-expansion-panels max-width:="20rem">
-        <v-expansion-panel>
-          <v-expansion-panel-header color="accent1">
-            Houses {{house.houseName}}
-          </v-expansion-panel-header>
-          <v-expansion-panel-content
-            v-for="house in houses"
-            :key="house._id"
-            fucosable
-            color="base"
-          >
-            <v-list-item>
-              <v-btn
-                min-width="15rem"
-                width="90%"
-                depressed
-                :key="house._id"
-                @click="goToHouseHandler(house)"
-                >{{ house.houseName }}</v-btn
-              >
-            </v-list-item>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      </v-expansion-panels>
-      <v-select
-        v-model="select"
-        v-on:change="test(select)"
+      <v-select v-if="houses !== undefined"
+        v-model="currentHouseId"
+        v-on:change="goToHouseHandler(currentHouseId)"
         prepend-icon="mdi-calendar-check-outline"
         :items="houses.map((house) => house)"
         item-text="houseName"
         item-value="_id"
+        :placeholder="house.houseName"
       ></v-select>
       <v-col cols="12" sm="6" md="8">
         <v-card class="mx-auto" color="base" v-if="house !== undefined">
@@ -125,7 +102,7 @@ export default {
   data() {
     return {
       // items: ["Olvonvägen 47", "Sommarstugan"],
-      select: {},
+      currentHouseId: {},
       colors: [
         "indigo",
         "warning",
@@ -153,14 +130,10 @@ export default {
       localStorage.setItem("currentItem", JSON.stringify(selectedItem));
       this.$router.push("Item");
     },
-    goToHouseHandler(house) {
-      this.$store.dispatch("HOUSE/setHouse", house);
-      // localStorage.setItem("currentHouse", JSON.stringify(house));
-    },
-
-    test(id) {
-      this.$store.dispatch("HOUSE/setHouse",this.$store.getters["HOUSE/getHouseFromHouses"](id))
-
+    goToHouseHandler(currentHouseId) {
+      const currentHouse = this.$store.getters["HOUSE/getHouseFromHouses"](currentHouseId)
+      localStorage.setItem("currentHouse", JSON.stringify(currentHouse))
+      this.$store.dispatch("HOUSE/setHouse", currentHouse)
     },
   },
 

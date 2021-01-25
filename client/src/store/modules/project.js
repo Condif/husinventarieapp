@@ -23,7 +23,7 @@ export const project = {
     setProject(state, payload) {
       state.project = payload;
     },
-    async setProjectFromStorage(state, loggedInUser) {
+    setProjectFromStorage(state, loggedInUser) {
       const currentProject = JSON.parse(
         localStorage.getItem("currentProject") || "[]"
       );
