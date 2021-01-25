@@ -3,7 +3,7 @@ const Project = require("../models/project.model");
 // GET ALL
 const getAllProjects = async (req, res) => {
 
-  await Project.find()
+  await Project.find({userParentId: {$in: req.session.userId}})
     .populate("itemsId")
     .populate("roomId")
     .populate("notesId")
@@ -22,7 +22,17 @@ const getProjectsById = async (req, res) => {
 
 // CREATE NEW 
 const createNewProject = async (req, res) => {
-    const project = new Project(req.body);
+    const newProject = {
+      projectName: req.body.projectName,
+      userParentId: req.session.userId,
+      imageId: req.body.imageId,
+      description: req.body.description,
+      roomId: req.body.roomId,
+      category: req.body.category,
+      notesId: req.body.notesId,
+      itemsId: req.body.items
+    }
+    const project = new Project(newProject);
 
     project.save((err, project) => {
         if (err) {
@@ -34,15 +44,13 @@ const createNewProject = async (req, res) => {
 
 // UPDATE
 const updateProject = async (req, res) => {
-  console.log(req.body.itemsId, "req.body.itemsid");
-  console.log(req.params.projectId, "req.body.projectid");
   try {
-
     const updatedProject = await Project.updateOne(
       { _id: req.params.projectId },
       { 
         $set: {
           projectName: req.body.projectName,
+          userParentId: req.session.userId,
           imageId: req.body.imageId,
           description: req.body.description,
           roomId: req.body.roomId,

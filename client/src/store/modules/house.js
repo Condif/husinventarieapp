@@ -28,16 +28,23 @@ export const house = {
     addRoomToHouse(state, room) {
       state.house.rooms.push(room);
     },
+    setHouseFromStorage(state, loggedInUser) {
+      const currentHouse = JSON.parse(
+        localStorage.getItem("currentHouse") || "[]"
+      );
+      if(loggedInUser._id === currentHouse.userParentId) {
+        state.house = currentHouse
+      }
+      return
+    }
   },
 
   actions: {
-
-//     setHouseFromId() {
-//  const house = (state) => (id) =>
-//  state.house.find((house) => house._id === id),
-
- 
-//     },
+    async setHouseFromStorage(state) {
+      const loggedInUser = await fetch("/api/loggedIn")
+      const j = await loggedInUser.json()
+      state.commit("setHouseFromStorage", j);
+    },
 
     async setHouses(state) {
       const allhouses = await fetch(url + "houses", { headers });

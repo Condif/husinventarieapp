@@ -3,7 +3,7 @@ const Item = require("../models/item.model");
 // GET ALL
 const getAllItems = async (req, res) => {
     try {
-      const items = await Item.find();
+      const items = await Item.find({userParentId: {$in: req.session.userId}});
       res.status(200).json(items);
     } catch (err) {
       res.status(500).json(err);
@@ -20,7 +20,19 @@ const getItemsById = async (req, res) => {
 };
 // CREATE NEW 
 const createNewItem = async (req, res) => {
-    const item = new Item(req.body);
+  
+  const newItem = {
+    itemName: req.body.itemName,
+    userParentId: req.session.userId,
+    imageId: req.body.imageId,
+    description: req.body.description,
+    receipt: req.body.receipt,
+    orderDate: req.body.orderDate,
+    warranty: req.body.warranty,
+    projectId: req.body.projectId,
+    roomId: req.body.roomId,
+  }
+    const item = new Item(newItem);
 
     item.save((err, item) => {
         if (err) {
@@ -38,6 +50,7 @@ const updateItem = async (req, res) => {
   
       if (item) {
         item.itemName = req.body.itemName;
+        userParentId = req.session.userId,
         item.imageId = req.body.imageId;
         item.description = req.body.description;
         item.receipt = req.body.receipt ;

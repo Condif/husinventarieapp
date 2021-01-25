@@ -51,6 +51,14 @@
          
         ></v-date-picker>
       </v-menu>
+      <v-select v-if="projects !== undefined"
+        v-model="selectedProjectId"
+        prepend-icon="mdi-calendar-check-outline"
+        :items="projects.map((project) => project)"
+        item-text="projectName"
+        item-value="._id"
+        placeholder="Välj projekt"
+      ></v-select>
       <ImageUploader />
       <v-card-actions>
         <v-btn @click="createItemHandler" color="accent2">
@@ -69,10 +77,11 @@ export default {
   name: "CreatItem",
   data: () => ({
     itemName: "",
-
     description: "",
     orderDate: "",
     warranty: "",
+    receipt:"",
+    selectedProjectId: undefined,
 
     rules: [
       (value) => !!value || "Required.",
@@ -87,6 +96,21 @@ export default {
         val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
       },
     },
+  computed: {
+    projects() {
+      return this.$store.getters["PROJECT/getProjects"];
+    },
+    project() {
+      return this.$store.getters["PROJECT/getProjectFromProjects"](
+        this.selectedProjectId
+      ) !== undefined
+        ? this.$store.getters["PROJECT/getProjectFromProjects"](
+            this.selectedProjectId
+          )
+        : [];
+    }
+    
+  },
   methods: {
     save (date) {
         this.$refs.menu.save(date)
@@ -98,7 +122,11 @@ export default {
         description: this.description,
         orderDate: this.orderDate,
         warranty: this.warranty,
+        receipt: this.receipt,
+        projectId: this.selectedProjectId,
+        roomId: "5feb3656cbd090ff99f2c81c"
       };
+      await this.$store.dispatch("PROJECT/setProject", this.project);
       await this.$store.dispatch("ITEMS/createItem", newItemObject);
       await this.$store.dispatch(
         "PROJECT/addItemToProject",

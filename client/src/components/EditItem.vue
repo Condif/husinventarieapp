@@ -144,7 +144,6 @@ export default {
     async storeOldId() {
       await this.$store.commit("PROJECT/setOldProject", this.project);
       await this.$store.commit("IMAGE/setOldImage", this.item.imageId);
-      console.log("skicka gamla porjektet store", this.project);
     },
 
     save(date) {
@@ -162,8 +161,6 @@ export default {
         projectId: this.item.projectId,
         roomId: this.item.roomId,
       };
-      console.log("itemobjekt" + JSON.stringify(updatedItemObject));
-
       await this.$store.dispatch("ITEMS/updateItem", updatedItemObject);
       await this.$store.dispatch(
         "IMAGE/updateImage",
@@ -171,10 +168,9 @@ export default {
       );
 
       await this.$store.dispatch("PROJECT/setProject", this.project);
-      console.log("this.project", this.project);
 
       await this.$store.dispatch(
-        "PROJECT/addItemToProject",
+        "PROJECT/moveItemToProject",
         this.$store.getters["ITEMS/getItem"]._id
       );
 
