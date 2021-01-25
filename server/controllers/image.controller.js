@@ -3,7 +3,7 @@ const Image = require("../models/image.model");
 // GET ONE
 getImg = async (req, res) => {
   try {
-    const image = await Image.findById(req.params.id);
+    const image = await Image.findById({ _id: req.params.id });
     if (!image) {
       // todo....
     }
@@ -25,6 +25,20 @@ getAllImages = async (req, res) => {
   }
 };
 
+// DELETE ONE
+deleteImg = async (req, res) => {
+  console.log({ _id: req.params.id },"delete");
+  try {
+    const image = await Image.deleteOne({ _id: req.params.id });
+    if (!image) {
+      // todo....
+    }
+    res.status(200).json({message: "Image deleted"});
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+};
 // POST
 newImage = (req, res) => {
   if (!req.files || !req.files.image) {
@@ -46,4 +60,4 @@ newImage = (req, res) => {
   });
 };
 
-module.exports = { newImage, getImg, getAllImages };
+module.exports = { newImage, getImg, getAllImages, deleteImg };

@@ -143,6 +143,7 @@ export default {
   methods: {
     async storeOldId() {
       await this.$store.commit("PROJECT/setOldProject", this.project);
+      await this.$store.commit("IMAGE/setOldImage", this.item.imageId);
     },
 
     save(date) {
@@ -161,35 +162,18 @@ export default {
         roomId: this.item.roomId,
       };
       await this.$store.dispatch("ITEMS/updateItem", updatedItemObject);
+      await this.$store.dispatch(
+        "IMAGE/updateImage",
+        updatedItemObject.imageId
+      );
 
-      //Updatera projekt med nytt Item ej om oförändrat
-      // ta bort item från projekt
       await this.$store.dispatch("PROJECT/setProject", this.project);
-      // if (this.project.itemsId === this.$store.getters["Pro"].itemsId) {
-
-      // }
-
-      // if (this.project.itemsId.length === 0 ) {
-      //   console.log("tom lista");
-
-      //   this.$store.commit("PROJECT/addItemToProject", this.$store.getters["ITEMS/getItem"]._id)
-      //   this.$store.dispatch("PROJECT/updateProject", this.$store.getters["PROJECT/getProject"])
-      // } else
-      // console.log(this.project.itemsId, " de finns något");
 
       await this.$store.dispatch(
         "PROJECT/moveItemToProject",
         this.$store.getters["ITEMS/getItem"]._id
       );
 
-      //Uppdatera rum om förändrat
-      //
-
-      // await this.$store.dispatch(
-      //   "PROJECT/updateProject",
-      //   this.$store.getters["PROJECT/getProject"]
-      // );
-      // await this.$store.dispatch("PROJECT/setProjects");
       this.dialog = false;
     },
   },
