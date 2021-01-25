@@ -1,7 +1,7 @@
 // ----- PROJECT ------ // 
 ###
 // GET ONE PROJECT BY ID. 
-GET http://localhost:3002/api/projects/5ffeea1b46032c7d6e43c9b9
+GET http://localhost:3002/api/projects/6009498fe33cae1b60ff6988
 
 ###
 // GET ALL Projects. 

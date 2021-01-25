@@ -25,8 +25,15 @@ export const items = {
     createItem(state, payload) {
       state.items.push(payload);
     },
-    setItemFromStorage(state) {
-      state.item = JSON.parse(localStorage.getItem("currentItem") || "[]");
+    setItemFromStorage(state, loggedInUser) {
+
+      const currentItem = JSON.parse(
+        localStorage.getItem("currentItem") || "[]"
+      );
+      if (loggedInUser._id === currentItem.userParentId) {
+        state.item = currentItem;
+      }
+      return;
     },
     updateItem(state, payload) {
       const index = state.items.findIndex((item) => item._id === payload._id);
@@ -39,8 +46,10 @@ export const items = {
       if (index > -1) {
         state.items.splice(index, 1);
       }
-      if (state.items.length !== 0) {
-        state.item = state.items[0];
+      if(state.items.length !== 0) {
+        state.item = state.items[0]
+      } else {
+        state.item = []
       }
     },
   },
@@ -54,8 +63,10 @@ export const items = {
     setItem(state, selectedItemId) {
       state.commit("setItem", selectedItemId);
     },
-    setItemFromStorage(state, selectedItem) {
-      state.commit("setItemFromStorage", selectedItem);
+    async setItemFromStorage(state) {
+      const loggedInUser = await fetch("/api/loggedIn")
+      const j = await loggedInUser.json()
+      state.commit("setItemFromStorage", j);
     },
     async createItem(state, newItemObject) {
       const response = await fetch(url + "newitem", {
@@ -86,7 +97,6 @@ export const items = {
       return response;
     },
     async updateItem(state, updatedItemObject) {
-      console.log(updatedItemObject, "update item.js");
       const response = await fetch(url + "items/" + updatedItemObject._id, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -97,7 +107,6 @@ export const items = {
           return response.json();
         })
         .then((data) => {
-          console.log("uppdaterat till db", data);
           state.commit("updateItem", data);
           state.commit("setItem", data);
         });

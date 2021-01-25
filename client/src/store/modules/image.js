@@ -46,7 +46,6 @@ export const image = {
 
         .then((data) => {
           state.commit("setImage", data);
-          console.log("created image" + data);
         });
       return response;
     },

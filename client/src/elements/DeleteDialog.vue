@@ -35,7 +35,13 @@ export default {
   methods: {
     async deleteItemHandler(selectedItemId) {
       await this.$store.dispatch("ITEMS/deleteItem", selectedItemId);
-
+      console.log(this.$store.getters["ITEMS/getItems"][0])
+      if(this.$store.getters["ITEMS/getItems"].length !== 0) {
+        localStorage.setItem("currentItem", JSON.stringify(this.$store.getters["ITEMS/getItems"][0]));
+      } else {
+        localStorage.setItem("currentItem", [])
+      }
+      this.$store.dispatch("ITEMS/setItems")
       this.$store.dispatch("PROJECT/setProjects");
       this.dialogBox = false;
     },
