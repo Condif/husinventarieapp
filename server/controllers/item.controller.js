@@ -40,7 +40,7 @@ const updateItem = async (req, res) => {
         item.itemName = req.body.itemName;
         item.imageId = req.body.imageId;
         item.description = req.body.description;
-        item.receipt = req.body.receipt ;
+        item.files = req.body.fileId ;
         item.orderDate = req.body.orderDate;
         item.projectId = req.body.projectId;
         item.roomId = req.body.roomId;

@@ -42,6 +42,7 @@ deleteImg = async (req, res) => {
 };
 // POST
 newImage = (req, res) => {
+  console.log("ny fil", req.files);
   if (!req.files || !req.files.image) {
     // Ingen fil har skickats med... Se till använda namn:image på input fältet...
   }

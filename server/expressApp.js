@@ -9,9 +9,6 @@ require("dotenv").config();
 const port = process.env.PORT || 8080;
 const path = require("path");
 
-
-
-
 app.use(express.json());
 app.use(
   cors({
@@ -39,7 +36,6 @@ app.use(
   })
 );
 
-
 /* Import routes */
 
 const userRouter = require("./routers/user.router");
@@ -49,7 +45,8 @@ const roomRouter = require("./routers/room.router");
 const houseRouter = require("./routers/house.router");
 const notesRouter = require("./routers/notes.router");
 const itemRouter = require("./routers/item.router");
-const imageRouter = require("./routers/image.router");
+// const imageRouter = require("./routers/image.router");
+const fileRouter = require("./routers/file.router");
 
 // run the database
 run();
@@ -62,17 +59,18 @@ app.use(userRouter);
 app.use(sessionRouter);
 app.use(projectRouter);
 app.use(roomRouter);
+app.use(fileRouter);
+// app.use(imageRouter);
 app.use(houseRouter);
 app.use(notesRouter);
 app.use(itemRouter);
-app.use(imageRouter)
 
 // Handle production
-if(process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   // static folder
-  app.use(express.static(__dirname + '/public'))
+  app.use(express.static(__dirname + "/public"));
 
   // Handle SPA
-  app.get(/.*/, (req, res) => res.sendFile(__dirName + '/public/index.html'))
+  app.get(/.*/, (req, res) => res.sendFile(__dirName + "/public/index.html"));
 }
 app.listen(port, () => console.log("Server has started"));

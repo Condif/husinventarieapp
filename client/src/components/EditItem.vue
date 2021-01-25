@@ -80,6 +80,7 @@
         max-height="100 "
       ></v-img>
       <ImageUploader />
+      <FileUploader />
       <v-card-actions>
         <v-btn @click="updateItemHandler" color="accent2">
           Spara
@@ -91,8 +92,9 @@
 
 <script>
 import ImageUploader from "./ImageUploader.vue";
+import FileUploader from "./FileUploader.vue";
 export default {
-  components: { ImageUploader },
+  components: { ImageUploader, FileUploader },
   name: "UpdateItem",
 
   data: () => ({
@@ -158,6 +160,7 @@ export default {
         imageId: this.$store.getters["IMAGE/getImage"],
         description: this.item.description,
         orderDate: this.item.orderDate,
+        fileId: this.$store.getters["FILE/getFile"]._id,
         warranty: this.item.warranty,
         projectId: this.item.projectId,
         roomId: this.item.roomId,
