@@ -1,7 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const fileUpload = require("express-fileupload");
-const { newImage, getImg, getAllImages } = require("../controllers/image.controller");
+const {
+  newImage,
+  getImg,
+  getAllImages,
+  deleteImg,
+} = require("../controllers/image.controller");
 
 router.use(fileUpload({}));
 
@@ -13,6 +18,11 @@ router.get("/api/images/:id", async (req, res) => {
 // GET ALL IMAGE
 router.get("/api/images/", async (req, res) => {
   getAllImages(req, res);
+});
+
+// DELETE IMAGE
+router.delete("/api/images/:id", async (req, res) => {
+  deleteImg(req, res);
 });
 
 // POST IMAGE

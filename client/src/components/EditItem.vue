@@ -143,6 +143,7 @@ export default {
   methods: {
     async storeOldId() {
       await this.$store.commit("PROJECT/setOldProject", this.project);
+       await this.$store.commit("IMAGE/setOldImage", this.item.imageId);
       console.log("skicka gamla porjektet store", this.project);
     },
 
@@ -164,7 +165,7 @@ export default {
       console.log("itemobjekt" + JSON.stringify(updatedItemObject));
       //updatera item-state
       await this.$store.dispatch("ITEMS/updateItem", updatedItemObject);
-
+await this.$store.dispatch("IMAGE/updateImage", updatedItemObject.imageId);
       //Updatera projekt med nytt Item ej om oförändrat
       // ta bort item från projekt
       await this.$store.dispatch("PROJECT/setProject", this.project);

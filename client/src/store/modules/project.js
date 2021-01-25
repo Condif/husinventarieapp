@@ -99,7 +99,7 @@ export const project = {
         console.log("finns ett likandant id");
         return;
       }
-      console.log("inte tom men olika idn", itemsId);
+     
       state.commit("addItemToProject", itemsId);
       state.dispatch("updateProject", project);
       state.commit("deleteItemFromProject", itemsId);
@@ -121,7 +121,7 @@ export const project = {
       return response;
     },
     async updateProject(state, project) {
-      console.log(project, "updateproject");
+    
       const response = await fetch(url + "projects/" + project._id, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
