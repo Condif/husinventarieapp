@@ -144,7 +144,6 @@ export default {
       this.$refs.menu.save(date);
     },
     saveItem() {
-      console.log("test", this.item.projectId);
     },
     async updateItemHandler() {
       const updatedItemObject = {
@@ -157,7 +156,6 @@ export default {
         projectId: this.item.projectId,
         roomId: this.item.roomId,
       };
-      console.log("itemobjekt" + JSON.stringify(updatedItemObject));
       await this.$store.dispatch("ITEMS/updateItem", updatedItemObject);
       await this.$store.dispatch(
         "PROJECT/addItemToProject",

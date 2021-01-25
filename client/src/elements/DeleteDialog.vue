@@ -34,9 +34,7 @@ export default {
 
   methods: {
     async deleteItemHandler(selectedItemId) {
-      console.log(selectedItemId, "klicked");
       await this.$store.dispatch("ITEMS/deleteItem", selectedItemId);
-      console.log(selectedItemId, "deleted", this.dialogBox.value);
       this.$store.dispatch("PROJECT/setProjects");
       this.dialogBox= false;
     },

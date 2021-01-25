@@ -159,7 +159,6 @@ export default {
     },
 
     test(id) {
-      console.log("test", id);
       this.$store.dispatch("HOUSE/setHouse",this.$store.getters["HOUSE/getHouseFromHouses"](id))
 
     },

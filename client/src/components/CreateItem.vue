@@ -99,8 +99,8 @@ export default {
         orderDate: this.orderDate,
         warranty: this.warranty,
         receipt: this.receipt,
-        projectId: [],
-        roomId: []
+        projectId: "600153be4bc8fe051da7f5a4",
+        roomId: "5feb3656cbd090ff99f2c81c"
       };
       await this.$store.dispatch("ITEMS/createItem", newItemObject);
       await this.$store.dispatch(

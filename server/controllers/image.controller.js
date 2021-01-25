@@ -19,7 +19,6 @@ getImg = async (req, res) => {
 getAllImages = async (req, res) => {
   try {
     const imageIds = await Image.find({}, "_id").exec();
-    console.log(imageIds);
     res.status(200).json(imagesIds);
   } catch (err) {
     res.status(500).json(err);
@@ -45,7 +44,6 @@ newImage = (req, res) => {
       res.status(201).json(image);
     }
   });
-  console.log(image, "newImage");
 };
 
 module.exports = { newImage, getImg, getAllImages };

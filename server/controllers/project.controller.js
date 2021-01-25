@@ -22,7 +22,6 @@ const getProjectsById = async (req, res) => {
 
 // CREATE NEW 
 const createNewProject = async (req, res) => {
-  console.log(JSON.stringify(req.session.userId) + "userId create")
     const newProject = {
       projectName: req.body.projectName,
       userParentId: req.session.userId,

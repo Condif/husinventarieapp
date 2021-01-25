@@ -20,8 +20,7 @@ export const items = {
             state.items = payload
         },
         setItem(state, payload) {
-            state.item = payload
-            
+            state.item = payload       
         },
         createItem(state, payload) {
             state.items.push(payload)
