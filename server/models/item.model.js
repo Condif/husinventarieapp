@@ -16,9 +16,9 @@ const ItemSchema = new mongoose.Schema({
   description: {
       type: String,
   },
-  receipt: {
-    type: String
-  },
+  fileId: [{
+    type: mongoose.Types.ObjectId,
+  }],
   orderDate: {
     type: String
   },

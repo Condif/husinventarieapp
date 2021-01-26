@@ -80,6 +80,8 @@
         max-height="100 "
       ></v-img>
       <ImageUploader />
+      <FileUploader />
+      <div>{{item.fileId}}</div>
       <v-card-actions>
         <v-btn @click="updateItemHandler" color="accent2">
           Spara
@@ -91,8 +93,9 @@
 
 <script>
 import ImageUploader from "./ImageUploader.vue";
+import FileUploader from "./FileUploader.vue";
 export default {
-  components: { ImageUploader },
+  components: { ImageUploader, FileUploader },
   name: "UpdateItem",
 
   data: () => ({
@@ -144,6 +147,7 @@ export default {
     async storeOldId() {
       await this.$store.commit("PROJECT/setOldProject", this.project);
       await this.$store.commit("IMAGE/setOldImage", this.item.imageId);
+      await this.$store.commit("FILE/setOldFile", this.item.fileId);
     },
 
     save(date) {
@@ -157,6 +161,7 @@ export default {
         imageId: this.$store.getters["IMAGE/getImage"],
         description: this.item.description,
         orderDate: this.item.orderDate,
+        fileId: this.$store.getters["FILE/getFile"]._id,
         warranty: this.item.warranty,
         projectId: this.item.projectId,
         roomId: this.item.roomId,
@@ -167,6 +172,10 @@ export default {
         updatedItemObject.imageId
       );
       localStorage.setItem("currentItem", JSON.stringify(this.$store.getters["ITEMS/getItem"]));
+       await this.$store.dispatch(
+        "FILE/updateFile",
+        updatedItemObject.fileId
+      );
       await this.$store.dispatch("PROJECT/setProject", this.project);
 
       await this.$store.dispatch(

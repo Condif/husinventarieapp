@@ -45,7 +45,7 @@ const createNewItem = async (req, res) => {
 // UPDATE
 const updateItem = async (req, res) => {
     try {
-        
+        console.log(req.params, "update item ");
       let item = await Item.findById(req.params.itemId);
   
       if (item) {
@@ -53,7 +53,7 @@ const updateItem = async (req, res) => {
         item.userParentId = req.session.userId,
         item.imageId = req.body.imageId;
         item.description = req.body.description;
-        item.receipt = req.body.receipt ;
+        item.fileId = req.body.fileId ;
         item.orderDate = req.body.orderDate;
         item.projectId = req.body.projectId;
         item.roomId = req.body.roomId;
