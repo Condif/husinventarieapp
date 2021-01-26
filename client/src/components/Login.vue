@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <v-main>
-      <v-container fluid fill-height>
-        <v-layout align-center justify-center>
-          <v-flex xs12 sm8 md4>
+    <v-main  class="main">
+      <v-container fluid fill-height >
+        <v-layout align-center justify-center >
+          <v-flex xs12 sm8 md4 >
             <v-card class="elevation-12">
               <v-toolbar dark color="primary">
                 <v-toolbar-title>Logga in</v-toolbar-title>
@@ -66,4 +66,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style >
+.main {
+  background-image: url('../assets/chris-briggs-ILBrHd6PFJA-unsplash.jpg');
+  background-size: calc(80vh - 56px);
+}
+</style>

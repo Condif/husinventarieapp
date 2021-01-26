@@ -48,6 +48,7 @@
                       @click="goToItemHandler(item)"
                       >{{ item.itemName }}</v-btn
                     >
+                    <Delete-project-dialog v-bind:project="project" />
                     <v-list-item>
                       <v-btn
                         icon
@@ -80,13 +81,14 @@
 
 <script>
 import QuickStart from "../components/QuickStart.vue";
-
+import DeleteProjectDialog from "../elements/DeleteProjectDialog.vue";
 export default {
   namespaced: true,
   name: "Project",
   data: () => ({}),
   components: {
     QuickStart,
+     DeleteProjectDialog,
   },
   methods: {
     log(message) {

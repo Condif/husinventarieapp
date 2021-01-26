@@ -1,51 +1,33 @@
 <template>
   <v-sheet
     id="scrolling-techniques-7"
-    class="overflow-y-auto"
+    class="mx-auto pt-2"
     max-height="100%"
+    max-width="900"
+    color="accent2"
   >
-    <v-card class="mx-auto pt-2" color="primary">
+    <v-card max-width="900" class="mx-auto pt-2" color="accent2">
       <v-card-title v-if="project !== undefined">
-        {{ project.projectName }}
+        <h1>Välkommen!</h1>
       </v-card-title>
-
-      <v-card-subtitle text>
-        2021-01-02 En massa kablar och annat bös
-      </v-card-subtitle>
+      <v-card-title v-if="project !== undefined">
+        <div>
+          <h3>Senaste projekt:</h3>
+          <h4>
+            {{ project.projectName }}
+          </h4>
+        </div>
+      </v-card-title>
       <v-img
-        height="200"
-        src="../assets/chris-briggs-ILBrHd6PFJA-unsplash.jpg"
+        height="400"
+        src="../assets/todd-kent-178j8tJrNlc-unsplash.jpg"
       ></v-img>
       <v-expansion-panels>
-        <v-expansion-panel>
-          <v-expansion-panel-header color="primary">
-            Mitt hem
-          </v-expansion-panel-header>
-          <v-expansion-panel-content
-            color="primary"
-            v-for="house in houses"
-            :key="house._id"
-            fucosable
-          >
-            <v-container>
-              <v-btn color="base" width="90%" @click="goToHouseHandler(house)"
-                >{{ house.houseName }}
-              </v-btn>
-              <!-- <v-btn :key="item._id + 1" @click="deleteProjectHandler(item._id)">
-              <v-icon >mdi-delete-forever</v-icon>
-            </v-btn> -->
-            </v-container>
-            <v-card-text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
-              aspernatur neque sequi exercitationem consectetur excepturi unde,
-              voluptatibus ratione mollitia nobis reprehenderit, maiores quasi
-              nulla dicta magni tempora at veritatis ducimus.
-            </v-card-text>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
         <v-expansion-panel v-if="projects !== undefined">
           <v-expansion-panel-header color="primary">
-            Mina projekt
+            <h2>
+              Mina projekt
+            </h2>
           </v-expansion-panel-header>
           <v-expansion-panel-content
             color="primary"
@@ -53,18 +35,16 @@
             :key="project._id"
             fucosable
           >
-            <v-container>
-              <v-btn
-                color="base"
-                width="70%"
-                @click="goToProjectHandler(project)"
-                >{{ project.projectName }}
+            <h3>
+              {{ project.projectName }}
+            </h3>
+            <div class="d-flex justify-space-between">
+              <p>{{ project.description }}</p>
+
+              <v-btn fab color="accent2" @click="goToProjectHandler(project)">
+                <v-icon color="white">mdi-arrow-right</v-icon>
               </v-btn>
-              <Delete-project-dialog v-bind:project="project" />
-              <!-- <v-btn :key="item._id + 1" @click="deleteProjectHandler(item._id)">
-              <v-icon >mdi-delete-forever</v-icon>
-            </v-btn> -->
-            </v-container>
+            </div>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
@@ -73,7 +53,6 @@
 </template>
 
 <script>
-import DeleteProjectDialog from "../elements/DeleteProjectDialog.vue";
 export default {
   namespaced: true,
   name: "Dashboard",
@@ -81,29 +60,17 @@ export default {
     settings: [],
   }),
 
-  components: {
-    DeleteProjectDialog,
-  },
-
   methods: {
     goToProjectHandler(selectedProject) {
       this.$store.dispatch("PROJECT/setProject", selectedProject);
       localStorage.setItem("currentProject", JSON.stringify(selectedProject));
       this.$router.push("Project");
     },
-    goToHouseHandler(selectedHouse) {
-      this.$store.dispatch("HOUSE/setHouse", selectedHouse);
-      localStorage.setItem("currentHouse", JSON.stringify(selectedHouse));
-      this.$router.push({ name: "House" });
-    },
   },
 
   computed: {
     projects() {
       return this.$store.getters["PROJECT/getProjects"];
-    },
-    houses() {
-      return this.$store.getters["HOUSE/getHouses"];
     },
     project() {
       if (this.$store.getters["PROJECT/getProject"] !== undefined) {
@@ -113,10 +80,14 @@ export default {
           );
         }
       }
-      return []
+      return [];
     },
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+.title {
+  color: "#white";
+}
+</style>

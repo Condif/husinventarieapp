@@ -1,7 +1,7 @@
-<template>
-  <v-app>
+<template color="accent1">
+  <v-app >
     <Header />
-    <v-main class="pb-16">
+    <v-main class="py-0">
       <router-view />
     </v-main>
   </v-app>
