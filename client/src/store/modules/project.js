@@ -24,6 +24,7 @@ export const project = {
       state.project = payload;
     },
     setProjectFromStorage(state, loggedInUser) {
+      if(!loggedInUser) return
       const currentProject = JSON.parse(
         localStorage.getItem("currentProject") || "[]"
       );

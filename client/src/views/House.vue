@@ -2,7 +2,7 @@
   <v-container fluid>
     <Quick-start />
     <v-row>
-      <v-select v-if="houses !== undefined"
+      <v-select v-if="houses"
         v-model="currentHouseId"
         v-on:change="goToHouseHandler(currentHouseId)"
         prepend-icon="mdi-calendar-check-outline"
@@ -12,7 +12,8 @@
         :placeholder="house.houseName"
       ></v-select>
       <v-col cols="12" sm="6" md="8">
-        <v-card class="mx-auto" color="base" v-if="house !== undefined">
+        {{log(house)}}
+        <v-card class="mx-auto" color="base" v-if="house.rooms !== undefined && house.rooms[0] !== null">
           <v-expansion-panels
             v-for="room in house.rooms"
             :key="room._id"
@@ -119,6 +120,9 @@ export default {
   },
 
   methods: {
+    log(message) {
+      console.log(message);
+    },
     goToProjectHandler(selectedProject) {
       this.$store.dispatch("PROJECT/setProject", selectedProject);
       localStorage.setItem("currentProject", JSON.stringify(selectedProject));
@@ -138,9 +142,6 @@ export default {
   },
 
   computed: {
-    // rooms() {
-    //   return this.$store.getters["ROOM/getRooms"];
-    // },
     houses() {
       return this.$store.getters["HOUSE/getHouses"];
     },

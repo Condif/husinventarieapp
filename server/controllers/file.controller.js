@@ -49,6 +49,8 @@ console.log("ny fil", req.files);
   }
 
   const file = new File({
+    name: req.files.file.name,
+    userParentId: req.session.userId,
     data: req.files.file.data,
     contentType: req.files.file.mimetype,
   });

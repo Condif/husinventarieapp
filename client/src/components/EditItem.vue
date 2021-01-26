@@ -80,8 +80,9 @@
         max-height="100 "
       ></v-img>
       <ImageUploader />
+      
       <FileUploader />
-      <div>{{item.fileId}}</div>
+      <div v-if="item.fileId" ><v-icon>mdi-arrow-up-bold-box-outline</v-icon>{{ item.fileId }}</div>
       <v-card-actions>
         <v-btn @click="updateItemHandler" color="accent2">
           Spara
@@ -171,11 +172,11 @@ export default {
         "IMAGE/updateImage",
         updatedItemObject.imageId
       );
-      localStorage.setItem("currentItem", JSON.stringify(this.$store.getters["ITEMS/getItem"]));
-       await this.$store.dispatch(
-        "FILE/updateFile",
-        updatedItemObject.fileId
+      localStorage.setItem(
+        "currentItem",
+        JSON.stringify(this.$store.getters["ITEMS/getItem"])
       );
+      await this.$store.dispatch("FILE/updateFile", updatedItemObject.fileId);
       await this.$store.dispatch("PROJECT/setProject", this.project);
 
       await this.$store.dispatch(

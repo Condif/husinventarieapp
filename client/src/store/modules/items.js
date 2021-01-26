@@ -26,7 +26,7 @@ export const items = {
       state.items.push(payload);
     },
     setItemFromStorage(state, loggedInUser) {
-
+      if(!loggedInUser) return
       const currentItem = JSON.parse(
         localStorage.getItem("currentItem") || "[]"
       );
