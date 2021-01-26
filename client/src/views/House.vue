@@ -2,7 +2,8 @@
   <v-container fluid>
     <Quick-start />
     <v-row>
-      <v-select v-if="houses"
+      <v-select
+        v-if="houses"
         v-model="currentHouseId"
         v-on:change="goToHouseHandler(currentHouseId)"
         prepend-icon="mdi-calendar-check-outline"
@@ -12,8 +13,12 @@
         :placeholder="house.houseName"
       ></v-select>
       <v-col cols="12" sm="6" md="8">
-        {{log(house)}}
-        <v-card class="mx-auto" color="base" v-if="house.rooms !== undefined && house.rooms[0] !== null">
+        {{ log(house) }}
+        <v-card
+          class="mx-auto"
+          color="base"
+          v-if="house.rooms !== undefined && house.rooms[0] !== null"
+        >
           <v-expansion-panels
             v-for="room in house.rooms"
             :key="room._id"
@@ -90,20 +95,31 @@
         </v-carousel>
       </v-col>
     </v-row>
-    <v-col>
-      <v-btn to="/createRoom">Skapa rum</v-btn>
-    </v-col>
+
+    <v-row>
+      <v-col>
+
+    <CreateHouse />
+      </v-col>
+      <v-col>
+    <CreateRoom />
+       
+       
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
 import QuickStart from "../components/QuickStart.vue";
+import CreateRoom from "../components/CreateRoom.vue";
+import CreateHouse from "../components/CreateHouse.vue";
 
 export default {
   data() {
     return {
-      // items: ["Olvonvägen 47", "Sommarstugan"],
       currentHouseId: {},
+
       colors: [
         "indigo",
         "warning",
@@ -117,6 +133,8 @@ export default {
   name: "Home",
   components: {
     QuickStart,
+    CreateHouse,
+    CreateRoom
   },
 
   methods: {
@@ -135,9 +153,11 @@ export default {
       this.$router.push("Item");
     },
     goToHouseHandler(currentHouseId) {
-      const currentHouse = this.$store.getters["HOUSE/getHouseFromHouses"](currentHouseId)
-      localStorage.setItem("currentHouse", JSON.stringify(currentHouse))
-      this.$store.dispatch("HOUSE/setHouse", currentHouse)
+      const currentHouse = this.$store.getters["HOUSE/getHouseFromHouses"](
+        currentHouseId
+      );
+      localStorage.setItem("currentHouse", JSON.stringify(currentHouse));
+      this.$store.dispatch("HOUSE/setHouse", currentHouse);
     },
   },
 

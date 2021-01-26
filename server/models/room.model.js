@@ -18,11 +18,11 @@ const RoomSchema = mongoose.Schema({
     ref: "User"
   },
   roomSize: {
-    type: Number,
+    type: String,
     required: true,
   },
   roomHeight: {
-    type: Number,
+    type: String,
     required: true,
   },
     items: {
