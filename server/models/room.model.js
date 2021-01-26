@@ -5,17 +5,13 @@ const RoomSchema = mongoose.Schema({
   houseId: [
     {
       type: mongoose.Types.ObjectId,
-      
+      required: true,
       ref: "House",
     },
   ],
   roomName: {
     type: String,
     required: true,
-  },
-  userParentId: {
-    type: mongoose.Types.ObjectId,
-    ref: "User"
   },
   roomSize: {
     type: Number,
@@ -25,9 +21,9 @@ const RoomSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-    items: {
-      type: [{ type: mongoose.Types.ObjectId, ref: "Item" }]
-    },
+  //   items: {
+  //     type: [ItemSchema],
+  //   },
 
   projects: [{ type: mongoose.Types.ObjectId, ref: "Project" }],
 });

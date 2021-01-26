@@ -23,8 +23,8 @@ app.use(
   cookieSession({
     name: "LoginSession",
     secret: "GuppA4Lyf3-geeks",
-    maxAge: 24 * 60 * 60 * 1000, //24 hours
-    // maxAge: 1000 * 60 * 60, //1 hour
+    // maxAge: 24 * 60 * 60 * 1000, //24 hours
+    maxAge: 1000 * 60 * 60, //1 hour
     // maxAge: 30 * 60 * 1000, //30 minutes
     // maxAge: 60 * 1000, //1 minute
     // maxAge: 15 * 1000, //15 seconds
@@ -45,8 +45,6 @@ const roomRouter = require("./routers/room.router");
 const houseRouter = require("./routers/house.router");
 const notesRouter = require("./routers/notes.router");
 const itemRouter = require("./routers/item.router");
-// const imageRouter = require("./routers/image.router");
-const fileRouter = require("./routers/file.router");
 
 // run the database
 run();
@@ -59,18 +57,8 @@ app.use(userRouter);
 app.use(sessionRouter);
 app.use(projectRouter);
 app.use(roomRouter);
-app.use(fileRouter);
-// app.use(imageRouter);
 app.use(houseRouter);
 app.use(notesRouter);
-app.use(itemRouter);
+app.use(itemRouter)
 
-// Handle production
-if (process.env.NODE_ENV === "production") {
-  // static folder
-  app.use(express.static(__dirname + "/public"));
-
-  // Handle SPA
-  app.get(/.*/, (req, res) => res.sendFile(__dirName + "/public/index.html"));
-}
 app.listen(port, () => console.log("Server has started"));

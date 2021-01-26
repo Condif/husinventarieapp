@@ -7,14 +7,9 @@ const ProjectSchema = mongoose.Schema({
     type: String,
     // required: true
   },
-  userParentId: {
-    type: mongoose.Types.ObjectId,
-    ref: "User"
-  },
   imageId: {
     type: mongoose.Types.ObjectId,
     // required: true
-    ref: "uploadedImg"
   },
   description: {
     type: String,
@@ -22,26 +17,22 @@ const ProjectSchema = mongoose.Schema({
   },
   roomId: {
     type: mongoose.Types.ObjectId,
-    ref: "Room",
     // required: true,
   },
   category: {
     type: String,
     // required: true,
   },
-  notesId: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: "Note",
-    },
-  ],
-
-  itemsId: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: "Item",
-    },
-  ],
+  Notes: [{
+    type: mongoose.Types.ObjectId,
+    ref: "Notes"
+  }],
+ 
+    items: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Item',
+            required: true
+    }]
 });
 
 const ProjectModel = mongoose.model("Project", ProjectSchema);

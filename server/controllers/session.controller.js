@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user.model");
 // LOG IN
 const logInUser = async (req, res) => {
+  
   await User.find({ email: req.body.email })
     .exec()
     .then((user) => {

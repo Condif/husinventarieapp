@@ -2,11 +2,8 @@ const Project = require("../models/project.model");
 
 // GET ALL
 const getAllProjects = async (req, res) => {
-
-  await Project.find({userParentId: {$in: req.session.userId}})
-    .populate("itemsId")
-    .populate("roomId")
-    .populate("notesId")
+  await Project.find()
+    .populate("items")
     .then((post) => res.status(200).json(post))
     .catch((err) => res.status(500).json(err));
 };
@@ -19,20 +16,9 @@ const getProjectsById = async (req, res) => {
         res.status(500).json(err);
       }
 };
-
 // CREATE NEW 
 const createNewProject = async (req, res) => {
-    const newProject = {
-      projectName: req.body.projectName,
-      userParentId: req.session.userId,
-      imageId: req.body.imageId,
-      description: req.body.description,
-      roomId: req.body.roomId,
-      category: req.body.category,
-      notesId: req.body.notesId,
-      itemsId: req.body.items
-    }
-    const project = new Project(newProject);
+    const project = new Project(req.body);
 
     project.save((err, project) => {
         if (err) {
@@ -45,23 +31,20 @@ const createNewProject = async (req, res) => {
 // UPDATE
 const updateProject = async (req, res) => {
   try {
-    const updatedProject = await Project.updateOne(
+    let updatedProject = await Project.updateOne(
       { _id: req.params.projectId },
-      { 
+      {
         $set: {
           projectName: req.body.projectName,
-          userParentId: req.session.userId,
-          imageId: req.body.imageId,
+          imageId: req.body.projectName,
           description: req.body.description,
           roomId: req.body.roomId,
           category: req.body.category,
-          itemsId: req.body.itemsId,
-          notesId: req.body.notesId
+          items: req.body.items
         },
       }
-    )
-    
-    res.status(200).json(updatedProject);
+    );
+    res.status(200).json({ message: "ok" });
   } catch (err) {
     res.status(500).json(err);
   }

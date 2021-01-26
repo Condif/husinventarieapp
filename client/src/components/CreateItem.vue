@@ -1,148 +1,83 @@
 <template>
-  <div class="text-center">
-    <v-card class="mx-auto mt-2" color="base">
-      <v-card-title placeholder="test">
-        Lägg till inventarie
-      </v-card-title>
+  <v-card class="mx-auto mt-2" color="base">
+    <v-card-title placeholder="test">
+      Lägg till inventarie
+    </v-card-title>
 
-      <v-text-field
-        label="Namn"
-        v-model="itemName"
-        :rules="rules"
-        placeholder="Skriv in namnet på inventariet"
-      >
-      </v-text-field>
+    <v-card-subtitle color="error" text>
+      Datum: 2021-01-02
+    </v-card-subtitle>
 
-      <v-text-field
-        label="Garanti"
-        v-model="warranty"
-        :rules="rules"
-        placeholder="Hur många års garanti har produkten"
-      >
-      </v-text-field>
-      <v-textarea
-        label="Beskriving"
-        v-model="description"
-        :rules="rules"
-      ></v-textarea>
-      <v-menu
-        ref="menu"
-        v-model="menu"
-        :close-on-content-click="false"
-        transition="scale-transition"
-        offset-y
-        min-width="auto"
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-text-field
-            v-model="orderDate"
-            label="Inköpsdatum"
-            prepend-icon="mdi-calendar"
-            readonly
-            v-bind="attrs"
-            v-on="on"
-          ></v-text-field>
-        </template>
-        <v-date-picker
-          ref="picker"
-          v-model="orderDate"
-          :max="new Date().toISOString().substr(0, 10)"
-          min="1950-01-01"
-         
-        ></v-date-picker>
-      </v-menu>
-      <v-select v-if="projects !== undefined"
-        v-model="selectedProjectId"
-        prepend-icon="mdi-calendar-check-outline"
-        :items="projects.map((project) => project)"
-        item-text="projectName"
-        item-value="._id"
-        placeholder="Välj projekt"
-      ></v-select>
-      <ImageUploader />
-      <v-card-actions>
-        <v-btn @click="createItemHandler" color="accent2">
-          Spara
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-  
-  </div>
+    <v-text-field
+      label="Namn"
+      v-model="itemName"
+      :rules="rules"
+      placeholder="Skriv in namnet på inventariet"
+    >
+    </v-text-field>
+    <v-text-field
+      label="Inköpsdatum"
+      v-model="orderDate"
+      :rules="rules"
+      placeholder="Skriv in när du köpte produkten"
+    >
+    </v-text-field>
+    <v-text-field
+      label="Garanti"
+      v-model="warranty"
+      :rules="rules"
+      placeholder="Hur många års garanti har produkten"
+    >
+    </v-text-field>
+    <v-textarea
+      label="Beskriving"
+      v-model="description"
+      :rules="rules"
+    ></v-textarea>
+
+    <v-card-actions>
+      <v-btn  color="accent1">
+        Lägg till bild
+      </v-btn>
+      <v-btn  color="accent1">
+        Lägg till kvitto
+      </v-btn>
+      <v-btn @click="createItemHandler" color="accent2">
+        Spara
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
-import ImageUploader from "./ImageUploader.vue";
 export default {
-  components: { ImageUploader },
   name: "CreatItem",
   data: () => ({
     itemName: "",
+    imageId: "5ed612ec6aaf5cd950517f93",
     description: "",
     orderDate: "",
     warranty: "",
-    receipt:"",
-    selectedProjectId: undefined,
+   
 
     rules: [
       (value) => !!value || "Required.",
       (value) => (value && value.length >= 3) || "Min 3 characters",
     ],
- date: null,
-      menu: false,
-  
   }),
- watch: {
-      menu (val) {
-        val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
-      },
-    },
-  computed: {
-    projects() {
-      return this.$store.getters["PROJECT/getProjects"];
-    },
-    project() {
-      return this.$store.getters["PROJECT/getProjectFromProjects"](
-        this.selectedProjectId
-      ) !== undefined
-        ? this.$store.getters["PROJECT/getProjectFromProjects"](
-            this.selectedProjectId
-          )
-        : [];
-    }
-    
-  },
   methods: {
-    save (date) {
-        this.$refs.menu.save(date)
-      },
-    async createItemHandler() {
+   async createItemHandler() {
       const newItemObject = {
         itemName: this.itemName,
-        imageId: this.$store.getters["IMAGE/getImage"]._id,
+        imageId: this.imageId,
         description: this.description,
         orderDate: this.orderDate,
         warranty: this.warranty,
-        receipt: this.receipt,
-        projectId: this.selectedProjectId,
-        roomId: "5feb3656cbd090ff99f2c81c"
-      };
-      await this.$store.dispatch("PROJECT/setProject", this.project);
-      await this.$store.dispatch("ITEMS/createItem", newItemObject);
-      await this.$store.dispatch(
-        "PROJECT/addItemToProject",
-        this.$store.getters["ITEMS/getItem"]._id
-      );
-      if(this.$store.getters["PROJECT/getProject"].length !== 0) {
-        await this.$store.dispatch(
-          "PROJECT/updateProject",
-          this.$store.getters["PROJECT/getProject"]
-        );
-
+        
       }
-      await this.$store.dispatch("PROJECT/setProjects");
-      this.$emit('close-dialog')
-    },
-  },
+      this.$store.dispatch("ITEMS/createItem", newItemObject)
+    }
+  }
 };
 </script>
 

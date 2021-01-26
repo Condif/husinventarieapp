@@ -2,8 +2,8 @@ const Room = require("../models/room.model");
 
 // GET ALL
 getAllRooms = async (req, res) => {
-  await Room.find({userParentId: {$in: req.session.userId}})
-    .populate("items")
+  await Room.find()
+    .populate("houseId")
     .populate("projects")
 
     .then((post) => res.status(200).json(post))
@@ -12,7 +12,7 @@ getAllRooms = async (req, res) => {
 
 // GET ONE
 getOneRoom = async (req, res) => {
-  await Room.findById(req.params.roomId).populate("houseId").populate("projects")
+  await Room.findById(req.params.roomId)
 
     .then((post) => res.status(200).json(post))
     .catch((err) => res.status(500).json(err));

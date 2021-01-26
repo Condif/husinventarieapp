@@ -14,11 +14,9 @@ Content-Type: application/json
 
 {
   "houseId": "5fec43c4cceaaf1f07ed3268",
-  "roomName": "Sovrum",
+  "roomName": "Kök",
   "roomSize": "35",
-  "roomHeight": "2.40",
-  "projects": ["600153be4bc8fe051da7f5a4"],
-  "items": ["6001b27fd71d8720ae3b1b6f"]
+  "roomHeight": "2.40"
 
 }
 
@@ -35,7 +33,7 @@ Content-Type: application/json
   "houseId": "5ed612ec6aaf5cd950517f93",
   "roomName": "Köket",
   "roomSize": "347",
-  "roomHeight": "28",
+  "roomHeight": "2.8",
   "projects": ["5fec761ca3a1b83407b8df70", "5fec761ca3a1b83407b8df70"]
   
 }

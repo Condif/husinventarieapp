@@ -21,6 +21,16 @@ Content-Type: application/json
 }
 
 ###
+// LOGIN Is working!!!
+POST http://localhost:3002/api/users/login
+Content-Type: application/json
+
+{
+  "email": "dickssstehhdssssdnqvist@hotmail.com",
+  "password": "4321"
+}
+
+###
 // DELETE USER Is working!!!
 DELETE http://localhost:3002/api/users/5feb090d6ce331ed6d5dc6a7
 

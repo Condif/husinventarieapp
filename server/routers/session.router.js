@@ -7,12 +7,13 @@ const { logInUser, logOutUser } = require("../controllers/session.controller");
 const User = require("../models/user.model");
 // LOGIN
 
-router.post("/api/session/login", async (req, res) => {
+router.post("/api/users/login", async (req, res) => {
+  console.log("test");
   logInUser(req, res);
 });
 
 // CHECK-AUTH
-router.post("/api/session/auth", async (req, res) => {
+router.post("/api/users/auth", async (req, res) => {
   console.log("session", req.session.userId);
 
   if (req.session.userId) {
@@ -37,6 +38,6 @@ router.post("/api/session/auth", async (req, res) => {
   }
 });
 // LOGOUT
-router.post("/api/session/logout", isAuthenticated, logOutUser);
+router.post("/api/logout", isAuthenticated, logOutUser);
 
 module.exports = router;

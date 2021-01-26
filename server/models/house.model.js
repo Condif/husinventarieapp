@@ -6,10 +6,6 @@ const HouseSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  userParentId: {
-    type: mongoose.Types.ObjectId,
-    ref: "User"
-  },
   houseCategory: {
     type: String,
   },
