@@ -20,7 +20,7 @@
             <v-img height="200" :src="image"></v-img>
             <div class="text--primary">
               {{ item.description }}
-              <p>Inköpsdatum: {{ item.orderDate }}</p>
+             
             </div>
           </v-card-text>
           <v-card-actions>
@@ -37,10 +37,13 @@
             >
               <v-card-text class="pb-0">
                 <p>Garanti: {{ item.warranty }}</p>
-                <v-img height="200" :src="image"></v-img>
+                <p>Inköpsdatum: {{ item.orderDate }}</p>
                 <p>Kvitto</p>
                 <p>Rum: {{ item.warranty }}</p>
                 <p>Projekt: {{ item.warranty }}</p>
+                 <div v-if="item.fileId" ><v-icon>mdi-arrow-up-bold-box-outline</v-icon>{{ item.fileId }}</div>
+                <v-btn href="http://localhost:3002/api/files/600fb8f6a3d0ea8edd3c3667">visa fil
+      </v-btn>
               </v-card-text>
               <v-card-actions class="pt-0">
                 <v-btn text color="teal accent-4" @click="reveal = false">

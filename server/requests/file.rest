@@ -1,6 +1,6 @@
 
 //ONE
-GET http://localhost:3002/api/files/600e9c48d77f0268790c4969
+GET http://localhost:3002/api/files/600fb8f6a3d0ea8edd3c3667
 
 ###
 
