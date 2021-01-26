@@ -29,6 +29,7 @@ export const house = {
       state.house.rooms.push(room);
     },
     setHouseFromStorage(state, loggedInUser) {
+      if(!loggedInUser) return
       const currentHouse = JSON.parse(
         localStorage.getItem("currentHouse") || "[]"
       );

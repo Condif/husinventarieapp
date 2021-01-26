@@ -37,6 +37,6 @@ router.post("/api/session/auth", async (req, res) => {
   }
 });
 // LOGOUT
-router.post("/api/session/logout", isAuthenticated, logOutUser);
+router.post("/api/session/logout", logOutUser);
 
 module.exports = router;

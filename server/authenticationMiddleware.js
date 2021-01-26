@@ -1,8 +1,7 @@
 const isAuthenticated = (req, res, next) => {
   if (req.session.userId) {
     return next();
-  }
-  else {
+  } else {
     console.log("auth error");
   }
 };

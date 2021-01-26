@@ -15,7 +15,7 @@ export const session = {
         state.loggedIn = loggedIn
     },
     setLoggedInFromStorage(state) {
-        state.loggedIn = JSON.parse(localStorage.getItem("loggedIn") || '[]')  
+        state.loggedIn = JSON.parse(localStorage.getItem("loggedIn") || false)  
     },
   },
   
