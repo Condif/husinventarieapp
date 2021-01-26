@@ -1,0 +1,29 @@
+
+//ONE
+GET http://localhost:3002/api/files/600fb8f6a3d0ea8edd3c3667
+
+###
+
+//ALL
+GET http://localhost:3002/api/files/
+
+###
+// DELETE FILE
+DELETE http://localhost:3002/api/files/600159d55d0c1952c4bbf0a7
+
+
+###
+// POST FILE
+POST http://localhost:3002/api/files
+Content-Type: multipart/form-data; boundary=FormDataRow
+
+--FormDataRow
+Content-Disposition: form-data; name="file"; filename="brown-brim.jpg"
+Content-Type: image/jpg
+
+< ./polka-dot-shirt.jpg
+--FormDataRow--
+
+### Tänk på följande:
+### ALLA boundary's måste BÖRJA med --
+### SISTA boundary'n måste AVSLUTAS med --

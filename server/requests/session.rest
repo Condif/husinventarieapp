@@ -1,0 +1,12 @@
+###
+// LOGIN Is working!!!
+POST http://localhost:3002/api/session/login
+Content-Type: application/json
+
+{
+  "email": "dickssstehhdssssdnqvist@hotmail.com",
+  "password": "4321"
+}
+###
+// LOGOUT Is working!!!
+POST http://localhost:3002/api/session/logout

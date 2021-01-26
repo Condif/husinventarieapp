@@ -2,15 +2,15 @@ const House = require("../models/house.model");
 
 // GET ALL
 getAllHouses = async (req, res) => {
-  await House.find()
-    // .populate("houseId")
+  await House.find({userParentId: {$in: req.session.userId}})
+    .populate("rooms")
     .then((post) => res.status(200).json(post))
     .catch((err) => res.status(500).json(err));
 };
 
 // GET ONE
 getOneHouse = async (req, res) => {
-  await House.findById(req.params.houseId)
+  await House.findById(req.params.houseId).populate("rooms")
     // .populate("houseId")
 
     .then((post) => res.status(200).json(post))
@@ -19,7 +19,16 @@ getOneHouse = async (req, res) => {
 
 // CREATE
 createNewHouse = (req, res) => {
-  const house = new House(req.body);
+  const newHouse = {
+    houseName: req.body.houseName,
+    userParentId: req.session.userId,
+    houseCategory: req.body.houseCategory,
+    houseSize: req.body.houseSize,
+    numberOfRooms: req.body.numberOfRooms,
+    rooms: req.body.rooms,
+    projects: req.body.projects
+  }
+  const house = new House(newHouse);
 
   house.save((err, house) => {
     if (err) {
@@ -52,6 +61,8 @@ updateHouse = async (req, res) => {
           houseCategory: req.body.houseCategory,
           houseSize: req.body.houseSize,
           numberOfRooms: req.body.numberOfRooms,
+          rooms: req.body.rooms,
+          projects: req.body.projects
         },
       }
     );

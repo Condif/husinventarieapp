@@ -1,7 +1,7 @@
 // ----- PROJECT ------ // 
 ###
 // GET ONE PROJECT BY ID. 
-GET http://localhost:3002/api/projects/5feb4415b86c74079a471b36
+GET http://localhost:3002/api/projects/6009498fe33cae1b60ff6988
 
 ###
 // GET ALL Projects. 
@@ -13,12 +13,13 @@ POST http://localhost:3002/api/newproject
 Content-Type: application/json
 
 {
-  "projectName": "Byte av lampa",
-  "imageId": "5ed612ec6aaf5cd950517f93",
+  "projectName": "Med notes",
+  "imageId": "5ffee83646032c7d6e43c9b8",
   "description": "ipsum sdddlorem lorem ipsum",
   "roomId": "5feb3656cbd090ff99f2c81c",
   "category": "EL",
-  "items": ["5fec4526996e81276488d087"]
+  "itemsId": "5ffc4abb88b8de25c4ee87a6",
+  "notesId": "5fec4c5d5e047e22f88b0ea9"
  
 }
 
@@ -28,15 +29,17 @@ DELETE http://localhost:3002/api/projects/5fec79ad45d0642c30ea2895
 
 ###
 // UPDATE PROJECT
-PUT   http://localhost:3002/api/projects/5fec6cea8bb9823a547a14c1
+PUT   http://localhost:3002/api/projects/5ffeea1b46032c7d6e43c9b9
 Content-Type: application/json
 
 {
-  "projectName": "Byte av däck",
+  "projectName": "Byte av däckfirma",
   "imageId": "5ed612ec6aaf5cd950517f93",
   "description": "ipsum lorem lorem ipsum",
   "roomId": "5feb3656cbd090ff99f2c81c",
   "category": "EL",
-  "items": ["5fec4526996e81276488d087"]
+  "items": ["5fec4526996e81276488d087"],
+  "notesId": ["5fec4526996e81276488d087"]
+
  
 }

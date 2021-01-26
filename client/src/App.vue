@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <Header />
-    <v-main>
+    <v-main class="pb-16">
       <router-view />
     </v-main>
   </v-app>
@@ -16,12 +16,14 @@ export default {
     Header,
   },
   mounted() {
+    this.$store.dispatch("PROJECT/setProjectFromStorage");
+    this.$store.dispatch("ITEMS/setItemFromStorage");
+    this.$store.dispatch("FILE/setFiles")
+    this.$store.dispatch("HOUSE/setHouseFromStorage");
     this.$store.dispatch("PROJECT/setProjects");
+    this.$store.dispatch("HOUSE/setHouses");
     this.$store.dispatch("ROOM/setRooms");
     this.$store.dispatch("ITEMS/setItems");
-  },
-  data() {
-    return {};
   },
 };
 </script>

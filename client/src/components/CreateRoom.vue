@@ -57,10 +57,9 @@
 export default {
   name: "CreateRoom",
   data: () => ({
-    houseId: "5fec43c4cceaaf1f07ed3268",
-    roomName: "Kök",
-    roomSize: "35",
-    roomHeight: "2.40",
+    roomName: "",
+    roomSize: "",
+    roomHeight: "",
     rules: [
       (value) => !!value || "Required.",
       (value) => (value && value.length >= 3) || "Min 3 characters",
@@ -69,12 +68,22 @@ export default {
   methods: {
     async createRoomHandler() {
       const newRoomObject = {
-        houseId: this.houseId,
         roomName: this.roomName,
         roomSize: this.roomSize,
         roomHeight: this.roomHeight
       };
-      this.$store.dispatch("ROOM/createRoom", newRoomObject);
+      await this.$store.dispatch("ROOM/createRoom", newRoomObject);
+      await this.$store.dispatch(
+        "HOUSE/addRoomToHouse",
+        this.$store.getters["ROOM/getRoom"]._id
+      );
+      await this.$store.dispatch(
+        "HOUSE/updateHouse",
+        this.$store.getters["HOUSE/getHouse"]
+      );
+      await this.$store.dispatch("HOUSE/setHouseFromDb",  this.$store.getters["HOUSE/getHouse"]._id);
+      await this.$store.dispatch("HOUSE/setHouses")
+      await this.$router.push({name: "House"})
     },
   },
 };
