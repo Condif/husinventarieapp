@@ -2,7 +2,7 @@
   <v-container fluid>
     <Quick-start />
     <v-row>
-      <v-select v-if="houses !== undefined"
+      <v-select v-if="houses !== undefined || houses !== null"
         v-model="currentHouseId"
         v-on:change="goToHouseHandler(currentHouseId)"
         prepend-icon="mdi-calendar-check-outline"
