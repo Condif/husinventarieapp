@@ -1,13 +1,15 @@
 <template>
-  <v-container fluid>
+  <v-container fluid class="py-16" max-width="300">
         <Quick-start />
-    <v-row>
-      <v-col cols="12" sm="6"
-          md="4">
-        <Dashboard />
+    <v-row class="justify-center"  >
+      <v-col cols="12" justify="center" >
+        <Dashboard max-width="300" />
+      </v-col >
+      <v-col cols="12" justify="center">
+        <ActionCard max-width="300" />
+
       </v-col>
-     
-      <v-col cols="12" sm="6"
+      <!-- <v-col cols="12" sm="6"
           md="8">
         <v-card class="mx-auto" color="base">
           <v-img
@@ -30,7 +32,7 @@
             </div>
           </v-card-text>
         </v-card>
-      </v-col>
+      </v-col> -->
     </v-row>
    
   </v-container>
@@ -40,6 +42,7 @@
 
 import Dashboard from "../components/Dashboard.vue";
 import QuickStart from '../components/QuickStart.vue';
+import ActionCard from '../components/ActionCard.vue';
 
 
 export default {
@@ -47,6 +50,7 @@ export default {
   components: {
     Dashboard,
     QuickStart,
+    ActionCard
     
   },
 };
