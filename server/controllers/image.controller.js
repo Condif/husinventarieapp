@@ -47,6 +47,7 @@ newImage = (req, res) => {
   }
 
   const image = new Image({
+    userParentId: req.session.userId,
     data: req.files.image.data,
     contentType: req.files.image.mimetype,
   });
