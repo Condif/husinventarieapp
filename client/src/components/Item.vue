@@ -54,9 +54,9 @@
                 <div class="d-flex justify-space-between align-center">
                   <div v-if="item.fileId">
                     <v-icon>mdi-arrow-up-bold-box-outline</v-icon
-                    >{{ item.fileId }} Namn på filen
+                    > Namn på filen
                   </div>
-                <v-btn :href="fileURL">visa fil </v-btn>
+                <v-btn color="accent2" :href="fileURL">hämta fil </v-btn>
                 </div>
               </v-card-text>
               <v-card-actions class="pt-0">
