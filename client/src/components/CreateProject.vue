@@ -70,7 +70,7 @@ export default {
         projectName: this.projectName,
         imageId: this.$store.getters["IMAGE/getImage"]._id,
         description: this.description,
-        roomId: this.project.roomId,
+        roomId: this.selectedRoomId,
         category: this.category,
         itemsId: this.selectedItemId,
       };
@@ -87,6 +87,7 @@ export default {
         );
       }
       await this.$store.dispatch("ROOM/setRooms");
+      await this.$store.dispatch("PROJECT/setProjects");
       this.$emit('close-dialog')
     },
   },
@@ -95,10 +96,10 @@ export default {
       return this.$store.getters["ITEMS/getItems"];
     },
     room() {
-      return this.$store.getters["ITEMS/getRoomFromRooms"](
+      return this.$store.getters["ROOM/getRoomFromRooms"](
         this.selectedRoomId
       ) !== undefined
-        ? this.$store.getters["ITEMS/getRoomFromRooms"](this.selectedRoomId)
+        ? this.$store.getters["ROOM/getRoomFromRooms"](this.selectedRoomId)
         : [];
     },
     rooms() {

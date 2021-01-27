@@ -121,6 +121,13 @@ export default {
           )
         : [];
     },
+    room() {
+      return this.$store.getters["ROOM/getRoomFromRooms"](
+        this.selectedRoomId
+      ) !== undefined
+        ? this.$store.getters["ROOM/getRoomFromRooms"](this.selectedRoomId)
+        : [];
+    },
     rooms() {
       return this.$store.getters["ROOM/getRooms"];
     },
@@ -141,8 +148,8 @@ export default {
         projectId: this.selectedProjectId,
         roomId: this.selectedRoomId
       };
-      console.log("nytt iotem objeckt",newItemObject);
       await this.$store.dispatch("PROJECT/setProject", this.project);
+      await this.$store.dispatch("ROOM/setRoom", this.room);
       await this.$store.dispatch("ITEMS/createItem", newItemObject);
       await this.$store.dispatch(
         "PROJECT/addItemToProject",
@@ -153,9 +160,19 @@ export default {
           "PROJECT/updateProject",
           this.$store.getters["PROJECT/getProject"]
         );
-
+      }
+      await this.$store.dispatch(
+        "ROOM/addItemToRoom",
+        this.$store.getters["ITEMS/getItem"]._id
+      );
+      if(this.$store.getters["ROOM/getRoom"].length !== 0) {
+        await this.$store.dispatch(
+          "ROOM/updateRoom",
+          this.$store.getters["ROOM/getRoom"]
+        );
       }
       await this.$store.dispatch("PROJECT/setProjects");
+      await this.$store.dispatch("ROOM/setRooms");
       this.$emit('close-dialog')
     },
   },
