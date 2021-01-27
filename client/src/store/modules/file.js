@@ -3,16 +3,21 @@ const url = "/api/";
 export const file = {
   namespaced: true,
   state: {
+    files: [],
     file: [],
     oldFileId: [],
   },
 
   getters: {
     getFile: (state) => state.file,
+    getFiles: (state) => state.files
   },
   mutations: {
     setFile(state, payload) {
       state.file = payload;
+    },
+    setFiles(state, payload) {
+      state.files = payload;
     },
     setOldFile(state, payload) {
       state.oldFileId = payload;
@@ -24,6 +29,13 @@ export const file = {
       state.commit("setImage", selectedFile);
     },
 
+
+    async setFiles(state) {
+      const allFiles = await fetch(url + "files");
+      const j = await allFiles.json();
+      state.commit("setFiles", j);
+      console.log("hömtat alla fileid");
+    },
     updateFile(state, updatedFileId) {
       console.log(
         updatedFileId + "nytt id " + this.state.FILE.oldFileId + "gammalt id"

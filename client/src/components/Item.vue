@@ -20,7 +20,6 @@
             <v-img height="200" :src="image"></v-img>
             <div class="text--primary">
               {{ item.description }}
-             
             </div>
           </v-card-text>
           <v-card-actions>
@@ -41,9 +40,11 @@
                 <p>Kvitto</p>
                 <p>Rum: {{ item.warranty }}</p>
                 <p>Projekt: {{ item.warranty }}</p>
-                 <div v-if="item.fileId" ><v-icon>mdi-arrow-up-bold-box-outline</v-icon>{{ item.fileId }}</div>
-                <v-btn href="http://localhost:3002/api/files/600fb8f6a3d0ea8edd3c3667">visa fil
-      </v-btn>
+                <div v-if="item.fileId">
+                  <v-icon>mdi-arrow-up-bold-box-outline</v-icon
+                  >{{ item.fileId }}
+                </div>
+                <v-btn :href="fileURL">visa fil </v-btn>
               </v-card-text>
               <v-card-actions class="pt-0">
                 <v-btn text color="teal accent-4" @click="reveal = false">
@@ -92,6 +93,8 @@ export default {
 
   data: () => ({
     reveal: false,
+    file: {},
+    
   }),
 
   components: {
@@ -99,15 +102,26 @@ export default {
     DeleteDialog,
     EditItem,
   },
+  
+
   methods: {
     openItemDetails(selectedItem) {
       this.$store.dispatch("ITEMS/setItem", selectedItem);
-      this.$store.dispatch("IMAGE/setImage",this.$store.getters["ITEMS/getItem"].imageId)
+      // this.fileURL =
+      //   "/api/files/" + this.$store.getters["ITEMS/getItem"].fileId;
+      this.$store.dispatch(
+        "IMAGE/setImage",
+        this.$store.getters["ITEMS/getItem"].imageId
+      );
       localStorage.setItem("currentItem", JSON.stringify(selectedItem));
       window.scrollTo(0, 0);
     },
   },
   computed: {
+    fileURL() {
+      return (
+        "/api/files/" + this.$store.getters["ITEMS/getItem"].fileId);
+    },
     items() {
       return this.$store.getters["ITEMS/getItems"];
     },
@@ -116,6 +130,9 @@ export default {
     },
     image() {
       return "api/images/" + this.$store.getters["ITEMS/getItem"].imageId;
+    },
+    files() {
+      return this.$store.getters["FILE/getFiles"];
     },
   },
 };

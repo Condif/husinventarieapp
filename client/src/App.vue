@@ -18,6 +18,7 @@ export default {
   mounted() {
     this.$store.dispatch("PROJECT/setProjectFromStorage");
     this.$store.dispatch("ITEMS/setItemFromStorage");
+    this.$store.dispatch("FILE/setFiles")
     this.$store.dispatch("HOUSE/setHouseFromStorage");
     this.$store.dispatch("PROJECT/setProjects");
     this.$store.dispatch("HOUSE/setHouses");
