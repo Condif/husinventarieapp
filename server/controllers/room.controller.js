@@ -20,7 +20,16 @@ getOneRoom = async (req, res) => {
 
 // CREATE
 createNewRoom = (req, res) => {
-  const room = new Room(req.body);
+  const newRoom = {
+    houseId: req.body.houseId,
+    userParentId: req.session.userId,
+    roomName: req.body.roomName,
+    roomSize: req.body.roomSize,
+    roomHeight: req.body.roomHeight,
+    items: req.body.items,
+    projects: req.body.projects,
+  }
+  const room = new Room(newRoom);
 
   room.save((err, room) => {
     if (err) {
