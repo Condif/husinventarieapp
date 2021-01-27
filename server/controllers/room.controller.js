@@ -54,15 +54,17 @@ deleteRoom = async (req, res) => {
 // UPDATE
 updateRoom = async (req, res) => {
   try {
-    let updatedRoom = await Room.updateOne(
+    await Room.updateOne(
       { _id: req.params.roomId },
       {
         $set: {
           houseId: req.body.houseId,
+          userParentId: req.session.userId,
           roomName: req.body.roomName,
           roomSize: req.body.roomSize,
           roomHeight: req.body.roomHeight,
           projects: req.body.projects,
+          items: req.body.items
         },
       }
     );

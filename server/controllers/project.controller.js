@@ -31,7 +31,7 @@ const createNewProject = async (req, res) => {
       roomId: req.body.roomId,
       category: req.body.category,
       notesId: req.body.notesId,
-      itemsId: req.body.items
+      itemsId: req.body.itemsId
     }
     const project = new Project(newProject);
 

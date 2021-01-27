@@ -36,8 +36,8 @@
               <div class="d-flex flex-column">
 
               <p>Projektbeskrivning: <br>{{ project.description }}</p>
-              <p>Rum: <br> {{ project.roomId}} </p>
-              <p>Kategori: <br> {{ project.category}} Underhåll</p>
+              <p v-if="project.roomId">Rum: <br> {{ project.roomId.roomName}} </p>
+              <p>Kategori: <br> {{ project.category}}</p>
               </div>
 
               <v-btn class="align-self-center" fab color="accent2" @click="goToProjectHandler(project)">

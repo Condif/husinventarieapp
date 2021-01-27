@@ -25,13 +25,18 @@ export const room = {
     createRoom(state, payload) {
       state.rooms.push(payload);
     },
+    addProjectToRoom(state, payload) {
+      state.room.projects.push(payload);
+    },
+    addItemToRoom(state, payload) {
+      state.room.items.push(payload);
+    },
   },
 
   actions: {
     async setRooms(state) {
       const allRooms = await fetch(url + "rooms", { headers });
       const j = await allRooms.json();
-      console.log("rooms", j);
       state.commit("setRooms", j);
     },
     async createRoom(state, newRoomObject) {
@@ -48,6 +53,35 @@ export const room = {
           state.commit("createRoom", data);
           state.commit("setRoom", data);
         });
+      return response;
+    },
+    addProjectToRoom(state, projectId) {
+      if(state.getters["getRoom"].length === 0) return
+      const room = state.getters["getRoom"];
+      if (room.projects.filter((x) => x._id === projectId).length === 1) {
+        return;
+      }
+      state.commit("addProjectToRoom", projectId);
+    },
+    addItemToRoom(state, itemId) {
+      if(state.getters["getRoom"].length === 0) return
+      const room = state.getters["getRoom"];
+      if (room.items.filter((x) => x._id === itemId).length === 1) {
+        return;
+      }
+      state.commit("addItemToRoom", itemId);
+    },
+    async setRoom(state, selectedRoom) {
+      await state.commit("setRoom", selectedRoom)
+    },
+    async updateRoom(state, room) {
+      const response = await fetch(url + "rooms/" + room._id, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(room),
+      }).then((response) => {
+        return response.json();
+      });
       return response;
     },
   },
