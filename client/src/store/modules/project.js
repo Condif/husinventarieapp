@@ -117,6 +117,7 @@ export const project = {
       return response;
     },
     async updateProject(state, project) {
+      console.log(project._id);
       const response = await fetch(url + "projects/" + project._id, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

@@ -27,7 +27,7 @@ export const image = {
     updateImage(state, updatedImageId) {
       
       if (updatedImageId !== this.state.IMAGE.oldImageId) {
-        console.log("ta bort gammal bild");
+        console.log("ta bort gammal bild" ,this.state.IMAGE.oldImageId);
         state.dispatch("deleteImageFromDB", this.state.IMAGE.oldImageId);
       } else return;
     },

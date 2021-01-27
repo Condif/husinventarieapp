@@ -9,12 +9,12 @@ const ProjectSchema = mongoose.Schema({
   },
   userParentId: {
     type: mongoose.Types.ObjectId,
-    ref: "User"
+    ref: "User",
   },
   imageId: {
     type: mongoose.Types.ObjectId,
     // required: true
-    ref: "uploadedImg"
+    ref: "uploadedImg",
   },
   description: {
     type: String,
@@ -42,6 +42,10 @@ const ProjectSchema = mongoose.Schema({
       ref: "Item",
     },
   ],
+  roomId: {
+    type: mongoose.Types.ObjectId,
+    ref: "Item",
+  },
 });
 
 const ProjectModel = mongoose.model("Project", ProjectSchema);

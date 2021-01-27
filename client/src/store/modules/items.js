@@ -6,6 +6,7 @@ export const items = {
   state: {
     items: [],
     item: [],
+    oldItem: [],
   },
 
   getters: {
@@ -50,6 +51,14 @@ export const items = {
         state.item = state.items[0]
       } else {
         state.item = []
+      }
+    },
+    deleteProjectFromItem(state, payload) {   
+      const index = state.oldItem.projectId.findIndex(
+        (id) => id._id === payload
+      );
+      if (index > -1) {
+        state.oldItem.projectId.splice(index, 1);
       }
     },
   },
@@ -111,6 +120,35 @@ export const items = {
           state.commit("setItem", data);
         });
       return response;
+    },
+
+    moveProjectToItems(state, projectId) {
+      if(state.getters["getItem"].projectId === undefined) return
+      const item = state.getters["getItem"];
+      if (item.projectId.length === 0) {
+        state.commit("addProjectToItem", projectId);
+        state.dispatch("updateItem", state.getters["getItem"]);
+        state.commit("deleteItemFromProject", projectId);
+        // varför old item db?
+        state.dispatch("updateItem", this.state.ITEM.oldItem);
+        return;
+      }
+      if (item.projectId.filter((x) => x._id === projectId).length === 1) {
+        return;
+      }
+      state.commit("addProjecToItem", projectId);
+      state.dispatch("updateItem", item);
+      state.commit("deleteItemFromProject", projectId);
+      state.dispatch("updateItem", this.state.ITEM.oldItem)
+    },
+    addProjectToItem(state, projectId) {
+      if(state.getters["getItem"].length === 0) return
+      const item = state.getters["getItem"];
+
+      if (item.projectId.filter((x) => x._id === projectId).length === 1) {
+        return;
+      }
+      state.commit("addProjectToItem", projectId);
     },
   },
 };
