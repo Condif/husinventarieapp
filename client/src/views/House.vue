@@ -10,17 +10,16 @@
         :items="houses.map((house) => house)"
         item-text="houseName"
         item-value="_id"
-        :placeholder="house.houseName"
+        :placeholder="placeholderText"
       ></v-select>
       <v-col cols="12" sm="6" md="8">
         {{ log(house) }}
         <v-card
           class="mx-auto"
           color="base"
-          v-if="house.rooms !== undefined && house.rooms[0] !== null"
         >
           <v-expansion-panels
-            v-for="room in house.rooms"
+            v-for="room in computedRooms" 
             :key="room._id"
             focusable
           >
@@ -31,7 +30,7 @@
               <v-expansion-panel-content>
                 <p>Höjd till tak: {{ room.roomHeight }}</p>
                 <p>Antal kvadratmeter {{ room.roomSize }}</p>
-                <!-- {{room}} -->
+                {{room.items}}
                 <div class="items">
                   <h5>Inventarier</h5>
                   <v-expansion-panels>
@@ -102,7 +101,16 @@
     <CreateHouse />
       </v-col>
       <v-col>
-    <CreateRoom />
+        <v-dialog v-model="dialogRoom">
+      <template v-slot:activator="{ on }">
+        <div v-on="on" class="project_button">
+          <div class="inside_div">
+            <h3>Skapa rum</h3>
+          </div>
+        </div>
+      </template>
+      <CreateRoom @close-dialog="closeDialogRoom" />
+    </v-dialog>
        
        
       </v-col>
@@ -118,7 +126,9 @@ import CreateHouse from "../components/CreateHouse.vue";
 export default {
   data() {
     return {
-      currentHouseId: {},
+      currentHouseId: this.$store.getters["HOUSE/getHouse"],
+      dialogRoom: false,
+      placeholderText: "Välj hus att visa",
 
       colors: [
         "indigo",
@@ -138,6 +148,9 @@ export default {
   },
 
   methods: {
+    closeDialogRoom() {
+      this.dialogRoom = false;
+    },
     log(message) {
       console.log(message);
     },
@@ -158,6 +171,7 @@ export default {
       );
       localStorage.setItem("currentHouse", JSON.stringify(currentHouse));
       this.$store.dispatch("HOUSE/setHouse", currentHouse);
+      this.$store.dispatch("ROOM/computedRooms", currentHouseId)
     },
   },
 
@@ -168,6 +182,9 @@ export default {
     house() {
       return this.$store.getters["HOUSE/getHouse"];
     },
+    computedRooms() {
+      return this.$store.getters["ROOM/getComputedRooms"]
+    }
   },
 };
 </script>
@@ -175,5 +192,18 @@ export default {
 <style>
 .home {
   height: 100%;
+}
+
+.project_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 9rem;
+  width: 13rem;
+  min-width: 20rem;
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)),
+    url("../assets/projectbutton.jpg");
+  background-size: 100%;
+  border: solid #8a9ea798 2px;
 }
 </style>
