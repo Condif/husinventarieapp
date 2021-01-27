@@ -1,64 +1,78 @@
 <template>
-  <v-container fluid class="py-16" v-if="items !== undefined || item !== undefined">
+  <v-container
+    fluid
+    class="py-16"
+    v-if="items !== undefined || item !== undefined"
+  >
     <Quick-start />
     <v-row>
-      <v-col sm="6" md="5" color="secondary">
-        <v-card class="mx-auto mt-1" max-width="344" v-if="item !== undefined">
+      <v-col cols="12" md="6" order-md="1">
+        <v-card
+          color="primary"
+          class="mx-auto mt-2"
+          max-width="900"
+          v-if="item !== undefined"
+        >
           <v-card-text>
             <div class="d-flex justify-space-between">
               <div class="card-header">
-                <p>Inventarie</p>
-                <p class="display-1 text--primary">
+                <p>Valt inventarie</p>
+                <h2>
                   {{ item.itemName }}
-                </p>
+                </h2>
               </div>
-              <div class="edit-buttons d-flex">
+              <div class="edit-buttons d-flex" color="accent2">
                 <Edit-item />
                 <Delete-dialog />
               </div>
             </div>
             <v-img height="200" :src="image"></v-img>
             <div class="text--primary">
-              {{ item.description }}
+              <p>Beskrivning: {{ item.description }}</p>
             </div>
           </v-card-text>
           <v-card-actions>
-            <v-btn text color="teal accent-4" @click="reveal = true">
+            <v-btn text x-large color="secondary" @click="reveal = true">
               Visa mer
             </v-btn>
           </v-card-actions>
 
           <v-expand-transition>
             <v-card
+              color="primary"
               v-if="reveal"
-              class="transition-fast-in-fast-out v-card--reveal"
+              class="transition-fast-in-fast-out v-card--reveal d-flex flex-column justify-space-between"
               style="height: 100%;"
             >
+           
+
               <v-card-text class="pb-0">
                 <p>Garanti: {{ item.warranty }}</p>
                 <p>Inköpsdatum: {{ item.orderDate }}</p>
-                <p>Kvitto</p>
-                <p>Rum: {{ item.warranty }}</p>
+                <p>Rum: Köket</p>
                 <p>Projekt: {{ item.warranty }}</p>
-                <div v-if="item.fileId">
-                  <v-icon>mdi-arrow-up-bold-box-outline</v-icon
-                  >{{ item.fileId }}
+                <div class="d-flex justify-space-between align-center">
+                  <div v-if="item.fileId">
+                    <v-icon>mdi-arrow-up-bold-box-outline</v-icon
+                    > Namn på filen
+                  </div>
+                <v-btn color="accent2" :href="fileURL">hämta fil </v-btn>
                 </div>
-                <v-btn :href="fileURL">visa fil </v-btn>
               </v-card-text>
               <v-card-actions class="pt-0">
-                <v-btn text color="teal accent-4" @click="reveal = false">
+                <v-btn text x-large color="secondary" @click="reveal = false">
                   Stäng
                 </v-btn>
               </v-card-actions>
+           
             </v-card>
           </v-expand-transition>
         </v-card>
       </v-col>
-    </v-row>
-    <v-row>
-      <v-col sm="6" md="5">
-        <v-card class="mx-auto" max-width="344">
+    
+      <v-col cols="12" md="6">
+        <v-card  max-width="900" color="primary" class="mx-auto mt-1"
+          >
           <v-card-text>
             <h5>Alla inventarier</h5>
 
@@ -71,7 +85,7 @@
               </v-list-item-content>
               <v-list-item-action>
                 <v-btn icon @click="openItemDetails(item)">
-                  <v-icon color="grey lighten-1">mdi-open-in-new</v-icon>
+                  <v-icon color="secondary">mdi-open-in-new</v-icon>
                 </v-btn>
               </v-list-item-action>
             </v-list-item>

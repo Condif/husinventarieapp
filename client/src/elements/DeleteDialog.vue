@@ -6,7 +6,7 @@
   >
     <template v-slot:activator="{ on, attrs }">
       <v-btn icon v-bind="attrs" v-on="on">
-        <v-icon color="grey lighten-1">mdi-delete</v-icon>
+        <v-icon color="secondary">mdi-delete</v-icon>
       </v-btn>
     </template>
 
