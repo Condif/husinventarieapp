@@ -2,7 +2,7 @@
   <v-card
     max-width="900"
     class="mx-auto pt-2 d-flex justify-space-around align-center flex-wrap"
-    color="base"
+    color="primary"
     height="20rem"
   >
     <!-- <router-link to="CreateProject" tag="div" class="project_button">

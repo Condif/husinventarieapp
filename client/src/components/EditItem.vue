@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on, attrs }">
       <v-btn icon v-bind="attrs" v-on="on" @click="storeOldId">
-        <v-icon color="grey lighten-1">mdi-pencil</v-icon>
+        <v-icon color="secondary">mdi-pencil</v-icon>
       </v-btn>
     </template>
 
