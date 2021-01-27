@@ -1,55 +1,31 @@
 <template>
-<v-row>
-    <v-dialog v-model="dialog"  max-width="600px">
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn color="primary" dark v-bind="attrs" v-on="on">
-          skapa nytt rum
-        </v-btn>
-      </template>
-      <v-card>
-  <v-sheet
-    id="scrolling-techniques-7"
-    class="overflow-y-auto"
-    max-height="100%"
-  >
-    <v-card class="mx-auto mt-2" max-width="344">
+<div class="text-center">
+    <v-card class="mx-auto mt-2 px-1" color="base">
       <v-card-title placeholder="test">
-        Skapa nytt rum
+        Lägg till rum
       </v-card-title>
-
-      <v-card-subtitle color="error" text>
-        Datum: 2021-01-02
-      </v-card-subtitle>
 
       <v-text-field
         label="Namn"
         v-model="roomName"
         :rules="rules"
-        placeholder="Skriv in namnet på ditt projekt"
+        placeholder="Skriv in namnet på rummet"
+      >
+      </v-text-field>
+
+      <v-text-field
+        label="Storlek"
+        v-model="roomSize"
+        :rules="rules"
+        placeholder="Husets storlek i kvm"
       >
       </v-text-field>
       <v-textarea
-        label="Room size"
-        v-model="roomSize"
-        :rules="rules"
-      ></v-textarea>
-      <v-textarea
-        label="Room height"
+        label="Höjd"
         v-model="roomHeight"
         :rules="rules"
+        placeholder="Rummets höjd"
       ></v-textarea>
-      <!-- <v-menu offset-y>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn v-bind="attrs" v-on="on" >
-            <span>Rum: {{room}}</span>
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item v-for="(room, index) in rooms" :key="index" @click="addRoomToState(room)">
-            <v-list-item-title>{{ room }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu> -->
       <v-card-actions>
         <v-btn @click="createRoomHandler">
           Skapa rum
@@ -57,10 +33,7 @@
         <v-spacer></v-spacer>
       </v-card-actions>
     </v-card>
-  </v-sheet>
-  </v-card>
-    </v-dialog>
-  </v-row>
+  </div>
 </template>
 
 <script>
@@ -95,6 +68,7 @@ export default {
       );
       await this.$store.dispatch("HOUSE/setHouseFromDb",  this.$store.getters["HOUSE/getHouse"]._id);
       await this.$store.dispatch("HOUSE/setHouses")
+      this.$emit('close-dialog')
      
       this.dialog = false
     },
