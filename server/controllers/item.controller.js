@@ -25,6 +25,7 @@ const createNewItem = async (req, res) => {
     itemName: req.body.itemName,
     userParentId: req.session.userId,
     imageId: req.body.imageId,
+    fileId: req.body.fileId,
     description: req.body.description,
     receipt: req.body.receipt,
     orderDate: req.body.orderDate,

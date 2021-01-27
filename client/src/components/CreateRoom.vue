@@ -1,4 +1,12 @@
 <template>
+<v-row>
+    <v-dialog v-model="dialog"  max-width="600px">
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn color="primary" dark v-bind="attrs" v-on="on">
+          skapa nytt rum
+        </v-btn>
+      </template>
+      <v-card>
   <v-sheet
     id="scrolling-techniques-7"
     class="overflow-y-auto"
@@ -50,6 +58,9 @@
       </v-card-actions>
     </v-card>
   </v-sheet>
+  </v-card>
+    </v-dialog>
+  </v-row>
 </template>
 
 <script>
@@ -64,6 +75,7 @@ export default {
       (value) => !!value || "Required.",
       (value) => (value && value.length >= 3) || "Min 3 characters",
     ],
+    dialog: false
   }),
   methods: {
     async createRoomHandler() {
@@ -83,7 +95,8 @@ export default {
       );
       await this.$store.dispatch("HOUSE/setHouseFromDb",  this.$store.getters["HOUSE/getHouse"]._id);
       await this.$store.dispatch("HOUSE/setHouses")
-      await this.$router.push({name: "House"})
+     
+      this.dialog = false
     },
   },
 };

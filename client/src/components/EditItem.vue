@@ -80,7 +80,6 @@
         max-height="100 "
       ></v-img>
       <ImageUploader />
-      
       <FileUploader />
       <div v-if="item.fileId" ><v-icon>mdi-arrow-up-bold-box-outline</v-icon>{{ item.fileId }}</div>
       <v-card-actions>

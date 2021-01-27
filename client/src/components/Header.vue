@@ -3,7 +3,6 @@
     <v-app-bar
       app
       fixed
-      
       dark
       elevate-on-scroll
       style="background: linear-gradient(to right top, #e8dfe0, #ead3d1, #e9c7be, #e4bea8, #dab692)"
@@ -58,7 +57,13 @@
 
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn v-if="loggedIn" @click="logout" to="/login" block color="accent1">
+          <v-btn
+            v-if="loggedIn"
+            @click="logout"
+            to="/login"
+            block
+            color="accent1"
+          >
             Logout
           </v-btn>
         </div>
@@ -87,12 +92,10 @@ export default {
   }),
   methods: {
     async logout() {
-      await this.$store.dispatch("SESSION/logout").then(() => {
-        if (this.$store.getters["SESSION/getLoggedOut"] === true) {
-          this.signedOut = true;
-          this.$router.push({ name: "Login" });
-        }
-      });
+      await this.$store.dispatch("SESSION/logout")
+      this.$store.state.commit("SESSION/setLoggedIn", false);
+      localStorage.setItem("loggedIn", JSON.stringify(false));
+      this.$router.push({ name: "Login" });
     },
   },
   computed: {

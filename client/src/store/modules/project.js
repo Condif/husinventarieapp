@@ -24,6 +24,7 @@ export const project = {
       state.project = payload;
     },
     setProjectFromStorage(state, loggedInUser) {
+      if(!loggedInUser) return
       const currentProject = JSON.parse(
         localStorage.getItem("currentProject") || "[]"
       );
@@ -63,6 +64,7 @@ export const project = {
     async setProjects(state) {
       const allProjects = await fetch(url + "projects", { headers });
       const j = await allProjects.json();
+      console.log("projects", j);
       state.commit("setProjects", j);
     },
     async setProject(state, selectedProject) {

@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-card class="mx-auto mt-2" color="base">
+    <v-card class="mx-auto mt-2 px-1" color="base">
       <v-card-title placeholder="test">
         Lägg till inventarie
       </v-card-title>
@@ -51,6 +51,15 @@
          
         ></v-date-picker>
       </v-menu>
+     
+      <v-select v-if="rooms !== undefined"
+        v-model="selectedRoomId"
+        prepend-icon="mdi-home-city"
+        :items="rooms.map((room) => room)"
+        item-text="roomName"
+        item-value="_id"
+        placeholder="Välj rum"
+      ></v-select>
       <v-select v-if="projects !== undefined"
         v-model="selectedProjectId"
         prepend-icon="mdi-calendar-check-outline"
@@ -60,6 +69,7 @@
         placeholder="Välj projekt"
       ></v-select>
       <ImageUploader />
+      <FileUploader />
       <v-card-actions>
         <v-btn @click="createItemHandler" color="accent2">
           Spara
@@ -72,8 +82,9 @@
 
 <script>
 import ImageUploader from "./ImageUploader.vue";
+import FileUploader from "./FileUploader.vue";
 export default {
-  components: { ImageUploader },
+  components: { ImageUploader, FileUploader },
   name: "CreatItem",
   data: () => ({
     itemName: "",
@@ -82,6 +93,7 @@ export default {
     warranty: "",
     receipt:"",
     selectedProjectId: undefined,
+    selectedRoomId: undefined,
 
     rules: [
       (value) => !!value || "Required.",
@@ -108,8 +120,11 @@ export default {
             this.selectedProjectId
           )
         : [];
-    }
-    
+    },
+    rooms() {
+      return this.$store.getters["ROOM/getRooms"];
+    },
+   
   },
   methods: {
     save (date) {
@@ -121,11 +136,12 @@ export default {
         imageId: this.$store.getters["IMAGE/getImage"]._id,
         description: this.description,
         orderDate: this.orderDate,
+        fileId: this.$store.getters["FILE/getFile"]._id,
         warranty: this.warranty,
-        receipt: this.receipt,
         projectId: this.selectedProjectId,
-        roomId: "5feb3656cbd090ff99f2c81c"
+        roomId: this.selectedRoomId,
       };
+      console.log("nytt iotem objeckt",newItemObject);
       await this.$store.dispatch("PROJECT/setProject", this.project);
       await this.$store.dispatch("ITEMS/createItem", newItemObject);
       await this.$store.dispatch(
