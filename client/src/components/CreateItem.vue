@@ -137,7 +137,7 @@ export default {
         warranty: this.warranty,
         receipt: this.receipt,
         projectId: this.selectedProjectId,
-        roomId: this.item.roomId,
+        roomId: this.selectedRoomId
       };
       await this.$store.dispatch("PROJECT/setProject", this.project);
       await this.$store.dispatch("ITEMS/createItem", newItemObject);

@@ -1,30 +1,41 @@
 <template>
-  <v-sheet
-    id="scrolling-techniques-7"
-    class="overflow-y-auto"
-    max-height="100%"
-  >
-    <v-card class="mx-auto mt-2" max-width="344">
+  <div class="text-center">
+    <v-card class="mx-auto mt-2 px-1" color="base">
       <v-card-title placeholder="test">
-        Skapa nytt projekt
+        Lägg till projekt
       </v-card-title>
-
-      <v-card-subtitle color="error" text>
-        Datum: 2021-01-02
-      </v-card-subtitle>
 
       <v-text-field
         label="Namn"
         v-model="projectName"
         :rules="rules"
-        placeholder="Skriv in namnet på ditt projekt"
+        placeholder="Skriv in namnet på projektet"
+      >
+      </v-text-field>
+
+      <v-text-field
+        label="Beskrivning"
+        v-model="description"
+        :rules="rules"
+        placeholder="Beskriv projektet"
       >
       </v-text-field>
       <v-textarea
-        label="Description"
-        v-model="description"
+        label="Kategori"
+        v-model="category"
         :rules="rules"
+        placeholder="Välj kategori för projektet"
       ></v-textarea>
+      <v-select
+        v-if="rooms !== undefined"
+        v-model="selectedRoomId"
+        prepend-icon="mdi-home-city"
+        :items="rooms.map((room) => room)"
+        item-text="roomName"
+        item-value="_id"
+        placeholder="Välj rum"
+      ></v-select>
+      <ImageUploader />
       <v-card-actions>
         <v-btn @click="createProjectHandler">
           Skapa projekt
@@ -32,21 +43,21 @@
         <v-spacer></v-spacer>
       </v-card-actions>
     </v-card>
-  </v-sheet>
+  </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
+import ImageUploader from "./ImageUploader.vue";
 export default {
   name: "CreateProject",
+  components: { ImageUploader },
   data: () => ({
     projectName: "",
-    imageId: "5ed612ec6aaf5cd950517f93",
+    imageId: "",
     description: "",
-    roomId: "5ed612ec6aaf5cd950517f93",
     category: "",
-    items: [],
+    selectedRoomId: undefined,
 
     rules: [
       (value) => !!value || "Required.",
@@ -57,17 +68,42 @@ export default {
     async createProjectHandler() {
       const newProjectObject = {
         projectName: this.projectName,
-        imageId: this.imageId,
+        imageId: this.$store.getters["IMAGE/getImage"]._id,
         description: this.description,
-        roomId: this.roomId,
+        roomId: this.project.roomId,
         category: this.category,
-        items: this.items,
+        itemsId: this.selectedItemId,
       };
-      this.$store.dispatch("PROJECT/createProject", newProjectObject);
+      await this.$store.dispatch("ROOM/setRoom", this.room);
+      await this.$store.dispatch("PROJECT/createProject", newProjectObject);
+      await this.$store.dispatch(
+        "ROOM/addProjectToRoom",
+        this.$store.getters["PROJECT/getProject"]._id
+      );
+      if(this.$store.getters["ROOM/getRoom"].length !== 0) {
+        await this.$store.dispatch(
+          "ROOM/updateRoom",
+          this.$store.getters["ROOM/getRoom"]
+        );
+      }
+      await this.$store.dispatch("ROOM/setRooms");
+      this.$emit('close-dialog')
     },
-    addRoomToState(room) {
-      this.room = room
-    }
+  },
+  computed: {
+    items() {
+      return this.$store.getters["ITEMS/getItems"];
+    },
+    room() {
+      return this.$store.getters["ITEMS/getRoomFromRooms"](
+        this.selectedRoomId
+      ) !== undefined
+        ? this.$store.getters["ITEMS/getRoomFromRooms"](this.selectedRoomId)
+        : [];
+    },
+    rooms() {
+      return this.$store.getters["ROOM/getRooms"];
+    },
   },
 };
 </script>

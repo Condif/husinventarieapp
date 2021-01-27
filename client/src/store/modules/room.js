@@ -25,6 +25,9 @@ export const room = {
     createRoom(state, payload) {
       state.rooms.push(payload);
     },
+    addProjectToRoom(state, payload) {
+      state.room.projectId.push(payload);
+    },
   },
 
   actions: {
@@ -49,6 +52,15 @@ export const room = {
           state.commit("setRoom", data);
         });
       return response;
+    },
+    addProjectToRoom(state, projectId) {
+      if(state.getters["getRoom"].length === 0) return
+      const room = state.getters["getRoom"];
+
+      if (room.projectId.filter((x) => x._id === projectId).length === 1) {
+        return;
+      }
+      state.commit("addProjectToRoom", projectId);
     },
   },
 };
