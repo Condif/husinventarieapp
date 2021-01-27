@@ -10,7 +10,7 @@
         <h3>Skapa ditt projekt</h3>
       </div>
     </router-link> -->
-    <v-dialog v-model="dialog">
+    <v-dialog v-model="dialogProject">
       <template v-slot:activator="{ on }">
         <div v-on="on" class="project_button">
           <div class="inside_div">
@@ -18,10 +18,10 @@
           </div>
         </div>
       </template>
-      <CreateProject @close-dialog="closeDialog" />
+      <CreateProject @close-dialog="closeDialogProject" />
     </v-dialog>
 
-    <v-dialog v-model="dialog">
+    <v-dialog v-model="dialogInventory">
       <template v-slot:activator="{ on }">
         <div v-on="on" class="inventory_button">
           <div class="inside_div">
@@ -29,7 +29,7 @@
           </div>
         </div>
       </template>
-      <CreateItem @close-dialog="closeDialog" />
+      <CreateItem @close-dialog="closeDialogInventory" />
     </v-dialog>
 
     <!-- <v-btn class="btn" color="accent2">Skapa Projekt</v-btn>
@@ -38,17 +38,23 @@
 </template>
 <script>
 import CreateItem from "../components/CreateItem";
+import CreateProject from "../components/CreateProject";
 export default {
   name: "ActionCard",
   data: () => ({
-    dialog: false,
+    dialogProject: false,
+    dialogInventory: false,
+    
   }),
-  components: { CreateItem },
+  components: { CreateItem, CreateProject },
   methods: {
-    closeDialog() {
-      this.dialog = false;
+    closeDialogProject() {
+      this.dialogProject = false;
     },
-  },
+    closeDialogInventory() {
+      this.dialogInventory = false;
+    },
+    },
 };
 </script>
 <style scoped>
