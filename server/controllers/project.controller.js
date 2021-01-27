@@ -31,7 +31,8 @@ const createNewProject = async (req, res) => {
       roomId: req.body.roomId,
       category: req.body.category,
       notesId: req.body.notesId,
-      itemsId: req.body.itemsId
+      itemsId: req.body.itemsId,
+      filesId: req.body.fileId,
     }
     const project = new Project(newProject);
 
@@ -57,7 +58,7 @@ const updateProject = async (req, res) => {
           roomId: req.body.roomId,
           category: req.body.category,
           itemsId: req.body.itemsId,
-          fileId: req.body.fileId,
+          filesId: req.body.fileId,
           notesId: req.body.notesId
         },
       }

@@ -35,17 +35,19 @@ const ProjectSchema = mongoose.Schema({
       ref: "Note",
     },
   ],
-
+  filesId: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Note",
+    },
+  ],
   itemsId: [
     {
       type: mongoose.Types.ObjectId,
       ref: "Item",
     },
   ],
-  roomId: {
-    type: mongoose.Types.ObjectId,
-    ref: "Item",
-  },
+  
 });
 
 const ProjectModel = mongoose.model("Project", ProjectSchema);

@@ -3,7 +3,7 @@ const url = "/api/";
 export const image = {
   namespaced: true,
   state: {
-    image: [],
+    image: {},
     oldImageId: [],
   },
 
@@ -25,7 +25,8 @@ export const image = {
     },
 
     updateImage(state, updatedImageId) {
-      
+      // denna funkar sådär då den även plockar bort den gamla bilden när den e undefined mm.. 
+      //old image ska bara sparas om vi har satt en ny
       if (updatedImageId !== this.state.IMAGE.oldImageId) {
         console.log("ta bort gammal bild" ,this.state.IMAGE.oldImageId);
         state.dispatch("deleteImageFromDB", this.state.IMAGE.oldImageId);
@@ -57,7 +58,7 @@ export const image = {
           return response.json();
         })
         .then((data) => {
-          console.log("image deleted" + data);
+          console.log("image deleted tralalal" + data);
         });
   
       return response;

@@ -2,7 +2,7 @@
   <v-container class="py-16" fluid v-if="project !== undefined" min-width="300">
     <Quick-start />
     <v-row>
-      <v-col sm="6" md="6" color="secondary">
+      <v-col sm="6" md="6" order-md="1" color="secondary">
         <v-card
           class="mx-auto mt-2 px-1 "
           color="primary"
@@ -11,9 +11,9 @@
         >
           <div class="d-flex justify-space-between">
             <v-card-title class="card-header">
-              Mitt projekt: <br> {{ project.projectName }}
+              Mitt valda projekt: <br> {{ project.projectName }}
             </v-card-title>
-            <div class="edit-buttons d-flex" color="accent2">
+            <div class="edit-buttons d-flex pt-4" color="accent2">
               <Delete-project-dialog v-bind:project="project" />
               <EditProject/>
             </div>
@@ -21,7 +21,7 @@
           <div class="d-flex justify-center px-4">
             <v-img
               height="200"
-              src="../assets/chris-briggs-ILBrHd6PFJA-unsplash.jpg"
+              :src="image"
             ></v-img>
           </div>
 
@@ -29,13 +29,24 @@
           <v-card-text>
             {{ project.description }}
           </v-card-text>
-          <v-card-title v-if="project.roomId">
-            {{ project.roomId.roomName }}
-          </v-card-title>
-          <v-card-title v-if="project.category">
-            {{ project.category }}
-          </v-card-title>
+          
           <v-expansion-panels>
+            <v-expansion-panel v-if="project.roomId">
+              <v-expansion-panel-header color="primary">
+                Rum
+              </v-expansion-panel-header>
+              <v-expansion-panel-content>
+                 {{ project.category }}
+                 </v-expansion-panel-content>
+            </v-expansion-panel>
+            <v-expansion-panel v-if="project.category">
+              <v-expansion-panel-header color="primary">
+                Kategori
+              </v-expansion-panel-header>
+              <v-expansion-panel-content>
+                 {{ project.category }}
+                 </v-expansion-panel-content>
+            </v-expansion-panel>
             <v-expansion-panel>
               <v-expansion-panel-header color="primary">
                 Inventarier
@@ -79,7 +90,43 @@
                 </v-list-item>
               </v-expansion-panel-content>
             </v-expansion-panel>
+            <v-expansion-panel v-if="project.fileId">
+              <v-expansion-panel-header color="primary">
+                Dokument
+              </v-expansion-panel-header>
+              <v-expansion-panel-content>
+                 <div class="d-flex justify-space-between align-center">
+                  <div>
+                    <v-icon>mdi-arrow-up-bold-box-outline</v-icon
+                    > Namn på filen
+                  </div>
+                <v-btn color="accent2" :href="fileURL">hämta fil </v-btn>
+                </div>
+                 </v-expansion-panel-content>
+            </v-expansion-panel>
           </v-expansion-panels>
+        </v-card>
+      </v-col>
+      <v-col cols="12" md="6">
+        <v-card  max-width="900" color="primary" class="mx-auto mt-1"
+          >
+          <v-card-text>
+            <h5>Alla Projekt</h5>
+
+            <v-list-item two-line v-for="(project, i) in projects" :key="i">
+              <v-list-item-content>
+                <v-list-item-title>{{ project.projectName }}</v-list-item-title>
+                <v-list-item-subtitle>
+                  {{ project.description }},
+                </v-list-item-subtitle>
+              </v-list-item-content>
+              <v-list-item-action>
+                <v-btn icon @click="openProjectDetails(project)">
+                  <v-icon color="secondary">mdi-open-in-new</v-icon>
+                </v-btn>
+              </v-list-item-action>
+            </v-list-item>
+          </v-card-text>
         </v-card>
       </v-col>
     </v-row>
@@ -100,6 +147,17 @@ export default {
     EditProject,
   },
   methods: {
+    openProjectDetails(selectedProject) {
+      this.$store.dispatch("PROJECT/setProject", selectedProject);
+   
+      this.$store.dispatch(
+        "IMAGE/setImage",
+        this.$store.getters["PROJECT/getProject"].imageId
+      );
+      localStorage.setItem("currentProject", JSON.stringify(selectedProject));
+      window.scrollTo(0, 0);
+      console.log(this.project);
+    },
     log(message) {
       console.log(message);
     },
@@ -121,6 +179,16 @@ export default {
       return this.$store.getters["PROJECT/getProjectFromProjects"](
         this.$store.getters["PROJECT/getProject"]._id
       );
+    },
+    image() {
+      return "api/images/" + this.$store.getters["PROJECT/getProject"].imageId;
+    },
+    files() {
+      return this.$store.getters["FILE/getFiles"];
+    },
+    fileURL() {
+      return (
+        "/api/files/" + this.$store.getters["PROJECT/getProject"].fileId);
     },
   },
 };
