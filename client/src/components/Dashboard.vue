@@ -1,12 +1,6 @@
 <template>
-  <v-sheet
-    id="scrolling-techniques-7"
-    class="mx-auto pt-2"
-    max-height="100%"
-    max-width="900"
-    color="primary"
-  >
-    <v-card max-width="900" class="mx-auto pt-2" color="primary">
+  
+    <v-card max-width="900" class="mx-auto pt-2 mt-2" color="primary">
       <v-card-title v-if="project !== undefined">
         <h1>Välkommen!</h1>
       </v-card-title>
@@ -22,7 +16,7 @@
         height="400"
         src="../assets/todd-kent-178j8tJrNlc-unsplash.jpg"
       ></v-img>
-      <v-expansion-panels color="primary" v-if="projects !== undefined" focusable>
+      <v-expansion-panels class="pb-2" color="primary" v-if="projects !== undefined" popout>
             <h2>
               Mina aktiva projekt
             </h2>
@@ -54,7 +48,7 @@
         </v-expansion-panel>
       </v-expansion-panels>
     </v-card>
-  </v-sheet>
+ 
 </template>
 
 <script>
