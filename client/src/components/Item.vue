@@ -56,11 +56,7 @@
                     <v-icon>mdi-arrow-up-bold-box-outline</v-icon
                     >{{ item.fileId }} Namn på filen
                   </div>
-                  <v-btn v-if="item.fileId" large
-                    text
-                    :href="file"
-                    >Hämta fil
-                  </v-btn>
+                <v-btn :href="fileURL">visa fil </v-btn>
                 </div>
               </v-card-text>
               <v-card-actions class="pt-0">
@@ -111,6 +107,8 @@ export default {
 
   data: () => ({
     reveal: false,
+    file: {},
+    
   }),
 
   components: {
@@ -118,9 +116,13 @@ export default {
     DeleteDialog,
     EditItem,
   },
+  
+
   methods: {
     openItemDetails(selectedItem) {
       this.$store.dispatch("ITEMS/setItem", selectedItem);
+      // this.fileURL =
+      //   "/api/files/" + this.$store.getters["ITEMS/getItem"].fileId;
       this.$store.dispatch(
         "IMAGE/setImage",
         this.$store.getters["ITEMS/getItem"].imageId
@@ -130,6 +132,10 @@ export default {
     },
   },
   computed: {
+    fileURL() {
+      return (
+        "/api/files/" + this.$store.getters["ITEMS/getItem"].fileId);
+    },
     items() {
       return this.$store.getters["ITEMS/getItems"];
     },
@@ -139,9 +145,9 @@ export default {
     image() {
       return "api/images/" + this.$store.getters["ITEMS/getItem"].imageId;
     },
-    file() {
-      return "api/files/" + this.$store.getters["FILE/getFile"]._id
-    }
+    files() {
+      return this.$store.getters["FILE/getFiles"];
+    },
   },
 };
 </script>

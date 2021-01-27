@@ -15,11 +15,11 @@ getFile = async (req, res) => {
   }
 };
 
-// GET ALL 
+// GET ALL
 getAllFiles = async (req, res) => {
-  
   try {
-    const filesIds = await File.find({}, "_id").exec();
+    console.log("get all files");
+    const filesIds = await File.find({},{ userParentId: 1, _id: 1, name: 1 } );
     console.log(filesIds);
     res.status(200).json(filesIds);
   } catch (err) {
@@ -29,13 +29,13 @@ getAllFiles = async (req, res) => {
 
 // DELETE ONE
 deleteFile = async (req, res) => {
-  console.log({ _id: req.params.id },"delete");
+  console.log({ _id: req.params.id }, "delete");
   try {
     const file = await File.deleteOne({ _id: req.params.id });
     if (!file) {
       // todo....
     }
-    res.status(200).json({message: "File deleted"});
+    res.status(200).json({ message: "File deleted" });
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
@@ -43,7 +43,7 @@ deleteFile = async (req, res) => {
 };
 // POST
 newFile = (req, res) => {
-console.log("ny fil", req.files);
+  console.log("ny fil", req.files);
   if (!req.files || !req.files.file) {
     // Ingen fil har skickats med... Se till använda namn:file på input fältet...
   }
