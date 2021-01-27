@@ -6,13 +6,15 @@ export const room = {
   state: {
     rooms: [],
     room: [],
+    computedRooms: [],
   },
 
   getters: {
     getRooms: (state) => state.rooms,
+    getComputedRooms: (state) => state.computedRooms,
     getRoom: (state) => state.room,
     getRoomFromRooms: (state) => (id) =>
-      state.rooms.find((room) => room._id === id),
+      state.rooms.find((room) => room._id === id), 
   },
 
   mutations: {
@@ -21,9 +23,10 @@ export const room = {
     },
     setRoom(state, payload) {
       state.room = payload;
+      
     },
     createRoom(state, payload) {
-      state.rooms.push(payload);
+      state.room.push(payload);
     },
     addProjectToRoom(state, payload) {
       state.room.projects.push(payload);
@@ -31,6 +34,10 @@ export const room = {
     addItemToRoom(state, payload) {
       state.room.items.push(payload);
     },
+    updateToRoomsWithHouseId (state, payload) {
+      const filteredRooms = state.rooms.filter( ({ houseId }) => houseId == payload );
+      state.computedRooms = filteredRooms
+    }
   },
 
   actions: {
@@ -38,6 +45,9 @@ export const room = {
       const allRooms = await fetch(url + "rooms", { headers });
       const j = await allRooms.json();
       state.commit("setRooms", j);
+    },
+    computedRooms(state, currentHouseId) {
+      state.commit("updateToRoomsWithHouseId", currentHouseId)
     },
     async createRoom(state, newRoomObject) {
       const response = await fetch(url + "newroom", {
