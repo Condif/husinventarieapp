@@ -1,9 +1,9 @@
 <template>
-  <v-container fluid v-if="items !== undefined || item !== undefined">
+  <v-container fluid class="py-16" v-if="items !== undefined || item !== undefined">
     <Quick-start />
     <v-row>
       <v-col sm="6" md="5" color="secondary">
-        <v-card class="mx-auto" max-width="344" v-if="item !== undefined">
+        <v-card class="mx-auto mt-1" max-width="344" v-if="item !== undefined">
           <v-card-text>
             <div class="d-flex justify-space-between">
               <div class="card-header">

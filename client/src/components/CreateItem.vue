@@ -51,7 +51,7 @@
          
         ></v-date-picker>
       </v-menu>
-      {{rooms}}
+     
       <v-select v-if="rooms !== undefined"
         v-model="selectedRoomId"
         prepend-icon="mdi-home-city"
@@ -69,6 +69,7 @@
         placeholder="Välj projekt"
       ></v-select>
       <ImageUploader />
+      <FileUploader />
       <v-card-actions>
         <v-btn @click="createItemHandler" color="accent2">
           Spara
@@ -81,8 +82,9 @@
 
 <script>
 import ImageUploader from "./ImageUploader.vue";
+import FileUploader from "./FileUploader.vue";
 export default {
-  components: { ImageUploader },
+  components: { ImageUploader, FileUploader },
   name: "CreatItem",
   data: () => ({
     itemName: "",
@@ -134,11 +136,12 @@ export default {
         imageId: this.$store.getters["IMAGE/getImage"]._id,
         description: this.description,
         orderDate: this.orderDate,
+        fileId: this.$store.getters["FILE/getFile"]._id,
         warranty: this.warranty,
-        receipt: this.receipt,
         projectId: this.selectedProjectId,
         roomId: this.selectedRoomId
       };
+      console.log("nytt iotem objeckt",newItemObject);
       await this.$store.dispatch("PROJECT/setProject", this.project);
       await this.$store.dispatch("ITEMS/createItem", newItemObject);
       await this.$store.dispatch(
