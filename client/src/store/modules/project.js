@@ -64,6 +64,7 @@ export const project = {
     async setProjects(state) {
       const allProjects = await fetch(url + "projects", { headers });
       const j = await allProjects.json();
+      console.log("projects", j);
       state.commit("setProjects", j);
     },
     async setProject(state, selectedProject) {

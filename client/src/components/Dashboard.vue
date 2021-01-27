@@ -4,9 +4,9 @@
     class="mx-auto pt-2"
     max-height="100%"
     max-width="900"
-    color="accent2"
+    color="primary"
   >
-    <v-card max-width="900" class="mx-auto pt-2" color="accent2">
+    <v-card max-width="900" class="mx-auto pt-2" color="primary">
       <v-card-title v-if="project !== undefined">
         <h1>Välkommen!</h1>
       </v-card-title>
@@ -22,26 +22,31 @@
         height="400"
         src="../assets/todd-kent-178j8tJrNlc-unsplash.jpg"
       ></v-img>
-      <v-expansion-panels>
-        <v-expansion-panel v-if="projects !== undefined">
-          <v-expansion-panel-header color="primary">
+      <v-expansion-panels color="primary" v-if="projects !== undefined" focusable>
             <h2>
-              Mina projekt
+              Mina aktiva projekt
             </h2>
-          </v-expansion-panel-header>
-          <v-expansion-panel-content
-            color="primary"
+        <v-expansion-panel  color="primary"
             v-for="project in projects"
             :key="project._id"
-            fucosable
-          >
+            fucosable>
+          <v-expansion-panel-header color="primary">
             <h3>
               {{ project.projectName }}
             </h3>
-            <div class="d-flex justify-space-between">
-              <p>{{ project.description }}</p>
+          </v-expansion-panel-header>
+          <v-expansion-panel-content
+            color="primary"
+          >
+            <div class="d-flex justify-space-between mt-2">
+              <div class="d-flex flex-column">
 
-              <v-btn fab color="accent2" @click="goToProjectHandler(project)">
+              <p>Projektbeskrivning: <br>{{ project.description }}</p>
+              <p>Rum: <br> {{ project.roomId}} </p>
+              <p>Kategori: <br> {{ project.category}} Underhåll</p>
+              </div>
+
+              <v-btn class="align-self-center" fab color="accent2" @click="goToProjectHandler(project)">
                 <v-icon color="white">mdi-arrow-right</v-icon>
               </v-btn>
             </div>

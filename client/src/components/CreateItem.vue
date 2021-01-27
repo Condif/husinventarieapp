@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-card class="mx-auto mt-2" color="base">
+    <v-card class="mx-auto mt-2 px-1" color="base">
       <v-card-title placeholder="test">
         Lägg till inventarie
       </v-card-title>
@@ -51,6 +51,15 @@
          
         ></v-date-picker>
       </v-menu>
+      {{rooms}}
+      <v-select v-if="rooms !== undefined"
+        v-model="selectedRoomId"
+        prepend-icon="mdi-home-city"
+        :items="rooms.map((room) => room)"
+        item-text="roomName"
+        item-value="_id"
+        placeholder="Välj rum"
+      ></v-select>
       <v-select v-if="projects !== undefined"
         v-model="selectedProjectId"
         prepend-icon="mdi-calendar-check-outline"
@@ -82,6 +91,7 @@ export default {
     warranty: "",
     receipt:"",
     selectedProjectId: undefined,
+    selectedRoomId: undefined,
 
     rules: [
       (value) => !!value || "Required.",
@@ -108,8 +118,11 @@ export default {
             this.selectedProjectId
           )
         : [];
-    }
-    
+    },
+    rooms() {
+      return this.$store.getters["ROOM/getRooms"];
+    },
+   
   },
   methods: {
     save (date) {
@@ -124,7 +137,7 @@ export default {
         warranty: this.warranty,
         receipt: this.receipt,
         projectId: this.selectedProjectId,
-        roomId: "5feb3656cbd090ff99f2c81c"
+        roomId: this.item.roomId,
       };
       await this.$store.dispatch("PROJECT/setProject", this.project);
       await this.$store.dispatch("ITEMS/createItem", newItemObject);

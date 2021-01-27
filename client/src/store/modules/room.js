@@ -29,8 +29,9 @@ export const room = {
 
   actions: {
     async setRooms(state) {
-      const allrooms = await fetch(url + "rooms", { headers });
-      const j = await allrooms.json();
+      const allRooms = await fetch(url + "rooms", { headers });
+      const j = await allRooms.json();
+      console.log("rooms", j);
       state.commit("setRooms", j);
     },
     async createRoom(state, newRoomObject) {

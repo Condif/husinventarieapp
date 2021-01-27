@@ -9,6 +9,7 @@ const getAllProjects = async (req, res) => {
     .populate("notesId")
     .then((post) => res.status(200).json(post))
     .catch((err) => res.status(500).json(err));
+    
 };
 // GET ONE
 const getProjectsById = async (req, res) => {
