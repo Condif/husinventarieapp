@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 const { ProjectSchema } = require("./project.model");
 
 const RoomSchema = mongoose.Schema({
-  houseId: [
+  houseId: 
     {
       type: mongoose.Types.ObjectId,
       
       ref: "House",
     },
-  ],
+  
   roomName: {
     type: String,
     required: true,
