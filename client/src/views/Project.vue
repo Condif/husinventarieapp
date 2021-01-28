@@ -30,12 +30,12 @@
             {{ project.description }}
           </v-card-text>
           
-          <v-expansion-panels>
-            <v-expansion-panel v-if="project.roomId">
+          <v-expansion-panels class="pb-2" color="primary" popout>
+            <v-expansion-panel v-if="project.roomId" color="primary">
               <v-expansion-panel-header color="primary">
                 Rum
               </v-expansion-panel-header>
-              <v-expansion-panel-content>
+              <v-expansion-panel-content color="primary">
                  {{ project.category }}
                  </v-expansion-panel-content>
             </v-expansion-panel>
@@ -43,7 +43,7 @@
               <v-expansion-panel-header color="primary">
                 Kategori
               </v-expansion-panel-header>
-              <v-expansion-panel-content>
+              <v-expansion-panel-content color="primary">
                  {{ project.category }}
                  </v-expansion-panel-content>
             </v-expansion-panel>
@@ -108,7 +108,7 @@
         </v-card>
       </v-col>
       <v-col cols="12" md="6">
-        <v-card  max-width="900" color="primary" class="mx-auto mt-1"
+        <v-card  max-width="900" color="primary" class="mx-auto mt-2"
           >
           <v-card-text>
             <h5>Alla Projekt</h5>
