@@ -13,9 +13,9 @@
       >
       </v-text-field>
       <v-text-field
-        label="Storlek"
-        v-model="roomSize"
-        placeholder="Ange husets storlek i kvm"
+        label="Boendekategori"
+        v-model="houseCategory"
+        placeholder="Ange vilken typ av boende detta är"
       >
       </v-text-field>
       <v-text-field
