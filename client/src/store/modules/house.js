@@ -31,12 +31,17 @@ export const house = {
     setHouseFromStorage(state, loggedInUser) {
       if(!loggedInUser) return
       const currentHouse = JSON.parse(
-        localStorage.getItem("currentHouse") || "[]"
-      );
-      if(loggedInUser._id === currentHouse.userParentId) {
-        state.house = currentHouse
+        localStorage.getItem("currentHouse") || "[]")
+      
+      if(currentHouse.length === 0 && state.houses.length !== 0) {
+        state.house = state.houses[0]
+        localStorage.setItem("currentHouse", JSON.stringify(state.house));
+        return
+      } else if(loggedInUser._id === currentHouse.userParentId) {
+          state.house = currentHouse
+      } else {
+        return
       }
-      return
     }
   },
 
@@ -49,8 +54,13 @@ export const house = {
 
     async setHouses(state) {
       const allhouses = await fetch(url + "houses", { headers });
-      const j = await allhouses.json();
-      state.commit("setHouses", j);
+      const jAllHouses = await allhouses.json();
+      
+      const loggedInUser = await fetch("/api/loggedIn")
+        
+      const j = await loggedInUser.json()
+      state.commit("setHouses", jAllHouses);
+      state.commit("setHouseFromStorage", j);
     },
     async setHouseFromDb(state, newHouse) {
       const house = await fetch(url + "houses/" + newHouse, { headers });

@@ -26,12 +26,15 @@ export const project = {
     setProjectFromStorage(state, loggedInUser) {
       if(!loggedInUser) return
       const currentProject = JSON.parse(
-        localStorage.getItem("currentProject") || state.projects[0]
-      );
-      if(loggedInUser._id === currentProject.userParentId) {
-        state.project = currentProject
+        localStorage.getItem("currentProject") || "[]");
+      if(currentProject.length === 0 && state.projects.length !== 0) {
+        state.project = state.projects[0]
+        return
+      } else if(loggedInUser._id === currentProject.userParentId) {
+          state.project = currentProject
+      } else {
+        return
       }
-      return
     },
     setOldProject(state, payload) {
       state.oldProject = payload;
