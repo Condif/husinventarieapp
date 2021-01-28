@@ -36,7 +36,7 @@
                 Rum
               </v-expansion-panel-header>
               <v-expansion-panel-content color="primary">
-                 {{ project.category }}
+                 {{ project.roomId.roomName }}
                  </v-expansion-panel-content>
             </v-expansion-panel>
             <v-expansion-panel v-if="project.category">
