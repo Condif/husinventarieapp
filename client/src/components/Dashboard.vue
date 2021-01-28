@@ -14,7 +14,7 @@
       </v-card-title>
       <v-img
         height="400"
-        src="../assets/todd-kent-178j8tJrNlc-unsplash.jpg"
+        src="../assets/startHus1.jpg"
       ></v-img>
       <v-expansion-panels class="pb-2" color="primary" v-if="projects !== undefined" popout>
             <h2>
