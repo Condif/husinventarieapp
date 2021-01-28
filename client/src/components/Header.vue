@@ -15,20 +15,16 @@
           </router-link>
         </v-list-item-title>
       </v-list-item>
-
-      <v-spacer></v-spacer>
-      <v-btn icon color="secondary"> <v-icon>mdi-magnify</v-icon> </v-btn>
-
-      <v-btn color="white" v-if="!loggedIn" text to="/signup">
-        <span>Registrera</span>
+      <v-btn color="white" v-if="!loggedIn && inLogin" text to="/signup">
+        <span>Registrera </span>
         <v-icon right></v-icon>
       </v-btn>
 
-      <v-btn v-if="loggedIn" @click="logout" to="/login" color="grey" text>
-        <span>Logga ut</span>
+      <v-btn v-if="loggedIn" @click="logout " to="/login" color="grey" text>
+        <span>Logga ut </span>
         <v-icon right></v-icon>
       </v-btn>
-      <v-btn v-if="!loggedIn" to="/login" color="white" text>
+      <v-btn v-if="!loggedIn && inSignup" to="/login" color="white" text>
         <span>Logga in</span>
         <v-icon right></v-icon>
       </v-btn>
@@ -86,22 +82,26 @@ export default {
         link: "/project",
       },
       { title: "Inventarier", icon: "mdi-ballot", link: "/item" },
-      { title: "Mitt konto", icon: "mdi-account-box", link: "/createproject" },
-      { title: "Admin", icon: "mdi-gavel", link: "/createitem" },
     ],
   }),
   methods: {
     async logout() {
       await this.$store.dispatch("SESSION/logout")
-      this.$store.state.commit("SESSION/setLoggedIn", false);
+      // await this.$store.state.commit("SESSION/setLoggedIn", false);
       localStorage.setItem("loggedIn", JSON.stringify(false));
-      this.$router.push({ name: "Login" });
+      // this.$router.push({ name: "Login" });
     },
   },
   computed: {
     loggedIn() {
       return this.$store.getters["SESSION/getLoggedIn"];
     },
+    inLogin() {
+      return this.$store.getters["SESSION/getInLogin"];
+    },
+    inSignup() {
+      return this.$store.getters["SESSION/getInSignup"];
+    }
   },
 };
 </script>

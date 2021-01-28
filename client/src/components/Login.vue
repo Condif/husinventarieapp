@@ -63,6 +63,10 @@ export default {
       
     },
   },
+  async created() {
+    await this.$store.dispatch("SESSION/setInSignup", false)
+    await this.$store.dispatch("SESSION/setInLogin", true)
+  }
 };
 </script>
 
