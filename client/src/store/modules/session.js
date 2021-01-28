@@ -84,6 +84,6 @@ export const session = {
     },
     setInSignup(state, inSignup) {
         state.commit("inSignup", inSignup)
-    }
+    },
   }
 }

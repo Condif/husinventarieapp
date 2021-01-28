@@ -74,6 +74,7 @@ export default {
       );
       await this.$store.dispatch("HOUSE/setHouseFromDb",  this.$store.getters["HOUSE/getHouse"]._id);
       await this.$store.dispatch("HOUSE/setHouses")
+      this.$store.dispatch("ROOM/computedRooms", this.$store.getters["HOUSE/getHouse"]._id);
       this.$emit('close-dialog')
      
       

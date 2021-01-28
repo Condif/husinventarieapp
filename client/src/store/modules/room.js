@@ -25,6 +25,9 @@ export const room = {
       state.room = payload;
       
     },
+    updateRooms(state, payload) {
+      state.rooms.push(payload)
+    },
     
     addProjectToRoom(state, payload) {
       state.room.projects.push(payload);
@@ -60,6 +63,7 @@ export const room = {
         })
         .then((data) => {
           state.commit("setRoom", data);
+          state.commit("updateRooms", data);
           
         });
       return response;

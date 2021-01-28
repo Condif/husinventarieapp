@@ -16,7 +16,7 @@
             filled
             rounded
             class="selectHouse"
-            v-if="houses"
+            v-if="currentHouseId"
             v-model="currentHouseId"
             v-on:change="goToHouseHandler(currentHouseId)"
             prepend-icon="mdi-calendar-check-outline"
@@ -26,79 +26,79 @@
             :placeholder="placeholderText"
           ></v-select>
           <v-col cols="12">
-              <v-expansion-panels
-                v-for="room in computedRooms"
-                :key="room._id"
-                popout
-                color="primary"
-                class="pb-1"
-              >
-                <v-expansion-panel>
-                  <v-expansion-panel-header color="primary">{{
-                    room.roomName
-                  }}</v-expansion-panel-header>
-                  <v-expansion-panel-content color="primary" >
-                    <p>Höjd till tak: {{ room.roomHeight }}</p>
-                    <p>Antal kvadratmeter {{ room.roomSize }}</p>
-                    <div class="projects">
-                      <h5>Projekt</h5>
-                      <v-expansion-panels popout color="primary" class="mt-2">
-                        <v-expansion-panel
-                          v-for="project in room.projects"
-                          :key="project._id"
-                        >
-                          <v-expansion-panel-header color="primary">
-                            {{ project.projectName }}
-                          </v-expansion-panel-header>
-                          <v-expansion-panel-content color="primary">
-                            <p>Beskrivning</p>
-                            {{ project.description }}
-                            <div class="btn_div">
-                              <v-btn
-                                class="align-self-center"
-                                fab
-                                color="accent2"
-                                @click="goToProjectHandler(project)"
-                                ><v-icon color="white"
-                                  >mdi-arrow-right</v-icon
-                                ></v-btn
-                              >
-                            </div>
-                          </v-expansion-panel-content>
-                        </v-expansion-panel>
-                      </v-expansion-panels>
-                    </div>
-                    <div class="items">
-                      <h5>Inventarier</h5>
-                      <v-expansion-panels popout color="primary" class="mt-2">
-                        <v-expansion-panel
-                          v-for="item in room.items"
-                          :key="item._id"
-                        >
-                          <v-expansion-panel-header color="primary">
-                            {{ item.itemName }}
-                          </v-expansion-panel-header>
-                          <v-expansion-panel-content color="primary">
-                            <p>Beskrivning</p>
-                            {{ item.description }}
-                            <div class="btn_div">
-                              <v-btn
-                                class="align-self-center"
-                                fab
-                                color="accent2"
-                                @click="goToItemHandler(item)"
-                                ><v-icon color="white"
-                                  >mdi-arrow-right</v-icon
-                                ></v-btn
-                              >
-                            </div>
-                          </v-expansion-panel-content>
-                        </v-expansion-panel>
-                      </v-expansion-panels>
-                    </div>
-                  </v-expansion-panel-content>
-                </v-expansion-panel>
-              </v-expansion-panels>
+            <v-expansion-panels
+              v-for="room in computedRooms"
+              :key="room._id"
+              popout
+              color="primary"
+              class="pb-1"
+            >
+              <v-expansion-panel>
+                <v-expansion-panel-header color="primary">{{
+                  room.roomName
+                }}</v-expansion-panel-header>
+                <v-expansion-panel-content color="primary">
+                  <p>Höjd till tak: {{ room.roomHeight }}</p>
+                  <p>Antal kvadratmeter {{ room.roomSize }}</p>
+                  <div class="projects">
+                    <h5>Projekt</h5>
+                    <v-expansion-panels popout color="primary" class="mt-2">
+                      <v-expansion-panel
+                        v-for="project in room.projects"
+                        :key="project._id"
+                      >
+                        <v-expansion-panel-header color="primary">
+                          {{ project.projectName }}
+                        </v-expansion-panel-header>
+                        <v-expansion-panel-content color="primary">
+                          <p>Beskrivning</p>
+                          {{ project.description }}
+                          <div class="btn_div">
+                            <v-btn
+                              class="align-self-center"
+                              fab
+                              color="accent2"
+                              @click="goToProjectHandler(project)"
+                              ><v-icon color="white"
+                                >mdi-arrow-right</v-icon
+                              ></v-btn
+                            >
+                          </div>
+                        </v-expansion-panel-content>
+                      </v-expansion-panel>
+                    </v-expansion-panels>
+                  </div>
+                  <div class="items">
+                    <h5>Inventarier</h5>
+                    <v-expansion-panels popout color="primary" class="mt-2">
+                      <v-expansion-panel
+                        v-for="item in room.items"
+                        :key="item._id"
+                      >
+                        <v-expansion-panel-header color="primary">
+                          {{ item.itemName }}
+                        </v-expansion-panel-header>
+                        <v-expansion-panel-content color="primary">
+                          <p>Beskrivning</p>
+                          {{ item.description }}
+                          <div class="btn_div">
+                            <v-btn
+                              class="align-self-center"
+                              fab
+                              color="accent2"
+                              @click="goToItemHandler(item)"
+                              ><v-icon color="white"
+                                >mdi-arrow-right</v-icon
+                              ></v-btn
+                            >
+                          </div>
+                        </v-expansion-panel-content>
+                      </v-expansion-panel>
+                    </v-expansion-panels>
+                  </div>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
           </v-col>
         </v-card>
       </v-col>
@@ -187,7 +187,7 @@ export default {
     },
     goToHouseHandler(currentHouseId) {
       const currentHouse = this.$store.getters["HOUSE/getHouseFromHouses"](
-        currentHouseId
+        this.currentHouseId
       );
       localStorage.setItem("currentHouse", JSON.stringify(currentHouse));
       this.$store.dispatch("HOUSE/setHouse", currentHouse);
@@ -285,9 +285,9 @@ export default {
     background-size: 130%;
   }
   .skapa_hus_title {
-  padding: 0 5px;
-  font-size: 24px;
-  color: white;
-}
+    padding: 0 5px;
+    font-size: 24px;
+    color: white;
+  }
 }
 </style>
