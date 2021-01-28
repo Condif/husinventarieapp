@@ -73,6 +73,10 @@ export default {
       });
     },
   },
+  mounted() {
+    this.$store.dispatch("SESSION/setInSignup", true)
+    this.$store.dispatch("SESSION/setInLogin", false)
+  }
 };
 </script>
 

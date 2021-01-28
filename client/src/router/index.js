@@ -7,7 +7,6 @@ import Login from '../components/Login.vue'
 import store from '../store/store'
 import House from '../views/House.vue'
 import Signup from '../components/Signup.vue'
-import CreateHouse from '../components/CreateHouse.vue'
 
 Vue.use(VueRouter)
 
@@ -29,12 +28,6 @@ const routes = [
     component: Signup
   },
   {
-    path: '/createhouse',
-    name: 'CreateHouse',
-    component: CreateHouse,
-    meta: { requiresAuth: true }
-  },
-  {
     path: '/project',
     name: 'Project',
     component: Project,
@@ -52,22 +45,6 @@ const routes = [
     component: House,
     meta: { requiresAuth: true }
   },
-  {
-    path: '/createproject',
-    name: 'CreateProject',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/CreateProject.vue'),
-    meta: { requiresAuth: true }
-  },
-  {
-    path: '/createroom',
-    name: 'CreateRoom',
-    component: () => import('../components/CreateRoom.vue'),
-    meta: { requiresAuth: true }
-  },
-
 ]
 
 const router = new VueRouter({
@@ -92,7 +69,12 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else {
-    next() // make sure to always call next()!
+    if(to.name === "Login" || to.name === "Signup") {
+      next()
+    }
+    else {
+      next({path: '/', query: { redirect: to.fullPath }}) // make sure to always call next()!
+    }
   }
 })
 

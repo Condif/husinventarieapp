@@ -16,7 +16,6 @@ export default {
     Header,
   },
   mounted() {
-    this.$store.dispatch("PROJECT/setProjectFromStorage");
     this.$store.dispatch("ITEMS/setItemFromStorage");
     this.$store.dispatch("FILE/setFiles")
     this.$store.dispatch("HOUSE/setHouseFromStorage");

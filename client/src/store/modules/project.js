@@ -26,7 +26,7 @@ export const project = {
     setProjectFromStorage(state, loggedInUser) {
       if(!loggedInUser) return
       const currentProject = JSON.parse(
-        localStorage.getItem("currentProject") || "[]"
+        localStorage.getItem("currentProject") || state.projects[0]
       );
       if(loggedInUser._id === currentProject.userParentId) {
         state.project = currentProject
@@ -73,17 +73,15 @@ export const project = {
     },
 
     async setProjects(state) {
+      const loggedInUser = await fetch("/api/loggedIn")
+      const jLoggedInUser = await loggedInUser.json()
       const allProjects = await fetch(url + "projects", { headers });
       const j = await allProjects.json();
       state.commit("setProjects", j);
+      state.commit("setProjectFromStorage", jLoggedInUser);
     },
     async setProject(state, selectedProject) {
       await state.commit("setProject", selectedProject)
-    },
-    async setProjectFromStorage(state) {
-      const loggedInUser = await fetch("/api/loggedIn")
-      const j = await loggedInUser.json()
-      state.commit("setProjectFromStorage", j);
     },
     addItemToProject(state, itemsId) {
       if(state.getters["getProject"].length === 0) return

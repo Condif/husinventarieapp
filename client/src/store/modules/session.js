@@ -4,10 +4,14 @@ export const session = {
   namespaced: true,
   state: {
     loggedIn: false,
+    inSignup: false,
+    inLogin: true,
   },
   
   getters: {
     getLoggedIn: (state) => state.loggedIn,
+    getInSignup: (state) => state.inSignup,
+    getInLogin: (state) => state.inLogin,
   },
 
   mutations: {
@@ -17,6 +21,12 @@ export const session = {
     setLoggedInFromStorage(state) {
         state.loggedIn = JSON.parse(localStorage.getItem("loggedIn") || false)  
     },
+    inLogin(state, payload) {
+        state.inLogin = payload
+    },
+    inSignup(state, payload) {
+        state.inSignup = payload
+    }
   },
   
   actions: {
@@ -69,5 +79,11 @@ export const session = {
     setLoggedInFromStorage (state) {
         state.commit("setLoggedInFromStorage")
     },
+    setInLogin(state, inLogin) {
+        state.commit("inLogin", inLogin)
+    },
+    setInSignup(state, inSignup) {
+        state.commit("inSignup", inSignup)
+    }
   }
 }
