@@ -11,6 +11,7 @@
         >
           <v-card-title class="mb-2">
             <h1>Mitt Boende</h1>
+            
           </v-card-title>
           <v-select
             filled
@@ -25,6 +26,12 @@
             item-value="_id"
             :placeholder="placeholderText"
           ></v-select>
+          <div class="d-flex flex-column">
+            <p class="my-1">Kategori: {{ house.houseCategory }}</p>
+            <p class="my-1">Antal Kvm: {{ house.houseSize }}</p>
+            <p class="my-1">Antal rum: {{ house.numberOfRooms }}</p>
+          </div>
+           
           <v-col cols="12">
             <v-expansion-panels
               v-for="room in computedRooms"

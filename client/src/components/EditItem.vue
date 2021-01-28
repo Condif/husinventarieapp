@@ -167,10 +167,10 @@ export default {
         roomId: this.item.roomId,
       };
       await this.$store.dispatch("ITEMS/updateItem", updatedItemObject);
-      await this.$store.dispatch(
-        "IMAGE/updateImage",
-        updatedItemObject.imageId
-      );
+      // await this.$store.dispatch(
+      //   "IMAGE/updateImage",
+      //   updatedItemObject.imageId
+      // );
       localStorage.setItem(
         "currentItem",
         JSON.stringify(this.$store.getters["ITEMS/getItem"])

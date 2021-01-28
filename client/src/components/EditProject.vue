@@ -101,7 +101,7 @@ export default {
       return this.$store.getters["ITEMS/getItems"];
     },
     image() {
-      return "api/images/" + this.$store.getters["ITEMS/getItem"].imageId;
+      return "api/images/" + this.$store.getters["PROJECT/getProject"].imageId;
     },
 
     projects() {
@@ -140,7 +140,7 @@ export default {
       const updatedProjectObject = {
         _id: this.project._id,
         projectName: this.project.projectName,
-        imageId: this.$store.getters["IMAGE/getImage"],
+        imageId: this.$store.getters["IMAGE/getImage"]._id,
         description: this.project.description,
         category: this.project.category,
         fileId: this.$store.getters["FILE/getFile"]._id,
@@ -148,10 +148,10 @@ export default {
         roomId: this.item.roomId,
       };
       await this.$store.dispatch("PROJECT/updateProject", updatedProjectObject);
-      await this.$store.dispatch(
-        "IMAGE/updateImage",
-        updatedProjectObject.imageId
-      );
+      // await this.$store.dispatch(
+      //   "IMAGE/updateImage",
+      //   updatedProjectObject.imageId
+      // );
       localStorage.setItem(
         "currentProject",
         JSON.stringify(this.$store.getters["PROJECT/getProject"])

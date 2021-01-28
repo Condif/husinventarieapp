@@ -3,7 +3,7 @@ const url = "/api/";
 export const image = {
   namespaced: true,
   state: {
-    image: {},
+    image: [],
     oldImageId: [],
   },
 

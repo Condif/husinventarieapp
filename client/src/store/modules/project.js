@@ -22,6 +22,7 @@ export const project = {
     },
     setProject(state, payload) {
       state.project = payload;
+      console.log("payload",payload);
     },
     setProjectFromStorage(state, loggedInUser) {
       if(!loggedInUser) return
@@ -136,6 +137,8 @@ export const project = {
         body: JSON.stringify(project),
       }).then((response) => {
         return response.json();
+      }).then(() => {
+        state.commit("setProject", project)
       });
       return response;
     },
