@@ -15,11 +15,11 @@
             </v-card-title>
             <div class="edit-buttons d-flex pt-4" color="accent2">
               <Delete-project-dialog v-bind:project="project" />
-              <EditProject/>
+              <EditProject v-bind:project="project"/>
             </div>
           </div>
           <div class="d-flex justify-center px-4">
-            <v-img
+            <v-img v-if="project.imageId !== undefined"
               height="200"
               :src="image"
             ></v-img>

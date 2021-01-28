@@ -48,8 +48,10 @@ export default {
           }
 
       }
-      this.$store.dispatch("PROJECT/setProject")
-      this.$store.dispatch("PROJECT/setProjects");
+      this.$store.dispatch("PROJECT/setProjects")
+      this.$store.dispatch("ITEMS/setItems");
+      
+    
       this.dialogBox = false;
     },
   },

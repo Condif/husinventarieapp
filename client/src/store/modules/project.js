@@ -50,6 +50,17 @@ export const project = {
         state.oldProject.itemsId.splice(index, 1);
       }
     },
+    deleteProjectFromState(state, projectId) {
+      const index = state.projects.findIndex((project) => project._id === projectId);
+      if (index > -1) {
+        state.projects.splice(index, 1);
+      }
+      if(state.projects.length !== 0) {
+        state.project = state.projects[0]
+      } else {
+        state.project = []
+      }
+    },
   },
 
   selectedItem: (state) => {
@@ -133,6 +144,8 @@ export const project = {
       })
         .then((response) => {
           return response.json();
+        }).then(() => {
+          state.commit("deleteProjectFromState", projectId);
         })
       return response;
     },
