@@ -25,9 +25,7 @@ export const room = {
       state.room = payload;
       
     },
-    createRoom(state, payload) {
-      state.room.push(payload);
-    },
+    
     addProjectToRoom(state, payload) {
       state.room.projects.push(payload);
     },
@@ -50,6 +48,7 @@ export const room = {
       state.commit("updateToRoomsWithHouseId", currentHouseId)
     },
     async createRoom(state, newRoomObject) {
+      
       const response = await fetch(url + "newroom", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -60,8 +59,8 @@ export const room = {
           return response.json();
         })
         .then((data) => {
-          state.commit("createRoom", data);
           state.commit("setRoom", data);
+          
         });
       return response;
     },

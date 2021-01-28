@@ -10,7 +10,7 @@
           min-width="280"
         >
           <v-card-title class="mb-2">
-            <h1>Husvy</h1>
+            <h1>Mitt Boende</h1>
           </v-card-title>
           <v-select
             filled
@@ -110,7 +110,7 @@
       color="primary"
       height="20rem"
     >
-      <v-dialog v-model="dialogHouse">
+      <v-dialog v-model="dialogHouse" max-width="800">
         <template v-slot:activator="{ on }">
           <div v-on="on" class="house_button">
             <div class="inside_div">
@@ -120,11 +120,11 @@
         </template>
         <CreateHouse @close-dialog="closeDialogHouse" />
       </v-dialog>
-      <v-dialog v-model="dialogRoom">
+      <v-dialog v-model="dialogRoom" max-width="800">
         <template v-slot:activator="{ on }">
           <div v-on="on" class="room_button">
             <div class="inside_div">
-              <h3 class="skapa_hus_title">Skapa rum</h3>
+              <h3 class="skapa_hus_title">Skapa Rum</h3>
             </div>
           </div>
         </template>
