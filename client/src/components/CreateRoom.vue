@@ -17,7 +17,7 @@
         label="Storlek"
         v-model="roomSize"
         :rules="rules"
-        placeholder="Husets storlek i kvm"
+        placeholder="Rummets storlek i kvm"
       >
       </v-text-field>
       <v-text-field
