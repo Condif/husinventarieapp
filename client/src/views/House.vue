@@ -1,120 +1,136 @@
 <template>
-  <v-container fluid class="py-16">
+  <v-container fluid class="py-16" min-width="300">
     <Quick-start />
     <v-row>
-      <v-select
-        v-if="houses"
-        v-model="currentHouseId"
-        v-on:change="goToHouseHandler(currentHouseId)"
-        prepend-icon="mdi-calendar-check-outline"
-        :items="houses.map((house) => house)"
-        item-text="houseName"
-        item-value="_id"
-        :placeholder="placeholderText"
-      ></v-select>
-      <v-col cols="12" sm="6" md="8">
-        {{ log(house) }}
+      <v-col sm="12" order-md="1" color="secondary">
         <v-card
-          class="mx-auto"
-          color="base"
+          class="mx-auto mt-2 px-1 "
+          color="primary"
+          max-width="900"
+          min-width="280"
         >
-          <v-expansion-panels
-            v-for="room in computedRooms" 
-            :key="room._id"
-            focusable
-          >
-            <v-expansion-panel>
-              <v-expansion-panel-header>{{
-                room.roomName
-              }}</v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <p>Höjd till tak: {{ room.roomHeight }}</p>
-                <p>Antal kvadratmeter {{ room.roomSize }}</p>
-                {{room.items}}
-                <div class="items">
-                  <h5>Inventarier</h5>
-                  <v-expansion-panels>
-                    <v-expansion-panel
-                      v-for="item in room.items"
-                      :key="item._id"
-                    >
-                      <v-expansion-panel-header>
-                        {{ item.itemName }}
-                      </v-expansion-panel-header>
-                      <v-expansion-panel-content>
-                        <p>Beskrivning</p>
-                        {{ item.description }}
-                        <v-btn @click="goToItemHandler(item)"
-                          >Visa inventariet</v-btn
+          <v-card-title class="mb-2">
+            <h1>Husvy</h1>
+          </v-card-title>
+          <v-select
+            filled
+            rounded
+            class="selectHouse"
+            v-if="houses"
+            v-model="currentHouseId"
+            v-on:change="goToHouseHandler(currentHouseId)"
+            prepend-icon="mdi-calendar-check-outline"
+            :items="houses.map((house) => house)"
+            item-text="houseName"
+            item-value="_id"
+            :placeholder="placeholderText"
+          ></v-select>
+          <v-col cols="12">
+              <v-expansion-panels
+                v-for="room in computedRooms"
+                :key="room._id"
+                popout
+                color="primary"
+                class="pb-1"
+              >
+                <v-expansion-panel>
+                  <v-expansion-panel-header color="primary">{{
+                    room.roomName
+                  }}</v-expansion-panel-header>
+                  <v-expansion-panel-content color="primary" >
+                    <p>Höjd till tak: {{ room.roomHeight }}</p>
+                    <p>Antal kvadratmeter {{ room.roomSize }}</p>
+                    <div class="projects">
+                      <h5>Projekt</h5>
+                      <v-expansion-panels popout color="primary" class="mt-2">
+                        <v-expansion-panel
+                          v-for="project in room.projects"
+                          :key="project._id"
                         >
-                      </v-expansion-panel-content>
-                    </v-expansion-panel>
-                  </v-expansion-panels>
-                </div>
-
-                <div class="projects">
-                  <h5>Projekt</h5>
-                  <v-expansion-panels>
-                    <v-expansion-panel
-                      v-for="(project, i) in room.projects"
-                      :key="i"
-                    >
-                      <v-expansion-panel-header>
-                        {{ project.projectName }}
-                      </v-expansion-panel-header>
-                      <v-expansion-panel-content>
-                        {{ project.description }}
-
-                        <v-btn @click="goToProjectHandler(project)"
-                          >Gå till projektet</v-btn
+                          <v-expansion-panel-header color="primary">
+                            {{ project.projectName }}
+                          </v-expansion-panel-header>
+                          <v-expansion-panel-content color="primary">
+                            <p>Beskrivning</p>
+                            {{ project.description }}
+                            <div class="btn_div">
+                              <v-btn
+                                class="align-self-center"
+                                fab
+                                color="accent2"
+                                @click="goToProjectHandler(project)"
+                                ><v-icon color="white"
+                                  >mdi-arrow-right</v-icon
+                                ></v-btn
+                              >
+                            </div>
+                          </v-expansion-panel-content>
+                        </v-expansion-panel>
+                      </v-expansion-panels>
+                    </div>
+                    <div class="items">
+                      <h5>Inventarier</h5>
+                      <v-expansion-panels popout color="primary" class="mt-2">
+                        <v-expansion-panel
+                          v-for="item in room.items"
+                          :key="item._id"
                         >
-                      </v-expansion-panel-content>
-                    </v-expansion-panel>
-                  </v-expansion-panels>
-                </div>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-          </v-expansion-panels>
+                          <v-expansion-panel-header color="primary">
+                            {{ item.itemName }}
+                          </v-expansion-panel-header>
+                          <v-expansion-panel-content color="primary">
+                            <p>Beskrivning</p>
+                            {{ item.description }}
+                            <div class="btn_div">
+                              <v-btn
+                                class="align-self-center"
+                                fab
+                                color="accent2"
+                                @click="goToItemHandler(item)"
+                                ><v-icon color="white"
+                                  >mdi-arrow-right</v-icon
+                                ></v-btn
+                              >
+                            </div>
+                          </v-expansion-panel-content>
+                        </v-expansion-panel>
+                      </v-expansion-panels>
+                    </div>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+          </v-col>
         </v-card>
       </v-col>
-      <v-col cols="12" sm="6" md="4">
-        <v-carousel
-          cycle
-          height="400"
-          hide-delimiter-background
-          show-arrows-on-hover
-        >
-          <v-carousel-item v-for="(slide, i) in slides" :key="i">
-            <v-sheet :color="colors[i]" height="100%">
-              <v-row class="fill-height" align="center" justify="center">
-                <div class="display-3">{{ slide }} Slide</div>
-              </v-row>
-            </v-sheet>
-          </v-carousel-item>
-        </v-carousel>
-      </v-col>
     </v-row>
 
-    <v-row>
-      <v-col>
-
-    <CreateHouse />
-      </v-col>
-      <v-col>
-        <v-dialog v-model="dialogRoom">
-      <template v-slot:activator="{ on }">
-        <div v-on="on" class="project_button">
-          <div class="inside_div">
-            <h3>Skapa rum</h3>
+    <v-card
+      max-width="900"
+      class="mx-auto pt-2 mt-4 d-flex justify-space-around align-center flex-wrap"
+      color="primary"
+      height="20rem"
+    >
+      <v-dialog v-model="dialogHouse">
+        <template v-slot:activator="{ on }">
+          <div v-on="on" class="house_button">
+            <div class="inside_div">
+              <h3 class="skapa_hus_title">Skapa hus</h3>
+            </div>
           </div>
-        </div>
-      </template>
-      <CreateRoom @close-dialog="closeDialogRoom" />
-    </v-dialog>
-       
-       
-      </v-col>
-    </v-row>
+        </template>
+        <CreateHouse @close-dialog="closeDialogHouse" />
+      </v-dialog>
+      <v-dialog v-model="dialogRoom">
+        <template v-slot:activator="{ on }">
+          <div v-on="on" class="room_button">
+            <div class="inside_div">
+              <h3 class="skapa_hus_title">Skapa rum</h3>
+            </div>
+          </div>
+        </template>
+        <CreateRoom @close-dialog="closeDialogRoom" />
+      </v-dialog>
+    </v-card>
   </v-container>
 </template>
 
@@ -128,6 +144,7 @@ export default {
     return {
       currentHouseId: this.$store.getters["HOUSE/getHouse"],
       dialogRoom: false,
+      dialogHouse: false,
       placeholderText: "Välj hus att visa",
 
       colors: [
@@ -144,12 +161,15 @@ export default {
   components: {
     QuickStart,
     CreateHouse,
-    CreateRoom
+    CreateRoom,
   },
 
   methods: {
     closeDialogRoom() {
       this.dialogRoom = false;
+    },
+    closeDialogHouse() {
+      this.dialogHouse = false;
     },
     log(message) {
       console.log(message);
@@ -171,7 +191,7 @@ export default {
       );
       localStorage.setItem("currentHouse", JSON.stringify(currentHouse));
       this.$store.dispatch("HOUSE/setHouse", currentHouse);
-      this.$store.dispatch("ROOM/computedRooms", currentHouseId)
+      this.$store.dispatch("ROOM/computedRooms", currentHouseId);
     },
   },
 
@@ -183,8 +203,8 @@ export default {
       return this.$store.getters["HOUSE/getHouse"];
     },
     computedRooms() {
-      return this.$store.getters["ROOM/getComputedRooms"]
-    }
+      return this.$store.getters["ROOM/getComputedRooms"];
+    },
   },
 };
 </script>
@@ -193,8 +213,10 @@ export default {
 .home {
   height: 100%;
 }
-
-.project_button {
+.skapa_hus_title {
+  color: white;
+}
+.house_button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -202,8 +224,70 @@ export default {
   width: 13rem;
   min-width: 20rem;
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)),
-    url("../assets/projectbutton.jpg");
+    url("../assets/bluehouse.jpg");
   background-size: 100%;
   border: solid #8a9ea798 2px;
+}
+.room_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 9rem;
+  width: 13rem;
+  min-width: 20rem;
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)),
+    url("../assets/room.jpg");
+  background-size: 100%;
+  border: solid #8a9ea798 2px;
+}
+.btn_div {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px;
+}
+
+.items {
+  margin-top: 1rem;
+  margin-left: 3px;
+}
+
+.selectHouse {
+  width: 50%;
+  min-width: 300px;
+}
+
+@media screen and (min-width: 720px) {
+  .house_button {
+    height: 85%;
+    width: 45%;
+    min-width: 20rem;
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)),
+      url("../assets/bluehouse.jpg");
+    background-size: 130%;
+  }
+  .room_button {
+    height: 85%;
+    width: 45%;
+    min-width: 20rem;
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)),
+      url("../assets/room.jpg");
+    background-size: 130%;
+  }
+  .inventory_button {
+    height: 85%;
+    width: 45%;
+    min-width: 20rem;
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)),
+      url("../assets/window.jpg");
+    background-size: 130%;
+  }
+  .skapa_hus_title {
+  padding: 0 5px;
+  font-size: 24px;
+  color: white;
+}
 }
 </style>

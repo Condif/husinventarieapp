@@ -1,47 +1,42 @@
 <template>
-  <v-row>
-    <v-dialog v-model="dialog"  max-width="600px">
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn color="primary" dark v-bind="attrs" v-on="on">
-          skapa nytt hus
+  <div class="text-center">
+    <v-card class="mx-auto mt-2 px-1" color="base">
+      <v-card-title placeholder="test">
+        Skapa nytt hus
+      </v-card-title>
+
+      <v-text-field
+        label="Namn"
+        v-model="houseName"
+        :rules="rules"
+        placeholder="Skriv in namnet på ditt hus"
+      >
+      </v-text-field>
+      <v-text-field
+        label="Storlek"
+        v-model="roomSize"
+        placeholder="Ange husets storlek i kvm"
+      >
+      </v-text-field>
+      <v-text-field
+        label="Husets storlek"
+        v-model="houseSize"
+        placeholder="Ange husets area"
+      ></v-text-field>
+      <v-text-field
+        label="Antal rum"
+        v-model="numberOfRooms"
+        placeholder="Ange antal rum"
+      ></v-text-field>
+      <v-card-actions>
+        <v-btn @click="createHouseHandler">
+          Skapa rum
         </v-btn>
-      </template>
-      <v-card>
-        <v-sheet
-          id="scrolling-techniques-7"
-          class="overflow-y-auto"
-          max-height="100%"
-        >
-          <v-card class="mx-auto mt-2" max-width="344">
-            <v-card-title placeholder="test"> Skapa nytt hus </v-card-title>
-
-            <v-card-subtitle color="error" text>
-              Datum: 2021-01-02
-            </v-card-subtitle>
-
-            <v-text-field
-              label="Namn"
-              v-model="houseName"
-              :rules="rules"
-              placeholder="Skriv in namnet på ditt hus"
-            >
-            </v-text-field>
-            <v-text-field label="House size" v-model="houseSize"></v-text-field>
-            <v-text-field
-              label="Number of rooms"
-              v-model="numberOfRooms"
-            ></v-text-field>
-            <v-card-actions>
-              <v-btn @click="createHouseHandler"> Skapa hus </v-btn>
-              <v-spacer></v-spacer>
-            </v-card-actions>
-          </v-card>
-        </v-sheet>
-      </v-card>
-    </v-dialog>
-  </v-row>
+        <v-spacer></v-spacer>
+      </v-card-actions>
+    </v-card>
+  </div>
 </template>
-
 
 <script>
 // @ is an alias to /src
