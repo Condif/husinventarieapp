@@ -20,12 +20,12 @@
         placeholder="Husets storlek i kvm"
       >
       </v-text-field>
-      <v-textarea
+      <v-text-field
         label="Höjd"
         v-model="roomHeight"
         :rules="rules"
         placeholder="Rummets höjd"
-      ></v-textarea>
+      ></v-text-field>
       <v-card-actions>
         <v-btn @click="createRoomHandler">
           Skapa rum
