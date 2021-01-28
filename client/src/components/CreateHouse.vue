@@ -1,6 +1,6 @@
 <template>
-  <div class="text-center">
-    <v-card class="mx-auto mt-2 px-1" color="base">
+  <div class="text-center" >
+    <v-card class="mx-auto mt-2 px-1" color="base" >
       <v-card-title placeholder="test">
         Skapa nytt hus
       </v-card-title>
@@ -30,7 +30,7 @@
       ></v-text-field>
       <v-card-actions>
         <v-btn @click="createHouseHandler">
-          Skapa rum
+          Skapa hus
         </v-btn>
         <v-spacer></v-spacer>
       </v-card-actions>
@@ -55,7 +55,7 @@ export default {
       (value) => !!value || "Required.",
       (value) => (value && value.length >= 3) || "Min 3 characters",
     ],
-    dialog: false,
+   
   }),
   methods: {
     async createHouseHandler() {
@@ -68,7 +68,7 @@ export default {
         projects: this.projects,
       };
       this.$store.dispatch("HOUSE/createHouse", newHouseObject);
-      this.diaolg = false;
+      this.$emit('close-dialog')
     },
   },
 };

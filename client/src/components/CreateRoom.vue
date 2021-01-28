@@ -2,7 +2,7 @@
 <div class="text-center">
     <v-card class="mx-auto mt-2 px-1" color="base">
       <v-card-title placeholder="test">
-        Lägg till rum
+        Lägg till rum i {{house.houseName}}
       </v-card-title>
 
       <v-text-field
@@ -50,9 +50,15 @@ export default {
     ],
     dialog: false
   }),
+  computed: {
+    house() {
+      return this.$store.getters["HOUSE/getHouse"];
+    },
+  },
   methods: {
     async createRoomHandler() {
       const newRoomObject = {
+        houseId: this.house._id,
         roomName: this.roomName,
         roomSize: this.roomSize,
         roomHeight: this.roomHeight
@@ -70,7 +76,7 @@ export default {
       await this.$store.dispatch("HOUSE/setHouses")
       this.$emit('close-dialog')
      
-      this.dialog = false
+      
     },
   },
 };

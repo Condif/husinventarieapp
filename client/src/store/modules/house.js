@@ -22,9 +22,9 @@ export const house = {
     setHouse(state, payload) {
       state.house = payload;
     },
-    createHouse(state, payload) {
-      state.house.push(payload);
-    },
+    // createHouse(state, payload) {
+    //   state.houses.push(payload);
+    // },
     addRoomToHouse(state, room) {
       state.house.rooms.push(room);
     },
@@ -67,8 +67,9 @@ export const house = {
         .then((response) => {
           return response.json();
         })
-        .then((data) => {
-          state.commit("createHouse", data);
+        .then(() => {
+          
+          state.dispatch("setHouses");
         });
       return response;
     },
