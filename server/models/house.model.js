@@ -14,7 +14,7 @@ const HouseSchema = mongoose.Schema({
     type: String,
   },
   houseSize: {
-    type: Number,
+    type: String,
     required: true,
   },
   numberOfRooms: {
