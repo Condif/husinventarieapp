@@ -12,39 +12,55 @@
         </v-btn>
       </template>
 
-      <v-btn fab dark medium color="accent1">
-        <v-icon>mdi-pencil</v-icon>
+      <v-btn fab dark medium color="accent1" @click="dialogRoom = true">
+        <v-icon>mdi-home-city-outline</v-icon>
       </v-btn>
-      <v-btn fab dark medium color="primary">
-        <v-icon>mdi-briefcase</v-icon>
+      <v-btn fab dark medium color="primary" @click="dialogProject = true">
+        <v-icon>mdi-calendar-check-outline</v-icon>
       </v-btn>
 
-      <v-btn fab dark medium color="secondary" @click="dialogOutside = true">
-        <v-icon>mdi-call-split</v-icon>
+      <v-btn fab dark medium color="secondary" @click="dialogItem = true">
+        <v-icon>mdi-ballot</v-icon>
       </v-btn>
     </v-speed-dial>
 
  
-    <v-dialog v-model="dialogOutside" width="500">
-      <CreateItem @close-dialog="closeDialog" />
+    <v-dialog v-model="dialogItem" width="500">
+      <CreateItem @close-dialog="closeDialogItem" />
+    </v-dialog>
+    <v-dialog v-model="dialogProject" width="500">
+      <CreateProject @close-dialog="closeDialogProject" />
+    </v-dialog>
+    <v-dialog v-model="dialogRoom" width="500">
+      <CreateRoom @close-dialog="closeDialogRoom" />
     </v-dialog>
   </v-container>
 </template>
 
 <script>
 import CreateItem from "../components/CreateItem";
+import CreateProject from "../components/CreateProject";
+import CreateRoom from "../components/CreateRoom";
 export default {
-  components: { CreateItem },
+  components: { CreateItem, CreateProject, CreateRoom },
   name: "QuickStart",
 
   data: () => ({
     fab: false,
-    dialogOutside: false,
+    dialogItem: false,
+    dialogProject: false,
+    dialogRoom: false,
   }),
 
   methods: {
-    closeDialog() {
-      this.dialogOutside = false;
+    closeDialogRoom() {
+      this.dialogRoom = false;
+    },
+    closeDialogProject() {
+      this.dialogRoom = false;
+    },
+    closeDialogItem() {
+      this.dialogRoom = false;
     },
   },
 };

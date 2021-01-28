@@ -13,19 +13,19 @@
       >
       </v-text-field>
 
-      <v-text-field
+      <v-textarea
         label="Beskrivning"
         v-model="description"
         :rules="rules"
         placeholder="Beskriv projektet"
       >
-      </v-text-field>
-      <v-textarea
+      </v-textarea>
+      <v-text-field
         label="Kategori"
         v-model="category"
         :rules="rules"
-        placeholder="Välj kategori för projektet"
-      ></v-textarea>
+        placeholder="Välj en kategori för projektet"
+      ></v-text-field>
       <v-select
         v-if="rooms !== undefined"
         v-model="selectedRoomId"
