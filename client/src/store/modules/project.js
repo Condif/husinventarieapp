@@ -22,6 +22,7 @@ export const project = {
     },
     setProject(state, payload) {
       state.project = payload;
+      console.log("payload",payload);
     },
     setProjectFromStorage(state, loggedInUser) {
       if(!loggedInUser) return
