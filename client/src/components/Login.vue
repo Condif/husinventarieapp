@@ -29,7 +29,7 @@
               
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click="loginHandler">Logga in</v-btn>
+                <v-btn color="accent2" @click="loginHandler">Logga in</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
